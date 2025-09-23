@@ -115,7 +115,12 @@ class ThinkerNewsPublisher:
     
     def _build_section(self, title, content):
         """建立HTML section"""
-        section_html = f'<div class="content-section"><h2>{title}</h2>'
+        # 為深度洞察section添加特殊樣式
+        if '深度洞察分析' in title:
+            section_html = f'<div class="content-section insight-section"><h2>{title}</h2>'
+            section_html += '<div class="insight-dashboard">'
+        else:
+            section_html = f'<div class="content-section"><h2>{title}</h2>'
         
         current_item = {}
         
@@ -176,6 +181,18 @@ class ThinkerNewsPublisher:
             line-height: 1.7; color: #333; 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+        }
+        .insight-section { 
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid #667eea; position: relative;
+        }
+        .insight-section::before { 
+            content: "🔍"; position: absolute; top: 15px; right: 20px;
+            font-size: 1.5em; opacity: 0.7;
+        }
+        .insight-dashboard { 
+            background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px;
+            margin: 15px 0; border-left: 4px solid #667eea;
         }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         .back-link { 
