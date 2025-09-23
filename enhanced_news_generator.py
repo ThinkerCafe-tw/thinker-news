@@ -10,7 +10,7 @@ import requests
 import re
 from datetime import datetime
 from typing import List, Dict, Any
-import openai
+from openai import OpenAI
 import os
 from dotenv import load_dotenv
 import subprocess
@@ -29,11 +29,14 @@ class AveryNewsGenerator:
         self.openai_api_key = (
             os.getenv('OPENAI_API_KEY') or 
             os.getenv('OPENAPI') or
-            os.getenv('OPENAI_KEY') or
-            "sk-proj-default-key-for-testing"  # 預設測試key
+            os.getenv('OPENAI_KEY')
         )
         
-        openai.api_key = self.openai_api_key
+        if not self.openai_api_key:
+            raise ValueError("❌ 找不到 OpenAI API key，請檢查 .env 文件")
+        
+        # 初始化 OpenAI 客戶端
+        self.openai_client = OpenAI(api_key=self.openai_api_key)
         print(f"🔑 Using OpenAI API key: {self.openai_api_key[:10]}...")
         
     def fetch_rss_feeds(self) -> List[Dict[str, Any]]:
@@ -219,7 +222,7 @@ IV. ⚡ 輸出格式
 }}"""
 
         try:
-            client = openai.OpenAI(api_key=self.openai_api_key)
+            client = self.openai_client
             response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[{"role": "user", "content": prompt}],
@@ -353,7 +356,7 @@ IV. ⚡ 輸出格式
 [整合Step-Back思考，提供coherent narrative和具體學習建議]"""
 
         try:
-            client = openai.OpenAI(api_key=self.openai_api_key)
+            client = self.openai_client
             response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[{"role": "user", "content": prompt}],
@@ -395,7 +398,7 @@ Notion版日報內容：
 #AI #科技 #資料科學"""
 
         try:
-            client = openai.OpenAI(api_key=self.openai_api_key)
+            client = self.openai_client
             response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[{"role": "user", "content": prompt}],
