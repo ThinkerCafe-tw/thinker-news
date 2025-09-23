@@ -16,20 +16,24 @@ class EmailSubscriptionHandler {
             }
 
             // 使用 semantic_insights 表存放 email 訂閱
+            // 生成符合 UUID 格式的 conversation_id
             const subscriptionData = {
-                conversation_id: `email_subscription_${Date.now()}`,
+                conversation_id: this.generateUUID(),
                 content: JSON.stringify({
                     email: email.toLowerCase().trim(),
                     name: name.trim(),
                     interested_topics: interests,
                     subscription_source: 'thinker_news_website',
                     subscription_date: new Date().toISOString(),
-                    status: 'active'
+                    status: 'active',
+                    subscription_id: `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
                 }),
                 importance: 5,
                 category: 'email_subscription',
                 context: `Email subscription from ${email.toLowerCase().trim()}`
             };
+            
+            // 不提供 id 欄位，讓 Supabase 自動生成 UUID
 
             const response = await fetch(`${this.supabaseUrl}/rest/v1/semantic_insights`, {
                 method: 'POST',
@@ -75,6 +79,15 @@ class EmailSubscriptionHandler {
     validateEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
+    }
+
+    generateUUID() {
+        // 生成 UUID v4 格式
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            const v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 
     // 顯示訂閱表單
