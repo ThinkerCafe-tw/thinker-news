@@ -13,6 +13,7 @@ from typing import List, Dict, Any
 import openai
 import os
 from dotenv import load_dotenv
+import subprocess
 
 class AveryNewsGenerator:
     def __init__(self):
