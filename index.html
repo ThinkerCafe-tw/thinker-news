@@ -350,10 +350,7 @@
             <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(102, 126, 234, 0.05); border-radius: 15px;">
                 <p style="color: #667eea; font-weight: 600; margin-bottom: 10px;">💎 想看更多學習洞察？</p>
                 <p style="color: #888; font-size: 0.95em;">我們定期從教學經驗中提煉深度思考，分享給學習社群。</p>
-                <div style="margin-top: 15px;">
-                    <a href="#" onclick="alert('📱 LINE 洞察群組建置中...\\n\\n🤖 Agent 008 正在設定自動通知系統\\n⏰ 預計 2-3 小時內完成\\n🔔 完成後可接收即時洞察更新！'); return false;" style="display: inline-block; background: linear-gradient(45deg, #FFB900, #FF8C00); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; font-size: 0.95em; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 185, 0, 0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 185, 0, 0.4)'" onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 4px 15px rgba(255, 185, 0, 0.3)'">🚧 LINE 群組建置中...</a>
-                    <p style="color: #FF8C00; font-size: 0.8em; margin-top: 8px; font-weight: 500;">⚡ Agent 008 正在設定自動通知系統</p>
-                </div>
+                <button onclick="showSubscriptionForm()" style="display: inline-block; margin-top: 15px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-size: 0.95em; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.4)'" onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.3)'">📧 訂閱洞察更新</button>
             </div>
         </div>
         
@@ -401,5 +398,8 @@
             });
         });
     </script>
+    
+    <!-- Email 訂閱功能 -->
+    <script src="email_subscription_handler.js"></script>
 </body>
 </html>
