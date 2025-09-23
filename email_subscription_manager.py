@@ -20,57 +20,102 @@ class EmailSubscriptionManager:
         
     def get_all_subscribers(self, status: str = 'active') -> List[Dict]:
         """
-        從 semantic_insights 表獲取所有訂閱者
+        從 semantic_insights 表獲取所有會員 (包含訂閱者)
         """
         try:
-            response = self.supabase.table("semantic_insights").select("*").eq("category", "email_subscription").execute()
+            response = self.supabase.table("semantic_insights").select("*").eq("category", "member_profile").execute()
             
-            subscribers = []
+            members = []
             for record in response.data:
                 try:
-                    content = json.loads(record['content'])
-                    if content.get('status') == status:
-                        subscribers.append({
+                    profile = json.loads(record['content'])
+                    identity = profile.get('identity', {})
+                    subscription = profile.get('subscription', {})
+                    ai_prefs = profile.get('ai_preferences', {})
+                    crm_data = profile.get('crm_data', {})
+                    
+                    if identity.get('status') == status:
+                        members.append({
                             'id': record['id'],
-                            'email': content.get('email'),
-                            'name': content.get('name'),
-                            'interested_topics': content.get('interested_topics', []),
-                            'subscription_date': content.get('subscription_date'),
-                            'status': content.get('status'),
-                            'created_at': record['created_at']
+                            'email': identity.get('email'),
+                            'name': identity.get('name'),
+                            'member_id': identity.get('member_id'),
+                            'source': identity.get('source'),
+                            'interested_topics': subscription.get('interested_topics', []),
+                            'subscription_date': identity.get('registration_date'),
+                            'status': identity.get('status'),
+                            'lifecycle_stage': crm_data.get('lifecycle_stage', 'subscriber'),
+                            'communication_style': ai_prefs.get('communication_style', 'professional'),
+                            'complexity_level': ai_prefs.get('complexity_level', 'beginner'),
+                            'created_at': record['created_at'],
+                            'full_profile': profile  # 完整的 profile 供進階使用
                         })
                 except json.JSONDecodeError:
                     continue
             
-            return subscribers
+            return members
         except Exception as e:
-            print(f"❌ 獲取訂閱者失敗: {str(e)}")
+            print(f"❌ 獲取會員失敗: {str(e)}")
             return []
     
-    def get_subscriber_count(self) -> Dict[str, int]:
+    def get_member_stats(self) -> Dict[str, any]:
         """
-        獲取訂閱者統計
+        獲取會員統計 (更詳細的統計資料)
         """
         try:
-            response = self.supabase.table("semantic_insights").select("content").eq("category", "email_subscription").execute()
+            response = self.supabase.table("semantic_insights").select("content").eq("category", "member_profile").execute()
             
-            total = 0
-            active = 0
+            stats = {
+                'total': 0,
+                'active': 0,
+                'inactive': 0,
+                'lifecycle_stages': {},
+                'communication_styles': {},
+                'complexity_levels': {},
+                'top_interests': {},
+                'sources': {}
+            }
             
             for record in response.data:
                 try:
-                    content = json.loads(record['content'])
-                    total += 1
-                    if content.get('status') == 'active':
-                        active += 1
+                    profile = json.loads(record['content'])
+                    identity = profile.get('identity', {})
+                    subscription = profile.get('subscription', {})
+                    ai_prefs = profile.get('ai_preferences', {})
+                    crm_data = profile.get('crm_data', {})
+                    
+                    stats['total'] += 1
+                    
+                    # 狀態統計
+                    if identity.get('status') == 'active':
+                        stats['active'] += 1
+                    else:
+                        stats['inactive'] += 1
+                    
+                    # 生命週期階段
+                    stage = crm_data.get('lifecycle_stage', 'subscriber')
+                    stats['lifecycle_stages'][stage] = stats['lifecycle_stages'].get(stage, 0) + 1
+                    
+                    # 溝通風格
+                    style = ai_prefs.get('communication_style', 'professional')
+                    stats['communication_styles'][style] = stats['communication_styles'].get(style, 0) + 1
+                    
+                    # 複雜度等級
+                    level = ai_prefs.get('complexity_level', 'beginner')
+                    stats['complexity_levels'][level] = stats['complexity_levels'].get(level, 0) + 1
+                    
+                    # 興趣主題
+                    for topic in subscription.get('interested_topics', []):
+                        stats['top_interests'][topic] = stats['top_interests'].get(topic, 0) + 1
+                    
+                    # 來源統計
+                    source = identity.get('source', 'unknown')
+                    stats['sources'][source] = stats['sources'].get(source, 0) + 1
+                    
                 except json.JSONDecodeError:
                     continue
             
-            return {
-                'total': total,
-                'active': active,
-                'inactive': total - active
-            }
+            return stats
         except Exception as e:
             print(f"❌ 獲取統計失敗: {str(e)}")
             return {'total': 0, 'active': 0, 'inactive': 0}
@@ -218,31 +263,78 @@ class EmailSubscriptionManager:
 
 def main():
     """
-    測試和管理功能
+    統一會員系統展示
     """
     manager = EmailSubscriptionManager()
     
-    print("📊 Email 訂閱系統狀態")
-    print("=" * 30)
+    print("🎯 統一會員系統 - 詳細分析報告")
+    print("=" * 50)
     
-    # 顯示統計
-    stats = manager.get_subscriber_count()
-    print(f"📧 總訂閱者: {stats['total']}")
-    print(f"✅ 活躍訂閱者: {stats['active']}")
-    print(f"❌ 非活躍訂閱者: {stats['inactive']}")
+    # 顯示詳細統計
+    stats = manager.get_member_stats()
+    print(f"📊 會員總覽:")
+    print(f"  📧 總會員: {stats['total']}")
+    print(f"  ✅ 活躍會員: {stats['active']}")
+    print(f"  ❌ 非活躍會員: {stats['inactive']}")
     
-    # 顯示最近訂閱者
-    subscribers = manager.get_all_subscribers()
-    if subscribers:
-        print(f"\n📝 最近 5 位訂閱者:")
-        for sub in subscribers[-5:]:
-            print(f"  • {sub.get('email')} ({sub.get('subscription_date', '')[:10]})")
+    # 生命週期分析
+    print(f"\n🚀 生命週期分布:")
+    for stage, count in stats.get('lifecycle_stages', {}).items():
+        print(f"  • {stage}: {count} 人")
     
-    print("\n🎯 各主題訂閱者分布:")
-    topics = ['AI開發', '團隊協作', '學習方法', '工具應用']
-    for topic in topics:
-        topic_subs = manager.get_subscribers_by_interests(topic)
-        print(f"  • {topic}: {len(topic_subs)} 人")
+    # AI 偏好分析
+    print(f"\n🤖 AI 偏好設定:")
+    print(f"  溝通風格分布:")
+    for style, count in stats.get('communication_styles', {}).items():
+        print(f"    • {style}: {count} 人")
+    
+    print(f"  複雜度偏好:")
+    for level, count in stats.get('complexity_levels', {}).items():
+        print(f"    • {level}: {count} 人")
+    
+    # 興趣主題熱門度
+    print(f"\n🎯 熱門興趣主題:")
+    sorted_interests = sorted(stats.get('top_interests', {}).items(), 
+                            key=lambda x: x[1], reverse=True)
+    for topic, count in sorted_interests[:5]:
+        print(f"  • {topic}: {count} 人")
+    
+    # 來源分析
+    print(f"\n📍 會員來源:")
+    for source, count in stats.get('sources', {}).items():
+        print(f"  • {source}: {count} 人")
+    
+    # 顯示會員樣本
+    members = manager.get_all_subscribers()
+    if members:
+        print(f"\n👥 會員樣本 (最近 3 位):")
+        for member in members[-3:]:
+            print(f"  📧 {member.get('email')}")
+            print(f"    • 階段: {member.get('lifecycle_stage')}")
+            print(f"    • 風格: {member.get('communication_style')}")
+            print(f"    • 等級: {member.get('complexity_level')}")
+            print(f"    • 興趣: {', '.join(member.get('interested_topics', []))}")
+            print()
+    
+    # 演示個人化提示詞生成 (如果有測試用戶)
+    if members:
+        test_member = members[0]
+        profile = test_member.get('full_profile', {})
+        ai_prefs = profile.get('ai_preferences', {})
+        
+        print(f"🎭 個人化提示詞示例 (基於 {test_member.get('email')}):")
+        prompt = f"""你是一個{ai_prefs.get('communication_style', 'professional')}的 AI 助手。
+用戶偏好{ai_prefs.get('complexity_level', 'beginner')}難度的內容。
+請用{ai_prefs.get('response_length', 'concise')}的方式回應。
+用戶特別關心：{', '.join(profile.get('subscription', {}).get('interested_topics', []))}。"""
+        
+        print(f"  {prompt}")
+        
+    print(f"\n💡 統一 JSON 結構的優勢:")
+    print(f"  ✅ 從簡單訂閱無縫升級到完整會員系統")
+    print(f"  ✅ AI 偏好設定與會員資料完美整合")
+    print(f"  ✅ 支援複雜的 CRM 分析和個人化服務")
+    print(f"  ✅ 單一資料源，避免資料不同步問題")
 
 if __name__ == "__main__":
     main()

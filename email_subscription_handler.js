@@ -15,22 +15,77 @@ class EmailSubscriptionHandler {
                 throw new Error('請輸入有效的電子郵件地址');
             }
 
-            // 使用 semantic_insights 表存放 email 訂閱
-            // 生成符合 UUID 格式的 conversation_id
-            const subscriptionData = {
-                conversation_id: this.generateUUID(),
-                content: JSON.stringify({
+            // 使用統一的會員系統 JSON 結構
+            const memberProfile = {
+                // === 基本資料 ===
+                identity: {
                     email: email.toLowerCase().trim(),
                     name: name.trim(),
+                    member_id: `member_${Date.now()}_${email.split('@')[0]}`,
+                    source: 'thinker_news_website',
+                    registration_date: new Date().toISOString(),
+                    status: 'active'
+                },
+                
+                // === 訂閱偏好 ===
+                subscription: {
+                    email_notifications: true,
+                    frequency: 'weekly',
                     interested_topics: interests,
-                    subscription_source: 'thinker_news_website',
-                    subscription_date: new Date().toISOString(),
-                    status: 'active',
-                    subscription_id: `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-                }),
+                    content_formats: ['email', 'web'],
+                    timezone: 'Asia/Taipei',
+                    last_interaction: new Date().toISOString()
+                },
+                
+                // === 個人化 AI 提示詞系統 ===
+                ai_preferences: {
+                    preferred_agents: ['007'],
+                    communication_style: 'professional',
+                    complexity_level: interests.includes('AI開發') ? 'intermediate' : 'beginner',
+                    response_length: 'concise',
+                    language: 'zh-TW',
+                    custom_prompts: {
+                        daily_insights: {
+                            template: `請用專業的語調，為我總結今天的 ${interests.join('、')} 重點`,
+                            active: true
+                        }
+                    }
+                },
+                
+                // === 學習軌跡 ===
+                learning_journey: {
+                    skill_interests: interests,
+                    current_goals: [],
+                    completed_courses: [],
+                    learning_style: 'visual',
+                    progress_tracking: {
+                        total_interactions: 1,
+                        favorite_topics: interests.reduce((acc, topic) => {acc[topic] = 1; return acc;}, {}),
+                        engagement_score: 1
+                    }
+                },
+                
+                // === CRM 資訊 ===
+                crm_data: {
+                    lifecycle_stage: 'subscriber',
+                    value_score: 1,
+                    churn_risk: 'low',
+                    last_engagement: new Date().toISOString(),
+                    total_value: 0,
+                    interaction_history: [{
+                        type: 'email_subscription',
+                        date: new Date().toISOString(),
+                        source: 'thinker_news_website'
+                    }]
+                }
+            };
+            
+            const subscriptionData = {
+                conversation_id: this.generateUUID(),
+                content: JSON.stringify(memberProfile),
                 importance: 5,
-                category: 'email_subscription',
-                context: `Email subscription from ${email.toLowerCase().trim()}`
+                category: 'member_profile',
+                context: `Member profile for ${email.toLowerCase().trim()}`
             };
             
             // 不提供 id 欄位，讓 Supabase 自動生成 UUID
