@@ -21,7 +21,7 @@ except ImportError:
 def md2html(markdown_path, output_date=None, gemini_api_key=None):
     """
     將 n8n 生成的 markdown 內容轉換為 2025-09-23.html 標準格式
-    使用 Gemini 2.5 Flash 進行智能格式化
+    使用專門的版面管理 Agent 確保格式完全一致
     
     Args:
         markdown_path: n8n 生成的 markdown 文件路徑
@@ -38,7 +38,7 @@ def md2html(markdown_path, output_date=None, gemini_api_key=None):
     
     # 設定 Gemini API
     if not gemini_api_key:
-        # 從 .env 讀取 (需要你添加 GEMINI_API_KEY)
+        # 從 .env 讀取
         from dotenv import load_dotenv
         load_dotenv(Path(__file__).parent / '.env')
         gemini_api_key = os.getenv('GEMINI_API_KEY')
@@ -59,53 +59,64 @@ def md2html(markdown_path, output_date=None, gemini_api_key=None):
     except Exception as e:
         print(f"❌ 無法讀取文件 {markdown_path}: {str(e)}")
         return None
+        
+    # 讀取標準格式範本 (2025-09-23.html)
+    template_path = Path(__file__).parent / '2025-09-23.html'
+    try:
+        with open(template_path, 'r', encoding='utf-8') as f:
+            template_html = f.read()
+    except Exception as e:
+        print(f"❌ 無法讀取格式範本 {template_path}: {str(e)}")
+        return None
     
-    # 建立 Gemini 提示詞
-    system_prompt = """你是一個專業的 HTML 格式化專家。請將提供的 n8n 生成的高品質科技新聞內容，
-轉換為符合指定標準格式的完整 HTML 頁面。
+    # 版面管理 Agent - 專門負責格式一致性
+    layout_agent_prompt = """你是專業的版面管理 Agent，專門負責確保網頁格式完全一致。
 
-**重要要求:**
-1. 保持所有新聞內容的品質和完整性
-2. 按照標準格式組織內容結構
-3. 確保包含完整的 CSS 樣式和 JavaScript
-4. 特別注意要包含「LINE 精華版」區塊，使用漸層背景
-5. 保持專業的視覺效果和響應式設計
-6. 所有連結保持原始 URL
-7. 使用繁體中文
+**核心職責:**
+1. 嚴格按照提供的標準範本格式
+2. 保持 CSS 樣式完全相同
+3. 確保 HTML 結構完全一致
+4. 不得添加任何額外的說明文字
+5. 輸出純淨的 HTML 代碼
 
-**標準格式結構:**
-- 頁面標題: "AI 科技日報精選"
-- 主要區塊: "今日必讀 TOP 3", "AI工具與應用", "產業趨勢與新聞", "安全警報", "觀點與分析", "編輯後記"
-- 特殊區塊: "LINE 精華版" (使用粉紅色漸層背景)
-- 導航: 返回首頁連結和 GitHub 連結
+**格式要求:**
+- 完全複製範本的 CSS 樣式
+- 保持相同的 HTML 結構
+- 只替換內容，不改變格式
+- 特別注意 LINE 精華版區塊的粉紅色漸層
+- 確保響應式設計和動畫效果
+- 絕對不在 </html> 後面添加任何文字
 
-**樣式要求:**
-- 使用藍紫色漸層背景 (#667eea 到 #764ba2)
-- 毛玻璃效果的白色內容區塊
-- 漸層文字標題效果
-- LINE 區塊使用粉紅色漸層 (#f093fb 到 #f5576c)
-- 響應式設計支援手機版"""
+**重要警告:**
+- 輸出結束於 </html> 標籤
+- 不得添加任何解釋或說明文字
+- 不得輸出 markdown 代碼塊標記"""
 
-    user_prompt = f"""請將以下 n8n 生成的科技新聞內容轉換為完整的 HTML 頁面:
+    user_prompt = f"""請基於以下標準範本，將 n8n 新聞內容格式化為完全相同的格式。
 
-日期: {output_date}
+**標準範本 HTML:**
+{template_html}
 
-n8n 內容:
+**要替換的內容:**
+- 日期: {output_date}
+- 新聞內容: 以下 n8n 內容
+
+**n8n 新聞內容:**
 {markdown_content}
 
-請輸出完整的 HTML 代碼，包含:
-1. 完整的 DOCTYPE、head、body 結構
-2. 內嵌的完整 CSS 樣式
-3. JavaScript 動畫效果
-4. 所有必要的 meta 標籤
-5. 專業的內容組織和視覺效果
+**執行指令:**
+1. 使用標準範本的完整格式
+2. 只替換日期和新聞內容
+3. 保持所有 CSS 和 JavaScript 不變
+4. 確保輸出結束於 </html>
+5. 不要添加任何說明文字
 
-請確保輸出是可以直接保存為 .html 文件使用的完整代碼。"""
+請輸出完整的 HTML 代碼:"""
 
     try:
-        print("🤖 正在使用 Gemini 2.5 Flash 進行智能格式化...")
+        print("🎯 版面管理 Agent 正在確保格式完全一致...")
         
-        response = model.generate_content([system_prompt, user_prompt])
+        response = model.generate_content([layout_agent_prompt, user_prompt])
         html_content = response.text
         
         # 清理可能的 markdown 代碼塊標記
