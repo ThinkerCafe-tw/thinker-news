@@ -26,25 +26,35 @@ class ThinkerNewsPublisher:
         self.n8n_webhook_url = os.getenv('N8N_WEBHOOK_URL', '')  # n8n webhook URL
         self.gemini_api_key = os.getenv('GEMINI_API_KEY', '')
         
-    def wait_for_n8n_content(self, date_str: str, timeout=300) -> bool:
+    def wait_for_n8n_content(self, date_str: str, timeout=1200) -> bool:
         """
         等待 n8n 生成內容
         檢查是否存在 {date}_community_digest.md 檔案
+        增加超時時間到 20 分鐘，給 n8n 充分的處理時間
         """
         expected_file = self.repo_path / f'{date_str}_community_digest.md'
         
-        print(f"🔍 等待 n8n 生成內容: {expected_file.name}")
+        print(f"🔍 等待 n8n 工作流程完成並生成內容: {expected_file.name}")
+        print(f"⏱️  最長等待時間: {timeout//60} 分鐘")
         
         start_time = time.time()
+        check_count = 0
+        
         while time.time() - start_time < timeout:
             if expected_file.exists():
                 print(f"✅ 找到 n8n 生成的內容: {expected_file.name}")
                 return True
             
-            print("⏳ 等待中... (每10秒檢查一次)")
-            time.sleep(10)
+            check_count += 1
+            elapsed = int(time.time() - start_time)
+            remaining = int(timeout - elapsed)
+            
+            print(f"⏳ 第 {check_count} 次檢查 | 已等待: {elapsed//60}:{elapsed%60:02d} | 剩餘: {remaining//60}:{remaining%60:02d}")
+            print(f"   📡 n8n 工作流程仍在執行中...")
+            
+            time.sleep(30)  # 每 30 秒檢查一次，減少頻率
         
-        print(f"❌ 等待超時 ({timeout}秒)，未找到 n8n 生成的內容")
+        print(f"❌ 等待超時 ({timeout//60}分鐘)，n8n 工作流程可能需要更多時間")
         return False
     
     def trigger_n8n_workflow(self, date_str: str) -> bool:
@@ -106,11 +116,19 @@ class ThinkerNewsPublisher:
             
             notion_content = result_data['notion_version_for_storage']
             
+            # 移除 n8n 組裝節點添加的 markdown 代碼塊包裹
+            if notion_content.startswith('```markdown\n') and notion_content.endswith('\n```'):
+                notion_content = notion_content[12:-4]  # 移除 ```markdown\n 和 \n```
+                print("🔧 已移除 markdown 代碼塊包裹")
+            
+            # 添加標準的日報標題格式
+            final_content = f"# 📰 {date_str} 科技新聞精選（n8n高品質版本）\n\n> 由 n8n 專業工作流程精選並分析的每日科技新聞\n\n## 🔥 今日亮點\n\n" + notion_content
+            
             # 保存為 community_digest.md 檔案
             md_file_path = self.repo_path / f'{date_str}_community_digest.md'
             
             with open(md_file_path, 'w', encoding='utf-8') as f:
-                f.write(notion_content)
+                f.write(final_content)
             
             print(f"✅ n8n 內容已保存: {md_file_path.name}")
             
