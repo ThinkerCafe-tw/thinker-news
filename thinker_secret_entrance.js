@@ -71,22 +71,7 @@ class ThinkerSecretEntrance {
     }
     
     findInsertionPoint() {
-        // 首頁：尋找包含 "🚀 讓複雜的 AI 世界變得簡單易懂" 的區域
-        const homeElements = document.querySelectorAll('*');
-        for (let el of homeElements) {
-            if (el.textContent && el.textContent.includes('🚀 讓複雜的 AI 世界變得簡單易懂')) {
-                return el.closest('.container, .footer, .intro-section') || el.parentElement;
-            }
-        }
-        
-        // 新聞頁面：尋找包含 "🏠 返回首頁" 的區域
-        for (let el of homeElements) {
-            if (el.textContent && el.textContent.includes('🏠 返回首頁')) {
-                return el.closest('.footer-nav, .nav-section') || el.parentElement;
-            }
-        }
-        
-        // 如果都找不到，返回 body
+        // 強制添加到頁面底部，確保一定能看到
         return document.body;
     }
     
