@@ -1,265 +1,122 @@
 /**
- * 思考者暗門 - 隱藏入口機制
- * 在公開新聞頁面中嵌入的 JavaScript 模組
+ * 思考者入口 - 簡單直接的入口按鈕
+ * 在公開新聞頁面底部添加思考者入口按鈕
  */
 
 class ThinkerSecretEntrance {
     constructor() {
-        // 多種觸發方式
-        this.secretSequence = ['t', 'h', 'i', 'n', 'k', 'e', 'r']; // 按順序輸入 "thinker"
-        this.shortSequence = ['0', '0', '7']; // 簡單版：按 007
-        this.userSequence = [];
-        this.resetTimeout = null;
+        this.password = 'thinker';
         this.isActivated = false;
-        this.currentMode = 'thinker'; // 'thinker' 或 '007'
-        
         this.init();
     }
     
     init() {
-        // 監聽鍵盤事件
-        document.addEventListener('keydown', (e) => this.handleKeyPress(e));
-        
-        // 隱藏版：三次點擊特定元素
-        this.createHiddenClickTrigger();
+        // 等待頁面載入完成後添加按鈕
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.createThinkerButton());
+        } else {
+            this.createThinkerButton();
+        }
         
         // 開發模式提示
         if (this.isDevelopmentMode()) {
-            console.log('🔧 開發提示：');
-            console.log('   方法1: 輸入 "thinker"');
-            console.log('   方法2: 輸入 "007"');
-            console.log('   方法3: 連續點擊標題3次');
-            console.log('   方法4: 按 Ctrl+Shift+T');
-        }
-        
-        // 添加快捷鍵
-        this.addKeyboardShortcuts();
-    }
-    
-    handleKeyPress(event) {
-        // 忽略在輸入框中的按鍵
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-            return;
-        }
-        
-        const key = event.key.toLowerCase();
-        
-        // 檢查兩種序列
-        const currentSequence = this.currentMode === 'thinker' ? this.secretSequence : this.shortSequence;
-        
-        // 檢查是否為當前序列中的下一個字母
-        if (key === currentSequence[this.userSequence.length]) {
-            this.userSequence.push(key);
-            
-            // 顯示進度提示（僅在開發模式）
-            if (this.isDevelopmentMode()) {
-                console.log(`🔑 進度: ${this.userSequence.join('')} (${this.userSequence.length}/${currentSequence.length})`);
-            }
-            
-            // 清除重置計時器
-            if (this.resetTimeout) {
-                clearTimeout(this.resetTimeout);
-            }
-            
-            // 設置新的重置計時器（5秒內沒有正確按鍵就重置）
-            this.resetTimeout = setTimeout(() => {
-                this.userSequence = [];
-            }, 5000);
-            
-            // 檢查是否完成序列
-            if (this.userSequence.length === currentSequence.length) {
-                this.activateSecretMode();
-            }
-        } else if (key === this.shortSequence[0] && this.userSequence.length === 0) {
-            // 切換到 007 模式
-            this.currentMode = '007';
-            this.userSequence.push(key);
-            if (this.isDevelopmentMode()) {
-                console.log('🔄 切換到 007 模式');
-            }
-        } else if (key === this.secretSequence[0] && this.userSequence.length === 0) {
-            // 切換到 thinker 模式
-            this.currentMode = 'thinker';
-            this.userSequence.push(key);
-            if (this.isDevelopmentMode()) {
-                console.log('🔄 切換到 thinker 模式');
-            }
-        } else {
-            // 錯誤按鍵，重置序列
-            this.userSequence = [];
-            this.currentMode = 'thinker';
-            if (this.resetTimeout) {
-                clearTimeout(this.resetTimeout);
-            }
+            console.log('🧠 思考者入口已載入，密碼：thinker');
         }
     }
     
-    addKeyboardShortcuts() {
-        // Ctrl+Shift+T 快捷鍵
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
-                e.preventDefault();
-                this.activateSecretMode();
-                if (this.isDevelopmentMode()) {
-                    console.log('🚀 快捷鍵激活');
+    createThinkerButton() {
+        // 尋找插入位置
+        let targetElement = null;
+        
+        // 首頁：尋找包含 "🚀 讓複雜的 AI 世界變得簡單易懂" 的區域
+        const homeElements = document.querySelectorAll('*');
+        for (let el of homeElements) {
+            if (el.textContent && el.textContent.includes('🚀 讓複雜的 AI 世界變得簡單易懂')) {
+                targetElement = el.closest('.container, .footer, .intro-section') || el.parentElement;
+                break;
+            }
+        }
+        
+        // 新聞頁面：尋找包含 "🏠 返回首頁" 的區域
+        if (!targetElement) {
+            for (let el of homeElements) {
+                if (el.textContent && el.textContent.includes('🏠 返回首頁')) {
+                    targetElement = el.closest('.footer-nav, .nav-section') || el.parentElement;
+                    break;
                 }
             }
-        });
-    }
-    
-    createHiddenClickTrigger() {
-        // 找到標題元素
-        const titleElement = document.querySelector('.article-title, h1');
-        if (titleElement) {
-            let clickCount = 0;
-            let clickTimeout = null;
-            
-            titleElement.addEventListener('click', (e) => {
-                clickCount++;
-                
-                if (clickTimeout) {
-                    clearTimeout(clickTimeout);
-                }
-                
-                if (clickCount === 3) {
-                    // 三次點擊，激活暗門
-                    this.activateSecretMode();
-                    clickCount = 0;
-                } else {
-                    // 設置重置計時器
-                    clickTimeout = setTimeout(() => {
-                        clickCount = 0;
-                    }, 1000);
-                }
-            });
-            
-            // 添加微妙的視覺提示（只有知道的人才會注意到）
-            titleElement.style.cursor = 'pointer';
-            titleElement.style.userSelect = 'none';
         }
-    }
-    
-    activateSecretMode() {
-        if (this.isActivated) return;
         
-        this.isActivated = true;
-        this.userSequence = [];
+        // 如果都找不到，就放在頁面最底部
+        if (!targetElement) {
+            targetElement = document.body;
+        }
         
-        // 創建暗門入口按鈕
-        this.createSecretButton();
-        
-        // 視覺反饋
-        this.showActivationFeedback();
-    }
-    
-    createSecretButton() {
-        // 檢查是否已經存在按鈕
-        if (document.getElementById('thinkerSecretBtn')) return;
-        
-        const button = document.createElement('div');
-        button.id = 'thinkerSecretBtn';
-        button.innerHTML = '🧠';
-        button.style.cssText = `
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 10000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        // 創建思考者入口按鈕
+        const thinkerButton = document.createElement('a');
+        thinkerButton.id = 'thinkerEntrance';
+        thinkerButton.href = '#';
+        thinkerButton.innerHTML = '🧠 思考者入口';
+        thinkerButton.style.cssText = `
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: scale(0);
-            animation: secretButtonAppear 0.5s ease forwards;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         `;
-        
-        // 添加動畫樣式
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes secretButtonAppear {
-                to {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-            }
-            
-            @keyframes secretPulse {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.1); }
-            }
-            
-            #thinkerSecretBtn:hover {
-                animation: secretPulse 0.6s ease infinite;
-                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-            }
-        `;
-        document.head.appendChild(style);
         
         // 點擊事件
-        button.addEventListener('click', () => {
-            this.openThinkerPanel();
+        thinkerButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.promptPassword();
         });
         
-        document.body.appendChild(button);
+        // 懸停效果
+        thinkerButton.addEventListener('mouseenter', () => {
+            thinkerButton.style.background = 'rgba(255, 255, 255, 0.3)';
+            thinkerButton.style.transform = 'translateY(-2px)';
+        });
         
-        // 10秒後自動隱藏（防止被意外發現）
-        setTimeout(() => {
-            if (button.parentNode) {
-                button.style.animation = 'secretButtonAppear 0.5s ease reverse forwards';
-                setTimeout(() => {
-                    if (button.parentNode) {
-                        button.remove();
-                    }
-                }, 500);
-            }
-        }, 10000);
+        thinkerButton.addEventListener('mouseleave', () => {
+            thinkerButton.style.background = 'rgba(255, 255, 255, 0.2)';
+            thinkerButton.style.transform = 'translateY(0)';
+        });
+        
+        // 添加到頁面
+        if (targetElement === document.body) {
+            // 如果是添加到 body，創建一個固定底部的容器
+            const footer = document.createElement('div');
+            footer.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 1000;
+            `;
+            footer.appendChild(thinkerButton);
+            document.body.appendChild(footer);
+        } else {
+            // 添加到現有的導航區域
+            targetElement.appendChild(thinkerButton);
+        }
+        
+        if (this.isDevelopmentMode()) {
+            console.log('🧠 思考者入口按鈕已添加');
+        }
     }
     
-    showActivationFeedback() {
-        // 創建短暫的視覺反饋
-        const feedback = document.createElement('div');
-        feedback.textContent = '🧠 思考者模式已激活';
-        feedback.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            z-index: 10001;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: feedbackAppear 2s ease forwards;
-        `;
+    promptPassword() {
+        const password = prompt('🧠 歡迎來到思考者入口\n\n請輸入密碼：');
         
-        const feedbackStyle = document.createElement('style');
-        feedbackStyle.textContent = `
-            @keyframes feedbackAppear {
-                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            }
-        `;
-        document.head.appendChild(feedbackStyle);
-        
-        document.body.appendChild(feedback);
-        
-        // 2秒後移除
-        setTimeout(() => {
-            if (feedback.parentNode) {
-                feedback.remove();
-            }
-        }, 2000);
+        if (password === this.password) {
+            this.openThinkerPanel();
+        } else if (password !== null) {
+            alert('❌ 密碼錯誤\n\n提示：密碼就是 "thinker"');
+        }
     }
     
     openThinkerPanel() {
