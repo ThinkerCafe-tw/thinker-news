@@ -321,11 +321,11 @@ class ThinkerSecretEntrance {
         
         try {
             // 獲取今日早報數據
-            const reportResponse = await fetch('http://localhost:6789/api/v1/reports/daily?format=json');
+            const reportResponse = await fetch('https://historic-meetings-slides-comply.trycloudflare.com/api/v1/reports/daily?format=json');
             const reportData = await reportResponse.json();
             
             // 獲取排程建議
-            const scheduleResponse = await fetch('http://localhost:6789/api/v1/reports/schedule-suggestion');
+            const scheduleResponse = await fetch('https://historic-meetings-slides-comply.trycloudflare.com/api/v1/reports/schedule-suggestion');
             const scheduleData = await scheduleResponse.json();
             
             // 更新狀態網格
