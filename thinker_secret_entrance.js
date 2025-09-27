@@ -5,10 +5,13 @@
 
 class ThinkerSecretEntrance {
     constructor() {
+        // 多種觸發方式
         this.secretSequence = ['t', 'h', 'i', 'n', 'k', 'e', 'r']; // 按順序輸入 "thinker"
+        this.shortSequence = ['0', '0', '7']; // 簡單版：按 007
         this.userSequence = [];
         this.resetTimeout = null;
         this.isActivated = false;
+        this.currentMode = 'thinker'; // 'thinker' 或 '007'
         
         this.init();
     }
@@ -22,8 +25,15 @@ class ThinkerSecretEntrance {
         
         // 開發模式提示
         if (this.isDevelopmentMode()) {
-            console.log('🔧 開發提示：輸入 "thinker" 或連續點擊標題3次進入思考者模式');
+            console.log('🔧 開發提示：');
+            console.log('   方法1: 輸入 "thinker"');
+            console.log('   方法2: 輸入 "007"');
+            console.log('   方法3: 連續點擊標題3次');
+            console.log('   方法4: 按 Ctrl+Shift+T');
         }
+        
+        // 添加快捷鍵
+        this.addKeyboardShortcuts();
     }
     
     handleKeyPress(event) {
@@ -34,31 +44,67 @@ class ThinkerSecretEntrance {
         
         const key = event.key.toLowerCase();
         
-        // 檢查是否為序列中的下一個字母
-        if (key === this.secretSequence[this.userSequence.length]) {
+        // 檢查兩種序列
+        const currentSequence = this.currentMode === 'thinker' ? this.secretSequence : this.shortSequence;
+        
+        // 檢查是否為當前序列中的下一個字母
+        if (key === currentSequence[this.userSequence.length]) {
             this.userSequence.push(key);
+            
+            // 顯示進度提示（僅在開發模式）
+            if (this.isDevelopmentMode()) {
+                console.log(`🔑 進度: ${this.userSequence.join('')} (${this.userSequence.length}/${currentSequence.length})`);
+            }
             
             // 清除重置計時器
             if (this.resetTimeout) {
                 clearTimeout(this.resetTimeout);
             }
             
-            // 設置新的重置計時器（2秒內沒有正確按鍵就重置）
+            // 設置新的重置計時器（5秒內沒有正確按鍵就重置）
             this.resetTimeout = setTimeout(() => {
                 this.userSequence = [];
-            }, 2000);
+            }, 5000);
             
             // 檢查是否完成序列
-            if (this.userSequence.length === this.secretSequence.length) {
+            if (this.userSequence.length === currentSequence.length) {
                 this.activateSecretMode();
+            }
+        } else if (key === this.shortSequence[0] && this.userSequence.length === 0) {
+            // 切換到 007 模式
+            this.currentMode = '007';
+            this.userSequence.push(key);
+            if (this.isDevelopmentMode()) {
+                console.log('🔄 切換到 007 模式');
+            }
+        } else if (key === this.secretSequence[0] && this.userSequence.length === 0) {
+            // 切換到 thinker 模式
+            this.currentMode = 'thinker';
+            this.userSequence.push(key);
+            if (this.isDevelopmentMode()) {
+                console.log('🔄 切換到 thinker 模式');
             }
         } else {
             // 錯誤按鍵，重置序列
             this.userSequence = [];
+            this.currentMode = 'thinker';
             if (this.resetTimeout) {
                 clearTimeout(this.resetTimeout);
             }
         }
+    }
+    
+    addKeyboardShortcuts() {
+        // Ctrl+Shift+T 快捷鍵
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                this.activateSecretMode();
+                if (this.isDevelopmentMode()) {
+                    console.log('🚀 快捷鍵激活');
+                }
+            }
+        });
     }
     
     createHiddenClickTrigger() {
