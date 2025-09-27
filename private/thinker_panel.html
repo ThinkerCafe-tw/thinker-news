@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思考者面板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .thinker-logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .login-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            margin-top: 15px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .panel-container {
+            display: none;
+            max-width: 1200px;
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .panel-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .panel-subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        .agent-status {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .status-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .status-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .status-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .recommendations {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .recommendation-item {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 87, 34, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .recommendation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #f57c00;
+        }
+        
+        .recommendation-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 登入介面 -->
+    <div class="login-container" id="loginContainer">
+        <div class="thinker-logo">🧠</div>
+        <h1 class="login-title">思考者面板</h1>
+        <p class="login-subtitle">Agent 007 私人控制中心</p>
+        
+        <input 
+            type="password" 
+            class="password-input" 
+            id="passwordInput" 
+            placeholder="請輸入訪問密碼"
+            autocomplete="off"
+        >
+        
+        <button class="login-btn" onclick="login()">進入思考者模式</button>
+        
+        <div class="error-message" id="errorMessage">
+            密碼錯誤，請重新輸入
+        </div>
+    </div>
+    
+    <!-- 面板主體 -->
+    <div class="panel-container" id="panelContainer">
+        <button class="logout-btn" onclick="logout()">登出</button>
+        
+        <div class="panel-header">
+            <h1 class="panel-title">🤖 Agent 007 控制中心</h1>
+            <p class="panel-subtitle">專屬於思考者的智能分析面板</p>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>正在載入 Agent 007 分析數據...</p>
+        </div>
+        
+        <div class="agent-status">
+            <h2>📊 今日狀態總覽</h2>
+            <div class="status-grid" id="statusGrid">
+                <!-- 動態載入狀態數據 -->
+            </div>
+        </div>
+        
+        <div class="recommendations">
+            <h2>🎯 個人化建議</h2>
+            <div id="recommendationsContent">
+                <!-- 動態載入建議內容 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 密碼設定（生產環境應該更安全）
+        const THINKER_PASSWORD = 'cruz007'; // 簡單好記：cruz + 007
+        
+        // 登入函數
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (password === THINKER_PASSWORD) {
+                // 隱藏登入界面，顯示面板
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('panelContainer').style.display = 'block';
+                
+                // 載入 Agent 007 數據
+                loadAgent007Data();
+            } else {
+                // 顯示錯誤訊息
+                errorMessage.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                
+                // 3秒後隱藏錯誤訊息
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // 登出函數
+        function logout() {
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('panelContainer').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+        }
+        
+        // 載入 Agent 007 數據
+        async function loadAgent007Data() {
+            const loading = document.getElementById('loading');
+            const statusGrid = document.getElementById('statusGrid');
+            const recommendationsContent = document.getElementById('recommendationsContent');
+            
+            loading.style.display = 'block';
+            
+            try {
+                // 獲取今日早報數據
+                const reportResponse = await fetch('http://localhost:6789/api/v1/reports/daily?format=json');
+                const reportData = await reportResponse.json();
+                
+                // 獲取排程建議
+                const scheduleResponse = await fetch('http://localhost:6789/api/v1/reports/schedule-suggestion');
+                const scheduleData = await scheduleResponse.json();
+                
+                // 更新狀態網格
+                updateStatusGrid(reportData, scheduleData);
+                
+                // 更新建議內容
+                updateRecommendations(reportData, scheduleData);
+                
+            } catch (error) {
+                console.error('載入數據失敗:', error);
+                statusGrid.innerHTML = '<p style="color: #e74c3c;">⚠️ 無法連接到 Agent 007 服務，請確認本地服務正在運行</p>';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+        
+        // 更新狀態網格
+        function updateStatusGrid(reportData, scheduleData) {
+            const statusGrid = document.getElementById('statusGrid');
+            const report = reportData.report || {};
+            
+            const statusCards = [
+                {
+                    title: '📅 日期',
+                    value: report.date || '今日'
+                },
+                {
+                    title: '🧠 記憶分析',
+                    value: `${report.memory_analysis?.insights_count || 0} 個洞察`
+                },
+                {
+                    title: '💭 情緒狀態', 
+                    value: report.memory_analysis?.emotional_state || '平靜'
+                },
+                {
+                    title: '🎯 焦點領域',
+                    value: report.memory_analysis?.focus_areas?.join(', ') || '無特定焦點'
+                },
+                {
+                    title: '📊 課程準備',
+                    value: `還有 ${report.course_preparation?.days_until_course || 'N/A'} 天`
+                },
+                {
+                    title: '🎙️ Podcast 機會',
+                    value: `${report.memory_analysis?.podcast_topics?.length || 0} 個主題`
+                }
+            ];
+            
+            statusGrid.innerHTML = statusCards.map(card => `
+                <div class="status-card">
+                    <div class="status-title">${card.title}</div>
+                    <div class="status-value">${card.value}</div>
+                </div>
+            `).join('');
+        }
+        
+        // 更新建議內容
+        function updateRecommendations(reportData, scheduleData) {
+            const recommendationsContent = document.getElementById('recommendationsContent');
+            const report = reportData.report || {};
+            const schedule = scheduleData || {};
+            
+            const recommendations = [];
+            
+            // 黃金時段建議
+            if (schedule.golden_hours_suggestion) {
+                recommendations.push({
+                    title: '🌟 黃金時段建議 (14:30-17:30)',
+                    content: `
+                        <strong>${schedule.golden_hours_suggestion.title}</strong><br>
+                        ${schedule.golden_hours_suggestion.description}<br><br>
+                        <strong>建議理由：</strong>${schedule.golden_hours_suggestion.reason}
+                    `
+                });
+            }
+            
+            // 高優先級任務
+            if (report.schedule_recommendation?.high_priority?.length > 0) {
+                const task = report.schedule_recommendation.high_priority[0];
+                recommendations.push({
+                    title: '🔥 今日最重要任務',
+                    content: `
+                        <strong>${task.task}</strong><br>
+                        預估時間：${task.time_estimate}<br>
+                        建議時段：${task.slot}<br>
+                        原因：${task.reason}
+                    `
+                });
+            }
+            
+            // Podcast 主題建議
+            if (report.memory_analysis?.podcast_topics?.length > 0) {
+                const topic = report.memory_analysis.podcast_topics[0];
+                recommendations.push({
+                    title: '🎙️ 優質 Podcast 主題',
+                    content: `
+                        <strong>主題：</strong>${topic.topic}<br>
+                        <strong>品質分數：</strong>${topic.score}/100<br>
+                        <strong>課程相關：</strong>${topic.course_relevant ? '是' : '否'}
+                    `
+                });
+            }
+            
+            // 智能提醒
+            if (report.schedule_recommendation?.reminders?.length > 0) {
+                recommendations.push({
+                    title: '💡 智能提醒',
+                    content: report.schedule_recommendation.reminders.map(reminder => 
+                        `• ${reminder}`
+                    ).join('<br>')
+                });
+            }
+            
+            recommendationsContent.innerHTML = recommendations.map(rec => `
+                <div class="recommendation-item">
+                    <div class="recommendation-title">${rec.title}</div>
+                    <div class="recommendation-content">${rec.content}</div>
+                </div>
+            `).join('');
+        }
+        
+        // 回車鍵登入
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+        
+        // 檢查是否在本地開發環境
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('🔧 開發模式：密碼是 cruz007');
+        }
+    </script>
+</body>
+</html>
