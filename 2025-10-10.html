@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-10-10 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="Google Gemini 2.5賦予AI網站操作能力，IBM Project Bob提升企業開發效率，宏亞食品實踐全員AI化，並關注AI市場泡沫與資安挑戰。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 10vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+        
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+        
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .article-header {
+                padding: 25px 20px;
+            }
+            
+            .article-title {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+        
+        <header class="article-header">
+            <div class="article-date">📅 2025年10月10日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">Google Gemini 2.5實現AI網站操作，IBM Project Bob助力開發，宏亞食品推動全民AI</p>
+        </header>
+        
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+            
+            <h3>1. Google Gemini 2.5讓AI能操作網站！點擊、鍵入、拖曳全自動化</h3>
+            <p>Google 最新釋出的 Gemini 2.5 Computer Use 預覽版，正在改變 AI 與數位介面的互動方式。這項技術建立於 Gemini 2.5 Pro 模型之上，具有強大的視覺理解與推理能力。透過 Gemini API，目前開放給 Google AI Studio 與 Vertex AI 使用者，開發者可以建立具備「操作」能力的 AI 代理，讓AI真正能與網站互動。</p>
+            <p>這意味著 AI 不再只能回答問題或生成內容，而是具備像人一樣的行為能力：自動點擊按鈕、在輸入框中鍵入資料，甚至精準拖拉畫面物件。對開發者而言，這是打造更高度自動化、可控制瀏覽器或網頁任務的 AI 工具最關鍵的一步。</p>
+            <p>Google 希望開發者能以此為基礎建立更自主化的 AI Agent，進一步解放非程式背景使用者的數位勞動。舉例來說，未來我們或許可以讓AI自動填寫繁瑣的表單、收集網站資訊，甚至進行簡單的客戶服務處理。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 初學者可以透過這個範例理解「AI Agent」的實際應用與未來趨勢。從被動回答問題到主動執行工作，是AI從文字模型邁向行為模型的重要里程碑。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171579" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>2. IBM推出Project Bob！程式碼AI助手整合Claude與Mistral，助力企業開發效率再升級</h3>
+            <p>IBM 近日在軟體開發者大會發表了全新的 AI 賦能軟體開發平台「Project Bob」，主打「AI優先設計」，企圖革新企業開發流程。該平台整合了 Anthropic 的 Claude 及 Mistral AI 模型，開發者可直接從 IDE 中使用這些強大的生成式AI工具進行程式碼生成、除錯、自動重構與測試。</p>
+            <p>這個整合環境讓開發週期大為縮短，同時也降低了因人力或程式邏輯錯誤所造成的成本。IBM 表示，Project Bob 將有助於企業將過時、技術債累積過深的系統現代化，並加快業務創新。</p>
+            <p>重要的是，這也代表著 AI 將成為撰寫與維護程式碼不可或缺的夥伴。從生成資料分析腳本、建立數據管線到部署模型，Project Bob 提供了一站式 AI 助力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 對資料科學初學者而言，可從這個案例中理解如何與「內嵌AI」的編輯器共事，並藉此更快地完成原本需要手動撰寫的程式邏輯，是未來必備技能之一。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171580" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>3. 宏亞食品導入GenAI創造全員AI時代！不懂Python也能寫出自動化程式</h3>
+            <p>台灣傳產代表宏亞食品帶來了一個AI落地的精彩案例。資訊部經理周哲旭分享，公司維運工程師在完全不懂Python的情況下，利用生成式AI工具自行撰寫多支實用腳本，成功解決長期存在的工廠加班痛點。</p>
+            <p>更特別的是，AI的應用不僅限於資訊部門：行銷、採購、企劃等多個非技術團隊也廣泛導入AI工具處理日常作業，提高決策品質與執行效率。甚至高層如董事長，也使用AI協助設備採購判斷，節省上千萬元預算。</p>
+            <p>此案例清楚展示即使在非科技產業、非工程職位中，GenAI 也能從多角度賦能全員，邁向真正的「全民AI」時代。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 對入門者尤其啟發性高。它打破了「學AI＝會寫程式」的迷思，鼓勵讀者透過工具創造價值，而非一開始執著於技術門檻本身。
+            </div>
+            <p><a href="https://www.ithome.com.tw/people/171578" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🛠 AI工具與應用焦點</h2>
+            
+            <h3>HiBob搭配ChatGPT打造智慧人資平台！客製GPT提升工作效率與營收</h3>
+            <p>知名HR平台HiBob宣布與OpenAI進行深度整合，將ChatGPT Enterprise 與客製GPT嵌入其核心系統中。用戶可以透過AI解答常見問題、優化入職體驗及產出員工洞察報表。</p>
+            <p>客製化GPT依據企業文化與政策訓練，因此不僅輸出速度更快，也能提供更貼近需求的建議，大幅提升資源運用效率，帶動產品收益與用戶擴張。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 展示如何運用GPT API、RAG與客製模型為特定領域創造深度價值，對AI應用邊界開拓具啟發性。
+            </div>
+            <p><a href="https://openai.com/index/hibob" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+            
+            <h3>英國央行示警：AI股票或已產生巨大泡沫，市場極度集中恐重演2000年網路破裂</h3>
+            <p>英國央行指出，目前AI技術的資本市場投資出現高度集中，少數科技巨頭股價脫離基本面、估值泡沫化，可能重現網路泡沫式崩盤局面。</p>
+            <p>AI雖值得期待，但不可忽略其金融層面的風險與連鎖反應。對技術工作者來說，這揭示技術繁榮與經濟安全的交互關係，同樣需要警覺與反思。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 鼓勵初學者建立技術與經濟雙重敏感度，不僅懂技術，也看懂背後的資本流動與風險提示。
+            </div>
+            <p><a href="https://arstechnica.com/ai/2025/10/bank-of-england-warns-ai-stock-bubble-rivals-2000-dotcom-peak/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🔐 資安趨勢快訊</h2>
+            
+            <h3>1. Clop駭客利用Oracle EBS零時差漏洞，攻擊早在8月開始潛伏</h3>
+            <p>Clop攻擊行動回溯至8月，漏洞編號CVE-2025-61882，針對Oracle的ERP系統發動高風險攻擊，導致敏感業務資料與系統控制權可能曝光。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 零時差攻擊反映企業軟體日益成為駭客目標，也提醒AI與資料科學領域需與資安團隊緊密合作，建構全方位防護。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171581" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>2. OpenAI阻擋來自俄中北韓的駭客濫用ChatGPT進行惡意開發</h3>
+            <p>三個國家級駭客組織遭揭露濫用GPT進行遠端木馬與釣魚語言生成。OpenAI主動封鎖帳號並通報安全團隊，展現監測能力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 認識AI的雙面性及模型提供商在「AI倫理與安全」的角色，是責任型AI實踐的重要概念。
+            </div>
+            <p><a href="https://thehackernews.com/2025/10/openai-disrupts-russian-north-korean.html" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+            
+            <h3>Red Hat驚爆5000家企業客戶資料外洩，駭客勒索雙重擴散</h3>
+            <p>開源巨擘Red Hat遭入侵，超過800份CER報告流入駭客手中。供應鏈攻擊與資料外洩類事件提醒，每家企業都應審查其合作夥伴的資安能力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 儘管你可能不開發軟體，但你分析的資料可能正來自於被駭的系統——資料科學家應對資訊源保持警覺。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171585" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>💡 深度觀點與建議</h2>
+            
+            <h3>AI在資安攻防雙方大活躍！你的防禦策略也該升級了</h3>
+            <p>AI不只是駭客工具，也成為資安團隊的「救命稻草」。面對日漸龐大的威脅資料、異常行為與警報，AI能有效降低雜訊、提高警準值。企業若想在AI驅動的資安攻防中存活，勢必要導入AI協助事件取捨與快速響應。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 理解AI在資安情境中如何應用 NLP、自動分類與行為模式分析，並將「應變效率」納入資料科學設計思維中。
+            </div>
+            <p><a href="https://thehackernews.com/2025/09/automation-is-redefining-pentest.html" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📝 編輯後記</h2>
+            <p>今日焦點是「實作」與「落地」的AI應用：Google Gemini 2.5讓AI能控制網頁、IBM Project Bob革命開發流程、宏亞食品讓非工程師也能寫程式，這些都強調一件事：AI正在你我工作流程中嵌入、變得可用。</p>
+            <p>對AI與資料科學初學者來說，與其每天追逐模型更新，不如動手去試試一個API、一個應用；AI不是高牆，而是入口。</p>
+            <p>未來將是懂AI也懂應用的人主導局勢。勇敢嘗試，才知道從哪裡增強你的技能樹 💪</p>
+            <div class="highlight-box">
+                <strong>🎯 學習建議</strong><br>
+                希望大家能從今日的日報中獲取有益的資訊，並持續關注 AI 的最新動向。讓我們一起學習，並與 AI 一起成長。記住：AI不是要取代我們，而是要成為我們更強大的工具！
+            </div>
+        </div>
+        
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🤖 今日AI重點 (LINE版)</h3>
+                <p><strong>❗AI不只會聊天，現在還能幫你點網頁、填表單、寫程式！</strong></p>
+                <p><strong>📌 今天最猛的應用趨勢：</strong></p>
+                
+                <p>🔹 <strong>Google Gemini 2.5 讓AI會動手：</strong><br>
+                AI代理現在能自動「點擊按鈕」、鍵入資料、拖拉介面物件，正式從「說話」進化到「做事」的時代，未來你不會再親手填表。</p>
+                
+                <p>🔹 <strong>IBM Project Bob 把AI裝進IDE：</strong><br>
+                直接在程式編輯器中整合Claude與Mistral，讓AI幫你寫程式、自動除錯，不會寫也能完成複雜任務。</p>
+                
+                <p>🔹 <strong>宏亞食品員工零程式底子照用AI寫腳本：</strong><br>
+                傳產部門用GenAI解決繁瑣工作流程，全公司從董事長到採購都在用AI幫決策、省上千萬。</p>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>🎯 所以說👉 AI落地不只是科技圈專屬，懂用工具 = 擁有超能力，零基礎也沒問題。</strong><br>
+                    #AI工具 #AI應用 #資料科學入門 #生成式AI #低門檻高效能
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    📅 2025-09-25<br>
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+    
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
