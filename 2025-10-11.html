@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-10-11 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="AI資安新篇章：Anthropic開源安全稽核，Google DeepMind推AI自癒，漏洞懸賞計畫啟動 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+        
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+        
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .article-header {
+                padding: 25px 20px;
+            }
+            
+            .article-title {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+        
+        <header class="article-header">
+            <div class="article-date">📅 2025年10月11日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">AI資安超神力！Anthropic開源『體檢報告』，Google DeepMind『自癒神藥』，還有賞金獵人等你來抓BUG！</p>
+        </header>
+        
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+            
+            <h3>1. AI資安超神力！Anthropic開源『體檢報告』，Google DeepMind『自癒神藥』，還有賞金獵人等你來抓BUG！</h3>
+            <p>AI技術日益普及，其資安風險也成為產業關注焦點。本週，AI公司Anthropic 和 Google DeepMind 宣布一系列 AI 資安新策略：Anthropic 發布了名為「Petri」的開源模型安全稽核框架，協助開發者系統性檢查 AI 模型是否存在漏洞，類似為 AI 模型制定一份安全體檢報告。</p>
+            <p>另一方面，Google DeepMind 推出了一位能自動發現並修補程式漏洞的 AI 代理人——「CodeMender」。此外，Google 亦啟動了專屬於AI安全領域的「漏洞懸賞計畫」，號召資安社群一同找出AI系統的弱點。</p>
+            <p>這兩家公司提供的工具與策略，皆顯示出未來AI在「自我安全性檢查」和「自我修復能力」方面的新趨勢，進一步鞏固AI基礎建設的安全性與信任度。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 體認AI專案不只是演算法訓練，還須重視安全審查。開源工具如 Petri 能讓初學者實際運用在專案中強化穩健性，而Google漏洞懸賞也為具備資安實力的學習者提供實戰與獎金機會。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171612" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>2. AI儲存黑科技！GPU伺服器也能變『儲存超跑』？內接SSD大翻身，你的模型訓練要飛了！</h3>
+            <p>過去GPU伺服器通常只負責運算，資料則存放於外部儲存裝置。但新創儲存公司Hammerspace與WEKA推動一個全新儲存架構：將GPU伺服器內部的高速SSD串連為一個儲存叢集。</p>
+            <p>這種設計結合了NVMe SSD的高速讀寫能力與平行檔案系統（Parallel File System）的高可用性，使GPU伺服器兼具高速計算與本地資料存取，不僅減少了資料傳輸瓶頸，也大幅提升模型訓練的效率與規模彈性。</p>
+            <p>這項創新對AI訓練與推論工作負載尤其有利，也是未來AI基礎設施的新典範，逐漸告別傳統「運算與儲存分離」的架構思維。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 資料科學初學者應理解資料讀寫瓶頸是AI專案中常見的效率殺手。這種架構提供了簡化部署又高效能的解法，在進行本地端GPU訓練時尤其受用。
+            </div>
+            <p><a href="https://www.ithome.com.tw/tech/171606" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>3. LLM大腦也有政治立場？OpenAI首揭『政治偏見』評估秘辛，你的AI會不會『帶風向』？</h3>
+            <p>OpenAI發表重要研究，首次揭示如何系統性評估大型語言模型（LLM）中的政治偏見。他們開發了一種新的實驗設計，用以測試不同輸入情境（prompt）下模型的回應偏向，包括立場、用詞、情緒等指標。</p>
+            <p>研究過程中，OpenAI嘗試以更貼近真實環境的資料評估模型，例如模擬社群問答、政策表態等場景，減少傳統偏見評測的主觀性。最終目的是建立一種更準確、公平的評價法，幫助模型開發時提早發現可能的判斷偏差。</p>
+            <p>這對於開發LLM應用的團隊意義重大。因為缺乏偏見控制的模型，可能在實務應用中產生資訊誤導、內容分化甚至法律風險。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 若你日後設計chatbot或問答系統，本研究提供了「如何量化LLM回應偏見」的框架。了解模型偏見本質與對社會的影響，也有助你設計更公平、更受信任的AI產品。
+            </div>
+            <p><a href="https://openai.com/index/defining-and-evaluating-political-bias-in-llms" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🛠 AI工具與應用焦點</h2>
+            
+            <h3>Google Gemini CLI大進化！終端機變AI魔法棒，擴充市集開啟開發者熱潮</h3>
+            <p>Google為旗下大型語言模型Gemini的命令列介面（CLI）開放「擴充套件機制」，允許開發者直接將各種工具內嵌到Gemini CLI中。每個套件附有「立即上手指南」，初學者可輕鬆試用。</p>
+            <p>此舉讓終端機成為AI開發總控台，不需切換至複雜前端，大幅簡化工作流。開發者也可透過社群貢獻擴充功能，使用者能依GitHub星數決定哪個工具適合自己。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> CLI使用者可藉此工具加速建模、部署與測試，省下大量切換視窗與介面的時間，並逐步打造自己的AI工作環境。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171613" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+            
+            <h3>OpenAI狂蓋資料中心？微軟霸氣回應：我們早就有了！揭示隱形AI底盤優勢</h3>
+            <p>微軟執行長納德拉回應外界關注OpenAI建置AI資料中心的新聞，強調微軟已經擁有全球最龐大的雲端AI基礎設施。並展示與Nvidia合作部署的大型AI系統，已實戰應用於微軟的Azure平台。</p>
+            <p>這顯示AI競爭不只是演算法或模型大小的比拚，更是底層基礎設施實力的對決。選擇哪一家雲端平台，未來將牽動AI專案的運算速度、成本與可行性。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> AI模型訓練與部署離不開強大的運算架構，初學者需要認識主流平台（如Azure）的基礎優勢，助於採用正確的平台策略。
+            </div>
+            <p><a href="https://techcrunch.com/2025/10/09/while-openai-races-to-build-ai-data-centers-nadella-reminds-us-that-microsoft-already-has-them/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🔐 資安趨勢快訊</h2>
+            
+            <h3>AI模型遭『後門植入』！只需少量惡意資料，駭客就能操縱你的模型行為</h3>
+            <p>最新研究揭示，大型語言模型（LLM）可能僅需極少量惡意樣本，就能悄悄學會「有毒行為」，例如洩密、出現偏見用語或繞過限制。這種攻擊方式稱為「資料中毒」（Data Poisoning），即於訓練階段偷偷植入特定觸發條件。</p>
+            <p>這意味即使你使用的是開源或知名資料集，也有可能模型被埋下後門，未來暴露於不可預測風險中。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 初學者常用來訓練語言模型的公開資料集，不一定可靠。學會資料審查技術、使用資料譜系工具或實作模組可解釋度（XAI）都是重要的防線。
+            </div>
+            <p><a href="https://arstechnica.com/ai/2025/10/ai-models-can-acquire-backdoors-from-surprisingly-few-malicious-documents/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+            
+            <h3>台灣人口負成長連21月，邁向高齡化社會：AI將如何解社會勞動難題？</h3>
+            <p>台灣內政部公布最新人口數據：連續21個月負成長，且老年人口即將突破總人口的20%。這樣的高齡少子社會將嚴重影響勞動力供給，迫使政府與企業積極尋求AI和自動化解方。</p>
+            <p>智慧照護、機器人護理、自動化運輸、智慧政府等領域，有望成為AI落地的重要場域，且應用需求將長期存在。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 深耕AI技能者若能關注銀髮照護、自動服務等應用，將能與社會剛需結合，開創長期穩定的職涯方向。
+            </div>
+            <p><a href="https://finance.technews.tw/2025/10/09/taiwans-total-population-has-experienced-negative-growth-for-21-consecutive-months/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>💡 深度觀點與建議</h2>
+            
+            <h3>英國央行示警：AI投資是否炒過頭了？技術背後的商業現實不能忽視</h3>
+            <p>英國中央銀行指出AI主題股的估值正在泡沫化，如同當年網路泡沫。儘管技術進展快速，但仍需警惕其商業可行性與市場過度熱情的風險。一旦政策收緊、市場需求趨緩，這些估值將面臨劇烈修正。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 對初學者而言，這提醒我們學AI不能只看技術，也應了解其商業落地難題。你的技術是否真能創造實質價值，是未來最重要的課題。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171618" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📝 編輯後記</h2>
+            <p>今天的關鍵主題聚焦「從技術到信任」：無論是OpenAI的政治偏見檢測、DeepMind的自動修補漏洞AI，還是LLM資料中毒風險，都強調了AI系統的可解釋性、安全性與社會責任。</p>
+            
+            <p>這代表AI的學習不再只是熟練Python或模型調參，更在於理解AI如何與世界互動、是否公平、是否穩健。</p>
+            
+            <p>此外，也再次呼籲大家掌握「儲存演進」與「基礎設施」的變化，這些可能是學習者最容易忽視，實際卻會大大影響效率與成果的環節。</p>
+            
+            <div class="highlight-box">
+                <strong>▶ 學習行動建議：</strong><br>
+                - 選擇1個你常用的LLM或工具（如Gemini CLI），試著探索其擴充功能與安全設定<br>
+                - 評估自己的專案是否需要加強訓練資料來源審查或儲存效能優化<br>
+                - 閱讀OpenAI偏見評估研究全文，熟悉其方法學與社會背景
+            </div>
+            <p>我們明天見 👋</p>
+        </div>
+        
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🛡️ AI開始自我防禦：安全與信任新篇章</h3>
+                <p>今天兩大消息引爆業界：</p>
+                <p>✅ Anthropic 開源安全體檢工具「Petri」，幫AI模型做資安健檢</p>
+                <p>✅ Google DeepMind 推出能自癒的AI「CodeMender」，還開起漏洞懸賞！</p>
+                
+                <p><strong>為什麼超重要？</strong><br>
+                AI將不只是決策工具，也將具備「自查」與「自救」能力。這讓AI不再是黑箱，而是「可信任」的夥伴，更為企業部署AI掃清風險陰影。</p>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>💡 初學者也能上手參與 — </strong><br>
+                    Petri為開源，想強化模型的穩定性，現在就能從你的專案開始做安全架構思考！
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    #AI安全 #模型體檢 #DeepMind #Anthropic #漏洞懸賞 #2025AI趨勢<br>
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+    
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
