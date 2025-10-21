@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-10-22 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="Claude整合微軟365強化企業搜尋，Cisco開源CodeGuard提升程式安全，Windows 10停止支援致資安風險升高 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+        
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+        
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .article-header {
+                padding: 25px 20px;
+            }
+            
+            .article-title {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+        
+        <header class="article-header">
+            <div class="article-date">📅 2025年10月22日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">Claude整合企業應用，Cisco開源AI安全框架，資安警報頻傳</p>
+        </header>
+        
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+            
+            <h3>1. Claude 大神更聰明了！直連微軟365、Slack、Google，你的企業搜尋將被 AI 全面強化！</h3>
+            <p>AI 新創公司 Anthropic 正式宣布，旗下先進聊天機器人 Claude 推出了「連接器（Connector）」功能，讓生成式 AI 功能正式延伸進企業應用。這個功能使得 Claude 能直接整合微軟 Microsoft 365 的生態系，包含 Teams、Outlook 和 SharePoint，進一步支援企業內部文件與溝通內容的分析與理解。</p>
+            <p>更加引人注目的是，Claude 的連接器也可讀取來自 Slack、Google Workspace 和 Notion 的資料，打造一個跨平台的企業內部知識搜尋工具。舉例來說，企業用戶可讓 Claude 搜尋跨部門的會議記錄、簡報、郵件或文件回應，並自動彙整相關資訊。這樣的能力可幫助企業員工快速獲得正確資訊，大幅提升決策效率。</p>
+            <p>這不僅是資訊檢索效率的突破，更為生成式 AI 在企業落地應用開啟了無限可能，包括報告自動生成、協作內容自動摘要、內部客服問答系統等。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 對資料科學初學者而言，這是認識 LLM（大型語言模型）從通用對話擴展到企業場景的一個實例。了解如何將企業內部非結構化資料結合進語言模型，是未來 AI 應用與產品設計的重要方向。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171754" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>2. Cisco 重磅開源！AI 驅動程式碼安全框架 CodeGuard 登場，打造「預設即安全」開發新紀元！</h3>
+            <p>思科（Cisco）正式開源名為 Project CodeGuard 的 AI 程式碼安全框架，目標是把「預設即安全」的理念併入整個軟體開發生命週期。這套系統可自動於開發初期階段加入安全檢查機制，幫助開發團隊在程式編碼、生成與審查階段就排除安全漏洞。</p>
+            <p>其 AI 模型可識別例如硬編碼金鑰、缺乏輸入驗證、使用過時函式庫這類風險項目，進行預警和修正建議。最重要的是，CodeGuard 並不取代工程師，而是以輔助方式整合進 DevSecOps 流程中，提升團隊開發效率與資安品質並重。</p>
+            <p>隨著生成式 AI 被越來越多人用來輔助編碼，CodeGuard 預示出企業將開始投入更多資源確保 AI 生成的程式碼本身要具備安全防線。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 對資料科學初學者而言，這是 AI 在程式碼安全領域的一個應用典範。學習如何利用工具自動檢測資安問題，是將來開發與部署 AI 專案不可或缺的技能。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171747" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>3. 微軟 Windows 10 掰了！資安漏洞狂飆，Apple 懸賞百萬找「零點擊」破綻，安卓也陷間諜危機！</h3>
+            <p>微軟在 10 月 14 日正式停止對 Windows 10、Exchange Server 2016/2019，以及 Office 2016/2019 的支援。未升級的用戶將不再獲得安全更新，成為駭客攻擊的首要目標。同一週內，微軟修補了創今年新高的 175 個漏洞，包含 6 個「零時差漏洞」，其中 3 個已被駭客實際利用。</p>
+            <p>除了 Windows 外，安卓系統也遭到針對性攻擊，一款名為 ClayRat 的間諜軟體被 Zimperium 證實已鎖定俄國用戶，偽裝成 TikTok、WhatsApp 等熱門 App，竊取大量隱私資料。</p>
+            <p>蘋果則宣布重金懸賞「零點擊攻擊鏈」的漏洞發現，將最高懸賞金由 100 萬美元翻倍至 200 萬，展現阻止高階網路攻擊的決心。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong> 資安意識在資料科學工作中也至關重要，了解這些漏洞與攻擊類型有助於設計更穩健的數據處理及部署流程。理解「零點擊」、「零時差」等術語，是安全基礎知識的重要一環。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171760" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📱 AI工具與應用</h2>
+            
+            <h3>Claude 接入企業平台搜尋內網智慧資料庫，加速工作流程革命</h3>
+            <p>（詳情請見「今日必讀 TOP 3」第一則）</p>
+            
+            <h3>Cisco CodeGuard 用 AI 憑證強化 Coding Security</h3>
+            <p>（詳情請見「今日必讀 TOP 3」第二則）</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+            <p>（今日無更新）</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🔒 安全警報</h2>
+            
+            <h3>F5 慘遭國家級駭客入侵，BIG-IP 原始碼外洩，供應鏈風險升溫</h3>
+            <p>全球資安設備大廠 F5 於 10 月 15 日證實，遭一組國家級駭客（疑似中國 UNC5221）攻擊，駭客滲透其工程研發環境，盜走核心產品 BIG-IP 原始碼與未公開漏洞資訊。由於 F5 是多數大企業、政府的資安要角，這代表全球供應鏈皆可能受波及。</p>
+            <p><a href="https://www.ithome.com.tw/news/171761" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>Chrome 擴充外掛藏惡意程式，WhatsApp Web 用戶遭劫持成垃圾訊息跳板</h3>
+            <p>資安公司 Socket 揭露，共131款改造版 Chrome 擴充功能被用於劫持巴西 WhatsApp Web 用戶帳號，傳送大量垃圾訊息給受害者聯絡人，造成隱私外洩與帳號封禁風險。</p>
+            <p><a href="https://thehackernews.com/2025/10/131-chrome-extensions-caught-hijacking.html" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+            
+            <h3>維基百科流量流失 8%，生成式 AI 正在改變我們的「搜尋習慣」</h3>
+            <p>🔍 隨著 AI 聊天機器人（如 ChatGPT、Claude）和搜尋引擎的摘要功能興起，用戶越來越少點擊連結至維基百科了。根據維基媒體基金會資料，今年訪問人次下滑了 8%。傳統內容平台遭遇前所未有的挑戰。</p>
+            <div class="highlight-box">
+                <strong>💡 這對資料科學初學者意味著什麼？</strong> 在資訊獲取行為改變的同時，資料分析師必須善於分析用戶行為改變，調整內容策略。另外，可反思怎樣的知識型內容無法被 AI 替代，例如有分析深度或帶有情感判斷的內容。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171752" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>💭 觀點與分析</h2>
+            
+            <h3>供應鏈資安風暴、Linux Rootkit、Pixnapping：你誤以為安全的系統其實漏洞百出？</h3>
+            <p>本週資安週報分析指出：攻擊者傾向使用低調但長期的潛伏入侵服，Linux 上的 Rootkit（可隱形運行的惡意軟體）已現蹤。攻擊手法如 EtherHiding（利用區塊鏈技術藏匿惡意內容）也開始活躍。傳統「掃毒即安全」的觀念已不合時宜，必須導入異常行為監控與資料科學分析。</p>
+            <p><a href="https://thehackernews.com/2025/10/weekly-recap-f5-breached-linux-rootkits.html" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📝 編輯後記</h2>
+            <p>今天的日報反映出三個趨勢：一是生成式 AI 開始深入整合企業內部工作流程，資料科學家將不只寫模型，也需要思考如何串接文件與知識庫；二是資安風險無所不在，「即使是資安公司本身也會中招」的現實令人警惕；三是內容與搜尋的變化也迫使我們思考：AI 提供答案後，你還需要人來說故事嗎？明天，我們繼續來理解這些故事背後的資料與風險。</p>
+            
+            <div class="highlight-box">
+                <strong>🎯 學習建議</strong><br>
+                希望大家能從今日的日報中獲取有益的資訊，並持續關注 AI 的最新動向。讓我們一起學習，並與 AI 一起成長。記住：AI不是要取代我們，而是要成為我們更強大的工具！
+            </div>
+        </div>
+        
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🤖 今日AI重點 (LINE版)</h3>
+                <p><strong>🚨 Claude 強勢升級：</strong>AI 變身你的企業知識超級助理，串接微軟365、Slack、Google打造跨平台內部搜尋神器！</p>
+                <p>✅ 會議記錄自動統整</p>
+                <p>✅ 文件秒搜尋與摘要</p>
+                <p>✅ 自動回應郵件與協作內容</p>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>🎯 給初學者的一句話：</strong><br>
+                    生成式 AI 正式跨入「企業內網應用」新時代，掌握串接技能是資料科學應用的大里程碑！<br>
+                    #AI應用 #企業數位轉型 #生成式AI #資料科學
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+    
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
