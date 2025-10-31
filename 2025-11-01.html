@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-11-01 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="輝達DGX Spark個人AI工作站亮相，OpenAI發布AI瀏覽器Atlas，IBM開源輕量級AI模型 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+        
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+        
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .article-header {
+                padding: 25px 20px;
+            }
+            
+            .article-title {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+        
+        <header class="article-header">
+            <div class="article-date">📅 2025年11月01日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">輝達DGX Spark個人AI工作站亮相，OpenAI發布AI瀏覽器Atlas，IBM開源輕量級AI模型</p>
+        </header>
+        
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+            
+            <h3>1. 輝達GB100晶片加持！小型AI工作站DGX Spark亮相，助攻個人AI訓練與部署</h3>
+            <p>Nvidia 再次在 AI 硬體領域領風騷，推出全新個人化 AI 工作站「DGX Spark」。相較以往只在資料中心出現的超高效能 GPU 系統，如 DGX H200 和 SuperPOD 系列，DGX Spark 具備更小型、更易部署的特性，卻依然搭載了高階 GB100 晶片或同等級處理器。</p>
+            <p>DGX Spark 的設計宗旨在於讓 AI 運算力更普及，進一步拓展給個人開發者、教育機構與小型研究團隊，降低進入門檻。這樣的轉變，不僅象徵超級運算力「下放」，也可能開啟 AI 模型訓練由中心化走向去中心化的趨勢。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                這讓資料科學入門者有機會在桌面等級裝置上實作 AI 訓練工作，建立從資料處理到模型部署的實戰經驗。
+            </div>
+            <p><a href="https://www.ithome.com.tw/review/171853" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>2. OpenAI公開ChatGPT瀏覽器Atlas的OWL架構，打造AI原生的代理式上網體驗</h3>
+            <p>OpenAI 發布名為 OWL 的創新瀏覽器架構，驅動其 AI 瀏覽器 ChatGPT Atlas。OWL 最大的突破是「解耦Chromium」，擺脫對傳統瀏覽器的依賴，改以自己設計的模組實現更快啟動、更靈活介面與AI代理功能。</p>
+            <p>Atlas 可以透過 ChatGPT 理解使用者任務意圖後，自動在網頁中操作，像是一個真正會行動的AI助理。例如它可自動搜尋資料、彙整表格、甚至幫你填寫網頁表單。這種「代理式瀏覽」（Agentic Browsing）標誌著 AI 與網路互動的全新篇章。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                資料科學家可從中學習代理型AI的實作概念，進一步試著思考如何將類似功能融入自己的自動化流程或數據讀取任務中。
+            </div>
+            <p><a href="https://openai.com/index/building-chatgpt-atlas" class="news-link external-link" target="_blank">閱讀原文</a></p>
+            
+            <h3>3. IBM開源Granite 4.0 Nano模型：10億參數也能跑邊緣設備！</h3>
+            <p>IBM 正式開源其專為邊緣運算設計的語言模型 Granite 4.0 Nano，涵蓋約 3.5 億與 10 億參數兩個版本，並保有不錯的推論表現。在推論框架方面，IBM 與 vLLM、llama.cpp、MLX 等工具整合，開發者可於 Hugging Face 上直接下載使用。</p>
+            <p>這些模型延續 Granite 4.0 在大型語料與訓練技巧上的成熟經驗，確保即使壓縮規模，依然保持優良泛用性。這使得將 AI 模型部署至手機、IoT 裝置或微型機上成為可能方案。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可藉此接觸與練習「模型壓縮」、「小模型部署」等實戰技能，為未來開發 on-device AI 奠定基礎。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171966" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🛠 AI工具與應用焦點</h2>
+            
+            <h3>Canva提升AI設計力，自研模型+全新應用功能齊發，更送專業軟體給用戶！</h3>
+            <p>Canva 推出自家 AI 設計模型並整合強化功能於平台，如 email 設計、表單設計等，讓非設計背景用戶也能創作專業內容。值得注意的是，Canva 近期大方提供全套 Affinity 專業設計軟體（Photo、Designer、Publisher）完全免費，大幅降低學習設計技能的門檻。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會用 Canva 的 AI 設計功能能有效提升數據視覺化與報告設計品質，也是非設計背景資料工作者必備技能之一。
+            </div>
+            <p><a href="https://techcrunch.com/2025/10/30/canva-launches-its-own-design-model-adds-new-ai-features-to-the-platform/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+            
+            <h3>微軟首次公開握有OpenAI 27%股份，AI技術已是財務成長主力</h3>
+            <p>微軟最新財報揭示，其擁有OpenAI營利實體的27%股權，正式將AI技術納入其財報成長引擎之一。此項目標誌著AI從實驗室技術轉為型塑企業營收核心的新階段，也印證了戰略投資AI的回報潛力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                建議資料分析師開始關注技術應用與商業成效的連結，提升專案ROI評估與溝通能力。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171967" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🔐 資安趨勢快訊</h2>
+            
+            <h3>NPM130+惡意套件植入「幽靈烏鴉」，專偷Git憑證與自動部署密鑰！</h3>
+            <p>研究人員發現名為 PhantomRaven 的惡意軟體潛藏於超過126個NPM套件之中，專門在開發者安裝後竊取 GitHub Token、CI/CD 憑證等高度敏感資料。攻擊者運用手法還能繞過部分靜態掃描機制，增加偵測難度。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                入門者應建立供應鏈安全意識，在使用任何套件前檢查來源與維護狀況，避免自己的代碼或開發環境被入侵。
+            </div>
+            <p><a href="https://thehackernews.com/2025/10/phantomraven-malware-found-in-126-npm.html" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+            
+            <h3>Bevel募資千萬美元！結合生活與穿戴裝置數據打造AI智慧健康助理</h3>
+            <p>AI健康科技公司 Bevel 宣布獲得1000萬美元資金，將利用穿戴裝置與日常行為數據（例如飲食、睡眠、運動）打造AI健康顧問，提供個人化健康建議。系統整合數據後由AI分析找出潛在風險，幫助用戶改善生活品質。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                這是資料整合與推薦系統實務的經典應用，適合初學者觀摩如何從多源資料建模出有價值的建議。
+            </div>
+            <p><a href="https://techcrunch.com/2025/10/30/bevel-raises-10m-series-a-from-general-catalyst-for-its-ai-health-companion/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2>💡 深度觀點與建議</h2>
+            
+            <h3>Python基金會拒絕150萬補助，只為堅守多元包容原則！</h3>
+            <p>Python基金會公開宣布退出美國NSF所提供的開源安全補助專案，原因是該補助要求受補單位不得在專案期間推行DEI（多元、平等、包容）倡議。基金會明確表示將堅守社群原則，不為資金妥協價值觀。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                身為資料科學社群一員，學習如何在技術之餘參與或理解開源社群文化，是建立長期技術職涯不可忽略的視角。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/171970" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>📝 編輯後記</h2>
+            <p>今日的新聞呈現AI技術「工具化、輕量化、民主化」的明確趨勢。不論是Nvidia讓AI訓練進入個人工作站，還是IBM釋出10億參數模型適配邊緣設備，皆說明AI能力逐漸從雲端走向端點，更多人能親手操作AI模型。</p>
+            <p>同時從OpenAI的OWL架構或Canva與Bevel等業者動態中，我們看到AI應用正結合不同領域（瀏覽器、設計工具、穿戴裝置）融入日常與職場。而資安威脅亦同步升級：開源供應鏈攻擊、零點擊AI助手漏洞、複雜木馬變種等，提醒開發者資安素養也必須與時俱進。</p>
+            <div class="highlight-box">
+                <strong>🎯 學習建議：</strong><br>
+                <ul>
+                    <li>本週建議把時間投資在學習「邊緣AI推論部署」與「LLM on-device壓縮」相關技術。</li>
+                    <li>若有NPM套件依賴，務必檢查敏感憑證與依賴來源，嘗試導入自動化掃描工具。</li>
+                    <li>嘗試操作 IBM Granite Nano 模型或在Hugging Face下載小模型是本週值得嘗試的練習專案。</li>
+                    <li>在開發或學習AI應用的同時，也別忘記創作價值背後的誠信與文化原則，這才是技術持久發展的根基。</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🤖 今日AI重點 (LINE版)</h3>
+                <p><strong>🚀 AI走入你我桌面！今日關鍵：</strong>個人AI訓練 & 輕量模型風暴</p>
+                <p><strong>📌 輝達最新工作站DGX Spark曝光，搭載GB100晶片，</strong>讓個人也能進行大模型訓練！這可能徹底改變資料科學入門方式。</p>
+                <p><strong>📌 IBM開源Granite 4.0 Nano小模型：</strong>僅10億參數，卻能部署在手機與IoT裝置上，邊緣AI訓練從此不再遙遠。</p>
+                <p><strong>📌 OpenAI推出Atlas AI瀏覽器，</strong>靠自研OWL架構打造AI原生上網體驗，像ChatGPT助手替你操作網頁。</p>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>🎯 為什麼重要？</strong><br>
+                    AI正從資料中心落地到開發者日常裝置，訓練模型、操作網頁、部署應用都變得更民主化、更精緻化，這對初學者是千載難逢的時機。
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    #AI工具 #邊緣運算 #DGXSpark #Granite模型 #AI代理人 #ChatGPTAtlas #資料科學入門
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+    
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
