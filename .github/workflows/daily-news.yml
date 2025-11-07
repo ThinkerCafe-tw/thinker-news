@@ -1,0 +1,49 @@
+name: 每日 AI 新聞自動生成
+
+on:
+  schedule:
+    # 每天 UTC 22:00 = 台灣時間 06:00 (UTC+8)
+    - cron: '0 22 * * *'
+  workflow_dispatch:  # 允許手動觸發
+
+jobs:
+  generate-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout 代碼
+        uses: actions/checkout@v4
+        with:
+          repository: ThinkerCafe-tw/thinker-news
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: 設置 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: 安裝依賴
+        run: |
+          pip install -r requirements.txt
+      
+      - name: 執行新聞生成腳本
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          python scripts/main.py
+      
+      - name: 提交變更到 GitHub
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "🤖 自動生成 $(date +'%Y-%m-%d') AI 新聞日報" || echo "No changes to commit"
+          git push
+      
+      - name: 發送 Slack 通知
+        if: success()
+        run: |
+          python scripts/notify_slack.py

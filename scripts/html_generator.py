@@ -1,0 +1,324 @@
+"""
+HTML 生成模組
+使用 Jinja2 模板生成 HTML 頁面
+"""
+
+import logging
+from pathlib import Path
+from datetime import datetime, timedelta
+from jinja2 import Template
+
+logger = logging.getLogger(__name__)
+
+# ============================================
+# HTML 模板
+# ============================================
+
+DAILY_NEWS_TEMPLATE = """<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ date }} AI 科技日報 | Thinker News</title>
+    <meta name="description" content="今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+        }
+        
+        .line-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .line-content {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .article-header {
+                padding: 25px 20px;
+            }
+            
+            .article-title {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+        
+        <header class="article-header">
+            <div class="article-date">📅 {{ date }}</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">今日AI科技重點新聞</p>
+        </header>
+        
+        <div class="content-section">
+{{ notion_content }}
+        </div>
+        
+        <div class="content-section line-section">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div class="line-content">
+{{ line_content }}
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+    
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>"""
+
+
+def generate_daily_html(final_output: dict) -> str:
+    """
+    生成今日新聞 HTML 頁面
+    
+    Args:
+        final_output: 組裝後的最終輸出
+        
+    Returns:
+        HTML 文件路徑
+    """
+    logger.info("📝 生成今日新聞 HTML...")
+    
+    date = final_output['final_date']
+    notion_content = final_output['notion_content']
+    line_content = final_output['line_content']
+    
+    # 渲染模板
+    template = Template(DAILY_NEWS_TEMPLATE)
+    html_content = template.render(
+        date=date,
+        notion_content=notion_content,
+        line_content=line_content
+    )
+    
+    # 寫入文件
+    output_path = Path(f"{date}.html")
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    logger.info(f"✅ HTML 文件已生成: {output_path}")
+    return str(output_path)
+
+
+def update_index_html(today_date: str) -> str:
+    """
+    更新首頁 index.html
+    
+    Args:
+        today_date: 今日日期
+        
+    Returns:
+        index.html 文件路徑
+    """
+    logger.info("📝 更新首頁 index.html...")
+    
+    # 計算明日日期
+    today_dt = datetime.strptime(today_date, '%Y-%m-%d')
+    tomorrow_dt = today_dt + timedelta(days=1)
+    tomorrow_date = tomorrow_dt.strftime('%Y-%m-%d')
+    
+    # 讀取現有的 index.html 模板
+    # 這裡簡化處理,實際應該讀取並更新
+    index_template = """<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinker News - AI 科技日報精選</title>
+    <meta name="description" content="為資料科學初學者提供每日精選的AI科技新聞">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        /* 樣式省略,與原版相同 */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="emoji">🤖</span> Thinker News</h1>
+            <p class="subtitle">為資料科學初學者精心打造的 AI 科技日報</p>
+        </header>
+        
+        <div class="news-section">
+            <h2 class="section-title">📅 最新日報</h2>
+            
+            <div class="news-item">
+                <div class="news-date">📅 {{ today_date }} (今日)</div>
+                <div class="news-title">🚀 今日AI科技重點新聞精選</div>
+                <div class="news-description">
+                    今日AI科技重點新聞精選,涵蓋最新的工具應用、產業趨勢與安全警報。
+                </div>
+                <a href="./{{ today_date }}.html" class="news-link">閱讀完整報告 📖</a>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">📅 {{ tomorrow_date }}</div>
+                <div class="news-title">🔄 明日精彩內容準備中...</div>
+                <div class="news-description">
+                    我們的AI編輯團隊正在為您精選明日最重要的科技新聞。請於明日08:30回訪查看最新內容。
+                </div>
+                <a href="#" class="news-link disabled">敬請期待 ⏳</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    # 渲染模板
+    template = Template(index_template)
+    html_content = template.render(
+        today_date=today_date,
+        tomorrow_date=tomorrow_date
+    )
+    
+    # 寫入文件
+    output_path = Path('index.html')
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    logger.info(f"✅ index.html 已更新")
+    return str(output_path)
