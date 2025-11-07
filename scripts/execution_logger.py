@@ -60,12 +60,17 @@ class ExecutionLogger:
             node["end_time"] = datetime.now().isoformat()
             node["duration"] = self._calculate_duration(node["start_time"], node["end_time"])
 
-            # 記錄輸出
+            # 記錄輸出 - 對 AI 節點保留完整文本輸出
             if output_data:
                 if isinstance(output_data, (dict, list)):
-                    node["output"] = self._truncate_data(output_data, max_items=5)
+                    # 對 dict/list 數據，只截斷列表元素，但保留完整文本字段
+                    node["output"] = self._smart_truncate(output_data, node["type"])
                 else:
-                    node["output"] = str(output_data)[:500]
+                    # 對純文本輸出，AI 節點保留完整內容
+                    if node["type"] == "ai":
+                        node["output"] = str(output_data)
+                    else:
+                        node["output"] = str(output_data)[:500]
 
             # 記錄指標
             if metrics:
@@ -129,5 +134,29 @@ class ExecutionLogger:
                 result = dict(items)
                 result["..."] = f"還有 {len(data) - max_items} 個鍵"
                 return result
+            return data
+        return data
+
+    def _smart_truncate(self, data: Any, node_type: str) -> Any:
+        """智能截斷數據 - AI 節點保留完整文本輸出"""
+        if isinstance(data, dict):
+            result = {}
+            for key, value in data.items():
+                # AI 節點的文本輸出字段保留完整內容
+                if node_type == "ai" and isinstance(value, str) and any(
+                    keyword in key.lower()
+                    for keyword in ["text", "report", "message", "content", "output"]
+                ):
+                    result[key] = value  # 保留完整文本
+                elif isinstance(value, list) and len(value) > 5:
+                    result[key] = value[:5] + [f"... 還有 {len(value) - 5} 項"]
+                elif isinstance(value, str) and len(value) > 1000 and node_type != "ai":
+                    result[key] = value[:1000] + "..."
+                else:
+                    result[key] = value
+            return result
+        elif isinstance(data, list):
+            if len(data) > 5:
+                return data[:5] + [f"... 還有 {len(data) - 5} 項"]
             return data
         return data

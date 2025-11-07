@@ -16,3 +16,6 @@ python-dateutil==2.9.0
 
 # JSON 修復
 json-repair==0.30.0
+
+# 環境變數管理
+python-dotenv==1.2.1
