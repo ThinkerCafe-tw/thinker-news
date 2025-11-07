@@ -33,6 +33,7 @@ logger = logging.getLogger(__name__)
 from rss_fetcher import fetch_all_rss_feeds
 from news_filter import filter_and_score_news
 from ai_processor import (
+    setup_apis,
     process_with_data_alchemist,
     process_with_tech_narrator,
     process_with_editor_in_chief
@@ -44,6 +45,13 @@ from utils import get_taiwan_date, validate_json_output
 def main():
     """主執行流程"""
     try:
+        # ============================================
+        # 步驟 0: 設置 API Keys
+        # ============================================
+        logger.info("🔑 設置 API Keys...")
+        openai_client = setup_apis()
+        logger.info("✅ API Keys 設置完成")
+
         # ============================================
         # 步驟 1: 生成今日日期（台灣時區）
         # ============================================
