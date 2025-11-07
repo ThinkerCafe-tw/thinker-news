@@ -1,0 +1,184 @@
+{
+  "execution_id": "20251107_120300",
+  "start_time": "2025-11-07T12:03:00.000Z",
+  "end_time": "2025-11-07T12:04:45.000Z",
+  "status": "success",
+  "nodes": [
+    {
+      "name": "生成台灣時間日期",
+      "type": "date",
+      "description": "獲取台灣時區的當前日期 (UTC+8)",
+      "status": "success",
+      "start_time": "2025-11-07T12:03:00.100Z",
+      "end_time": "2025-11-07T12:03:00.150Z",
+      "duration": 0.05,
+      "input": null,
+      "output": "2025-11-07",
+      "error": null,
+      "metrics": {
+        "日期": "2025-11-07"
+      }
+    },
+    {
+      "name": "RSS Feed 讀取",
+      "type": "rss",
+      "description": "並行讀取 7 個新聞來源的 RSS feeds",
+      "status": "success",
+      "start_time": "2025-11-07T12:03:00.200Z",
+      "end_time": "2025-11-07T12:03:22.645Z",
+      "duration": 22.445,
+      "input": {
+        "sources": ["hackernews", "techcrunch", "arstechnica", "openai", "bair", "technews", "ithome"]
+      },
+      "output": {
+        "total_items": 891,
+        "sources_breakdown": {
+          "openai": 721,
+          "hackernews": 50,
+          "technews": 40,
+          "ithome": 30,
+          "arstechnica": 20,
+          "techcrunch": 20,
+          "bair": 10
+        }
+      },
+      "error": null,
+      "metrics": {
+        "總新聞數": "891 則",
+        "來源數": "7 個",
+        "成功率": "100%"
+      }
+    },
+    {
+      "name": "台灣本地化篩選",
+      "type": "filter",
+      "description": "使用智能評分系統篩選和排序新聞",
+      "status": "success",
+      "start_time": "2025-11-07T12:03:22.650Z",
+      "end_time": "2025-11-07T12:03:22.702Z",
+      "duration": 0.052,
+      "input": {
+        "total_items": 891
+      },
+      "output": {
+        "filtered_items": 30,
+        "local_news": 10,
+        "international_news": 20
+      },
+      "error": null,
+      "metrics": {
+        "篩選前": "891 則",
+        "篩選後": "30 則",
+        "台灣新聞": "10 則",
+        "國際新聞": "20 則"
+      }
+    },
+    {
+      "name": "數據煉金術師 (Gemini)",
+      "type": "ai",
+      "description": "使用 Gemini AI 進行標題轉譯、內容摘要和智能分類",
+      "status": "success",
+      "start_time": "2025-11-07T12:03:22.710Z",
+      "end_time": "2025-11-07T12:04:22.525Z",
+      "duration": 59.815,
+      "input": {
+        "news_count": 30,
+        "model": "gemini-2.0-flash-exp"
+      },
+      "output": {
+        "ai_applications_and_tools": ["... 5 項"],
+        "industry_trends_and_news": ["... 2 項"],
+        "security_trends": ["... 1 項"]
+      },
+      "error": null,
+      "metrics": {
+        "模型": "Gemini 2.0 Flash",
+        "處理新聞": "30 則",
+        "輸出分類": "3 個",
+        "JSON 修復": "是"
+      }
+    },
+    {
+      "name": "科技導讀人 (OpenAI)",
+      "type": "ai",
+      "description": "使用 GPT-4 撰寫完整的 Notion 日報",
+      "status": "success",
+      "start_time": "2025-11-07T12:04:22.540Z",
+      "end_time": "2025-11-07T12:04:43.249Z",
+      "duration": 20.709,
+      "input": {
+        "model": "chatgpt-4o-latest"
+      },
+      "output": {
+        "notion_daily_report_text": "## 🤖 AI 科技日報精選...",
+        "character_count": 5432
+      },
+      "error": null,
+      "metrics": {
+        "模型": "GPT-4o",
+        "字數": "5,432 字",
+        "段落數": "10+"
+      }
+    },
+    {
+      "name": "總編輯 (OpenAI)",
+      "type": "ai",
+      "description": "使用 GPT-4 提煉 LINE 精簡快訊",
+      "status": "success",
+      "start_time": "2025-11-07T12:04:43.260Z",
+      "end_time": "2025-11-07T12:04:45.112Z",
+      "duration": 1.852,
+      "input": {
+        "model": "chatgpt-4o-latest"
+      },
+      "output": {
+        "line_message_text": "🚀 Google 蓋資料中心蓋到太空去了？！...",
+        "character_count": 387
+      },
+      "error": null,
+      "metrics": {
+        "模型": "GPT-4o",
+        "字數": "387 字"
+      }
+    },
+    {
+      "name": "HTML 生成",
+      "type": "html",
+      "description": "生成今日新聞頁面和更新首頁",
+      "status": "success",
+      "start_time": "2025-11-07T12:04:45.115Z",
+      "end_time": "2025-11-07T12:04:45.117Z",
+      "duration": 0.002,
+      "input": null,
+      "output": {
+        "files": ["2025-11-07.html", "index.html", "latest.json"]
+      },
+      "error": null,
+      "metrics": {
+        "生成文件": "3 個",
+        "今日頁面": "2025-11-07.html"
+      }
+    },
+    {
+      "name": "Git 提交",
+      "type": "commit",
+      "description": "提交新聞文件到 GitHub repository",
+      "status": "success",
+      "start_time": "2025-11-07T12:04:45.120Z",
+      "end_time": "2025-11-07T12:04:46.500Z",
+      "duration": 1.38,
+      "input": {
+        "files": ["2025-11-07.html", "index.html", "latest.json"]
+      },
+      "output": {
+        "commit_hash": "803af9d",
+        "message": "🤖 自動生成 2025-11-07 AI 新聞日報"
+      },
+      "error": null,
+      "metrics": {
+        "提交檔案": "3 個",
+        "Commit": "803af9d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinker News - Workflow Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .header .meta {
+            display: flex;
+            gap: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .workflow {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .node {
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .node:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .node.success {
+            border-color: #27ae60;
+            background: #f0fdf4;
+        }
+
+        .node.running {
+            border-color: #3498db;
+            background: #eff6ff;
+            animation: pulse 2s infinite;
+        }
+
+        .node.error {
+            border-color: #e74c3c;
+            background: #fef2f2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .node-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .node-title h3 {
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
+
+        .node-icon {
+            font-size: 1.5em;
+        }
+
+        .node-status {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .status-running {
+            background: #3498db;
+            color: white;
+        }
+
+        .status-error {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .node-description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .node-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .metric {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .node-details {
+            margin-top: 15px;
+        }
+
+        .detail-section {
+            margin: 10px 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-content {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .toggle-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background 0.3s;
+        }
+
+        .toggle-button:hover {
+            background: #2980b9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e1e8ed;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -29px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+
+        .refresh-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            transition: all 0.3s;
+        }
+
+        .refresh-button:hover {
+            background: #229954;
+            transform: scale(1.05);
+        }
+
+        .prompt-editor {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fffbeb;
+            border: 2px dashed #fbbf24;
+            border-radius: 6px;
+        }
+
+        .prompt-editor textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            resize: vertical;
+        }
+
+        .prompt-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Thinker News Workflow Dashboard</h1>
+            <div class="meta">
+                <span id="executionId">執行 ID: 載入中...</span>
+                <span id="executionStatus">狀態: 載入中...</span>
+                <span id="executionDuration">執行時間: 載入中...</span>
+            </div>
+        </div>
+
+        <div class="workflow">
+            <h2 style="margin-bottom: 20px;">📊 執行節點</h2>
+            <div id="nodesContainer" class="nodes-container">
+                <p style="text-align: center; color: #7f8c8d; padding: 40px;">
+                    載入執行日誌中...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <button class="refresh-button" onclick="loadExecutionLog()">
+        🔄 重新整理
+    </button>
+
+    <script>
+        const NODE_ICONS = {
+            'date': '📅',
+            'rss': '📡',
+            'filter': '🔍',
+            'ai': '🤖',
+            'html': '📝',
+            'commit': '💾',
+            'notify': '📬'
+        };
+
+        const STATUS_LABELS = {
+            'success': '成功',
+            'running': '執行中',
+            'error': '錯誤',
+            'pending': '等待中'
+        };
+
+        async function loadExecutionLog() {
+            try {
+                const response = await fetch('execution_log.json?t=' + Date.now());
+                const data = await response.json();
+                renderDashboard(data);
+            } catch (error) {
+                console.error('載入執行日誌失敗:', error);
+                document.getElementById('nodesContainer').innerHTML = `
+                    <p style="text-align: center; color: #e74c3c; padding: 40px;">
+                        ❌ 無法載入執行日誌：${error.message}
+                    </p>
+                `;
+            }
+        }
+
+        function renderDashboard(data) {
+            // 更新 header
+            document.getElementById('executionId').textContent = `執行 ID: ${data.execution_id}`;
+            document.getElementById('executionStatus').textContent = `狀態: ${STATUS_LABELS[data.status] || data.status}`;
+
+            const duration = calculateDuration(data.start_time, data.end_time || new Date().toISOString());
+            document.getElementById('executionDuration').textContent = `執行時間: ${duration}`;
+
+            // 渲染節點
+            const container = document.getElementById('nodesContainer');
+            container.innerHTML = data.nodes.map((node, index) => renderNode(node, index)).join('');
+        }
+
+        function renderNode(node, index) {
+            const icon = NODE_ICONS[node.type] || '📌';
+            const statusClass = node.status;
+            const statusLabel = STATUS_LABELS[node.status] || node.status;
+
+            let metricsHTML = '';
+            if (node.metrics && Object.keys(node.metrics).length > 0) {
+                metricsHTML = `
+                    <div class="node-metrics">
+                        ${Object.entries(node.metrics).map(([key, value]) => `
+                            <div class="metric">
+                                <div class="metric-label">${key}</div>
+                                <div class="metric-value">${value}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            let detailsHTML = '';
+            if (node.input || node.output || node.error) {
+                detailsHTML = `
+                    <div class="node-details" id="details-${index}" style="display: none;">
+                        ${node.input ? `
+                            <div class="detail-section">
+                                <div class="detail-label">📥 輸入數據</div>
+                                <div class="detail-content">${JSON.stringify(node.input, null, 2)}</div>
+                            </div>
+                        ` : ''}
+                        ${node.output ? `
+                            <div class="detail-section">
+                                <div class="detail-label">📤 輸出數據</div>
+                                <div class="detail-content">${JSON.stringify(node.output, null, 2)}</div>
+                            </div>
+                        ` : ''}
+                        ${node.error ? `
+                            <div class="detail-section">
+                                <div class="error-message">
+                                    <strong>${node.error.type}</strong>: ${node.error.message}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <button class="toggle-button" onclick="toggleDetails(${index})">
+                        顯示詳細資訊
+                    </button>
+                `;
+            }
+
+            const duration = node.duration ? `${node.duration.toFixed(2)}s` : '-';
+
+            return `
+                <div class="node ${statusClass}">
+                    <div class="node-header">
+                        <div class="node-title">
+                            <span class="node-icon">${icon}</span>
+                            <h3>${node.name}</h3>
+                        </div>
+                        <span class="node-status status-${statusClass}">${statusLabel}</span>
+                    </div>
+                    ${node.description ? `<div class="node-description">${node.description}</div>` : ''}
+                    <div class="metric">
+                        <div class="metric-label">執行時間</div>
+                        <div class="metric-value">${duration}</div>
+                    </div>
+                    ${metricsHTML}
+                    ${detailsHTML}
+                </div>
+            `;
+        }
+
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            const button = details.nextElementSibling;
+
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+                button.textContent = '隱藏詳細資訊';
+            } else {
+                details.style.display = 'none';
+                button.textContent = '顯示詳細資訊';
+            }
+        }
+
+        function calculateDuration(startTime, endTime) {
+            const start = new Date(startTime);
+            const end = new Date(endTime);
+            const seconds = (end - start) / 1000;
+
+            if (seconds < 60) {
+                return `${seconds.toFixed(1)}秒`;
+            } else if (seconds < 3600) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}分${secs}秒`;
+            } else {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                return `${hours}小時${minutes}分`;
+            }
+        }
+
+        // 初始載入
+        loadExecutionLog();
+
+        // 自動重新整理（每 5 秒）
+        setInterval(loadExecutionLog, 5000);
+    </script>
+</body>
+</html>
