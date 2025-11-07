@@ -7,6 +7,7 @@ import logging
 import re
 from datetime import datetime, timedelta
 from typing import Dict
+from json_repair import repair_json
 
 logger = logging.getLogger(__name__)
 
@@ -33,40 +34,52 @@ def get_taiwan_date() -> str:
 def validate_json_output(raw_output: str, agent_name: str) -> Dict:
     """
     驗證和清理 AI 輸出的 JSON
-    
+    增強版：包含自動修復功能
+
     Args:
         raw_output: AI 的原始輸出
         agent_name: Agent 名稱（用於日誌）
-        
+
     Returns:
         解析後的 JSON 對象
     """
     logger.info(f"🔧 驗證 {agent_name} 的輸出...")
-    
+
     try:
         # 嘗試找到 JSON 對象的邊界
         start_index = raw_output.find('{')
         end_index = raw_output.rfind('}')
-        
+
         if start_index == -1 or end_index == -1:
             raise ValueError(f"無法在輸出中找到 JSON 對象")
-        
+
         # 提取 JSON 字符串
         json_string = raw_output[start_index:end_index + 1]
-        
+
         # 清理可能的 markdown 代碼塊標記
         json_string = json_string.replace('```json', '').replace('```', '').strip()
-        
-        # 解析 JSON
-        parsed_json = json.loads(json_string)
-        
-        logger.info(f"✅ {agent_name} 輸出驗證成功")
-        return parsed_json
-        
-    except json.JSONDecodeError as e:
-        logger.error(f"❌ {agent_name} JSON 解析失敗: {str(e)}")
-        logger.error(f"原始輸出: {raw_output[:500]}...")
-        raise
+
+        # 第一次嘗試：直接解析
+        try:
+            parsed_json = json.loads(json_string)
+            logger.info(f"✅ {agent_name} 輸出驗證成功（直接解析）")
+            return parsed_json
+        except json.JSONDecodeError as e:
+            logger.warning(f"⚠️  {agent_name} JSON 直接解析失敗: {str(e)}")
+            logger.info(f"🔧 嘗試使用 json-repair 修復...")
+
+            # 第二次嘗試：使用 json-repair
+            try:
+                repaired_string = repair_json(json_string)
+                parsed_json = json.loads(repaired_string)
+                logger.info(f"✅ {agent_name} 輸出驗證成功（使用修復）")
+                return parsed_json
+            except Exception as repair_error:
+                logger.error(f"❌ {agent_name} JSON 修復也失敗: {str(repair_error)}")
+                logger.error(f"原始輸出前 500 字: {raw_output[:500]}...")
+                logger.error(f"JSON 字符串前 500 字: {json_string[:500]}...")
+                raise ValueError(f"JSON 解析和修復都失敗: {str(e)}")
+
     except Exception as e:
         logger.error(f"❌ {agent_name} 輸出驗證失敗: {str(e)}")
         raise

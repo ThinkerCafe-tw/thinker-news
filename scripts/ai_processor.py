@@ -10,11 +10,43 @@ AI 處理鏈
 import os
 import logging
 import json
-from typing import List, Dict
+import time
+from typing import List, Dict, Callable, Any
+from functools import wraps
 import google.generativeai as genai
 from openai import OpenAI
 
 logger = logging.getLogger(__name__)
+
+# ============================================
+# 重試裝飾器
+# ============================================
+
+def retry_on_failure(max_retries: int = 2, delay: int = 3):
+    """
+    重試裝飾器
+
+    Args:
+        max_retries: 最大重試次數
+        delay: 重試延遲（秒）
+    """
+    def decorator(func: Callable) -> Callable:
+        @wraps(func)
+        def wrapper(*args, **kwargs) -> Any:
+            for attempt in range(max_retries + 1):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if attempt < max_retries:
+                        logger.warning(f"⚠️  {func.__name__} 第 {attempt + 1} 次嘗試失敗: {str(e)}")
+                        logger.info(f"🔄 等待 {delay} 秒後重試...")
+                        time.sleep(delay)
+                    else:
+                        logger.error(f"❌ {func.__name__} 在 {max_retries + 1} 次嘗試後仍然失敗")
+                        raise
+            return None
+        return wrapper
+    return decorator
 
 # ============================================
 # API 配置
@@ -280,14 +312,16 @@ LINE群組中對 AI 與資料科學感興趣的初學者,需要快速可讀的�
 # AI 處理函數
 # ============================================
 
+@retry_on_failure(max_retries=2, delay=5)
 def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> str:
     """
     數據煉金術師 - 使用 Gemini
-    
+    包含自動重試機制
+
     Args:
         filtered_news: 篩選後的新聞列表
         today_date: 今日日期
-        
+
     Returns:
         JSON 格式的處理結果
     """
@@ -333,14 +367,16 @@ def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> s
         raise
 
 
+@retry_on_failure(max_retries=2, delay=3)
 def process_with_tech_narrator(alchemist_json: Dict, today_date: str) -> str:
     """
     科技導讀人 - 使用 OpenAI
-    
+    包含自動重試機制
+
     Args:
         alchemist_json: 數據煉金術師的 JSON 輸出
         today_date: 今日日期
-        
+
     Returns:
         JSON 格式的處理結果
     """
@@ -374,14 +410,16 @@ def process_with_tech_narrator(alchemist_json: Dict, today_date: str) -> str:
         raise
 
 
+@retry_on_failure(max_retries=2, delay=3)
 def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
     """
     總編輯 - 使用 OpenAI
-    
+    包含自動重試機制
+
     Args:
         narrator_json: 科技導讀人的 JSON 輸出
         today_date: 今日日期
-        
+
     Returns:
         JSON 格式的處理結果
     """
