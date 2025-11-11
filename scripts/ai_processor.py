@@ -55,11 +55,11 @@ def retry_on_failure(max_retries: int = 2, delay: int = 3):
 
 def setup_apis():
     """設置 API keys"""
-    google_api_key = os.getenv('GOOGLE_API_KEY')
+    google_api_key = os.getenv('GEMINI_API_KEY')
     openai_api_key = os.getenv('OPENAI_API_KEY')
     
     if not google_api_key:
-        raise ValueError("❌ GOOGLE_API_KEY 環境變數未設置")
+        raise ValueError("❌ GEMINI_API_KEY 環境變數未設置")
     if not openai_api_key:
         raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
     
