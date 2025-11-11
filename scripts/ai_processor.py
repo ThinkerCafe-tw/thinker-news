@@ -474,7 +474,7 @@ def process_with_html_generator(notion_content: str, line_content: str, today_da
 
     # 設置 Gemini
     genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-    model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    model = genai.GenerativeModel('gemini-2.5-flash')
 
     # System prompt - 對齊 n8n 的設定
     system_prompt = """你是專業的版面管理 Agent，專門負責確保網頁格式完全一致。
