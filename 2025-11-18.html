@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-11-18 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="Google BigQuery整合AI函式，VS Code強化AI代理管理 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .article-header {
+                padding: 25px 20px;
+            }
+
+            .article-title {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+
+        <header class="article-header">
+            <div class="article-date">📅 2025年11月18日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">Google BigQuery整合AI函式，VS Code強化AI代理管理</p>
+        </header>
+
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+
+            <h3>1. SQL大升級！Google BigQuery整合AI函式，讓你在SQL裡直接玩轉LLM語意分析！</h3>
+            <p>🔧 分類: AI工具與應用</p>
+            <p>Google 最新釋出的 BigQuery 託管人工智慧函式（Managed AI Functions），為資料分析師帶來劃時代的功能。這項更新提供三個可直接在 SQL 查詢中使用的 AI 函式：<code>AI.IF</code>、<code>AI.CLASSIFY</code> 和 <code>AI.SCORE</code>，讓使用者能無需編寫複雜的提示語或串接語言模型 API，就能進行語意分析任務。</p>
+            <p>例如，<code>AI.CLASSIFY</code> 可將文字自動分類，<code>AI.SCORE</code> 可用來對評論情緒評分，<code>AI.IF</code> 則可以用於條件式的語意運算。這些功能讓資料分析師在熟悉的 SQL 環境中，就能執行 NLP 任務，顯著降低了進入 LLM 應用的門檻。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                這是將 LLM 技術帶入資料分析日常流程的絕佳案例。若你熟悉 SQL，現在就能開始在查詢中整合 AI 功能，無需額外學習模型部署或 API 操作。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/172273" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>2. 開發者福音！VS Code重磅更新，新增Agent HQ一站式管理AI代理與Copilot，效率飆升！</h3>
+            <p>🔧 分類: AI工具與應用</p>
+            <p>Microsoft 釋出 VS Code 的 10 月更新（v1.106），最亮眼的改版是新增「Agent HQ」介面，提供開發者集中管理 AI 工具的新方式。這讓使用者能在單一介面中，同時管理本地與雲端的 AI Agent、GitHub Copilot 擴充元件，並增強 AI 工具的核准與安全控管機制。</p>
+            <p>除了 AI 管理功能外，這次更新也優化了多項編輯體驗，提升了 Copilot 的整合性與穩定性。這些變動標誌著 AI 工具愈來愈深入地融入主流開發流程，未來 AI 將成為開發工作中不可或缺的一部分。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                若你使用 VS Code 進行 Python 或資料分析開發，掌握這些整合技巧將能極大提升開發效率，並熟悉 AI 開發環境的實戰工具鏈。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/172276" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>3. AI資安新星Runlayer重磅登場！獲Khosla創投$11M注資，八家獨角獸力挺，專攻AI代理安全！</h3>
+            <p>🔧 分類: 資安趨勢快訊</p>
+            <p>知名創業家 Andrew Berman 推出新創公司 Runlayer，其核心業務是解決企業在使用 AI agent（代理）時的安全問題。Runlayer 已獲得來自 Khosla Ventures 和 Felicis Ventures 的 1100 萬美元種子資金，並聲稱獲得八家獨角獸企業支持，顯示 AI 安全市場的強烈需求。</p>
+            <p>隨著 AI agent 被廣泛用於自動化任務、客服、文件處理等領域，Runlayer 專注於確保這些代理在運作過程中不會產生資安漏洞或洩漏敏感資訊。這家公司正瞄準 AI 應用中的一大痛點：可信、安全的自動化。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                AI agent 安全是未來高需求領域。若你有資料安全或模型監控背景，Runlayer 的發展方向可為你提供職涯轉型的新契機。
+            </div>
+            <p><a href="https://techcrunch.com/2025/11/17/mcp-ai-agent-security-startup-runlayer-launches-with-8-unicorns-11m-from-khoslas-keith-rabois-and-felicis/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🛠 AI工具與應用焦點</h2>
+
+            <h3>Mozilla推出Firefox「AI視窗」，讓你安全體驗AI助手，隱私自由掌控！</h3>
+            <p>🔧 分類: AI工具與應用</p>
+            <p>Mozilla 在 Firefox 瀏覽器中新增「AI Window」功能，為使用者提供一個可與 AI 助手互動的專屬空間，支援內容摘要、即時問答等功能。與傳統瀏覽模式不同，AI 視窗可隨時關閉，確保使用者掌控資訊揭露的程度。</p>
+            <p>Mozilla 強調「使用者隱私優先」，這項設計為其他瀏覽器整合 AI 提供了良好範例。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                理解如何在 AI 應用中設計重視隱私的互動模式，是進入 AI 領域後需具備的倫理素養。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/172271" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>Google全球推出AI「航班優惠」工具，智慧搜尋助你秒找超值機票！</h3>
+            <p>🔧 分類: AI工具與應用</p>
+            <p>Google 推出 AI 驅動的「Flight Deals」搜尋工具，能根據用戶輸入的目的地與偏好，自動分析全球航班資料，找出最優惠的機票組合。這項功能大幅簡化旅遊規劃流程，顯示 AI 在個人化資訊推薦上的實力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                這是 NLP 與推薦系統在真實場景中應用的典型案例，適合學習語意理解與數據比對技術。
+            </div>
+            <p><a href="https://techcrunch.com/2025/11/17/google-rolls-out-its-ai-flight-deals-tool-globally-adds-new-travel-features-in-search/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+
+            <h3>Google砸400億美元，德州打造三座AI資料中心，強化雲端與AI基礎建設！</h3>
+            <p>🔧 分類: 產業趨勢</p>
+            <p>Google 宣布將在德州投資 400 億美元興建三座資料中心，支援其日益龐大的 AI 與雲端服務需求。這是 Google 有史以來在單一州最大規模的投資案，並包含能源與人才發展計畫。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                AI 模型背後仰賴龐大基礎設施支撐，理解資料中心建設與雲端架構對 AI 發展的重要性，有助於你掌握產業全貌。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/172272" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>OpenAI榮獲Gartner「生成式AI領導者」，全球百萬企業搶用ChatGPT！</h3>
+            <p>🔧 分類: 產業趨勢</p>
+            <p>Gartner 最近將 OpenAI 評為 2025 年生成式 AI 模型供應商中的「新興領導者」。全球已有超過 100 萬家企業使用 ChatGPT 技術開發產品與服務，證明其商業影響力持續擴大。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                OpenAI 模型的普及意味著你學習 ChatGPT API 或相關應用開發的投資報酬率極高。
+            </div>
+            <p><a href="https://openai.com/index/gartner-2025-emerging-leader" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🔐 資安趨勢快訊</h2>
+
+            <h3>AI資安危機！HiddenLayer揭露EchoGram攻擊技術，恐讓LLM防護模型失效！</h3>
+            <p>🔧 分類: 資安趨勢快訊</p>
+            <p>資安公司 HiddenLayer 公布一種名為「EchoGram」的對抗性攻擊技術，能繞過 LLM 模型的安全偵測機制，使其回傳錯誤或有害內容。駭客可藉此偽造合法輸入，讓模型釋出敏感資料或執行惡意行為。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                這是學習 AI 安全與對抗性範例的絕佳切入點，了解如何設計更堅固的模型，防禦此類攻擊。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/172275" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+
+            <h3>阿里巴巴推出「千問」App公測，進軍消費級AI市場！</h3>
+            <p>🔧 分類: AI應用趨勢</p>
+            <p>阿里巴巴啟動大型語言模型應用「千問」（Qwen）App 的公測，正式進軍 to C 市場。這項舉動顯示中國科技巨頭也開始將 LLM 技術推廣至用戶端，挑戰 ChatGPT 的領先地位。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                觀察大型企業如何將 LLM 技術產品化，是學習產品思維與模型應用的實戰教材。
+            </div>
+            <p><a href="https://technews.tw/2025/11/17/qwen-app-launches-its-public-beta/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>💡 深度觀點與建議</h2>
+
+            <h3>AI履歷成「雙輸」局面？求職者找不到工作，企業尋不到人才，AI幫倒忙引發深層反思！</h3>
+            <p>🔧 分類: 深度觀點</p>
+            <p>美國就業市場出現奇特現象：AI 協助撰寫履歷成為主流，但過度標準化與同質化，使 HR 難以辨識真正適任者，反而造成企業與求職者雙輸局面。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                使用 AI 工具時需保持人類原創性與個性表達，這提醒我們「AI 補助」不等於「AI 取代」，人類價值仍不可忽略。
+            </div>
+            <p><a href="https://technews.tw/2025/11/17/ai-resumes-are-becoming-increasingly-homogenized/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>📬 日報後記</h2>
+            <p>今天的 AI 日報揭示一個明確走向：AI 工具的門檻正在快速降低，從 SQL 查詢整合 LLM，到瀏覽器、開發工具全面內建 AI 助理，顯示「AI 無所不在」的時代已經來臨。對初學者而言，學會善用這些工具，將是邁向 AI 專業之路的重要第一步。</p>
+            <p>同時，我們也看到了 AI 帶來的新挑戰：模型安全性、資料隱私，以及過度自動化引發的履歷同質化等問題。這提醒我們，在擁抱創新技術的同時，也要保有人本視角與批判思維。</p>
+            <p>📖 建議本週主力學習方向：</p>
+            <ul>
+                <li>練習在 SQL 中使用 AI 函式（BigQuery）進行文本分類</li>
+                <li>熟悉 VS Code AI 開發環境（Agent HQ + Copilot）</li>
+                <li>閱讀對抗性攻擊（EchoGram）與 LLM 模型安全的案例分析</li>
+            </ul>
+            <p>下期見 👋</p>
+        </div>
+
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🚀 SQL 也能玩 LLM？VS Code 變身 AI 指揮中心！</h3>
+                <p><strong>今天兩大亮點：</strong></p>
+                <ul>
+                    <li>✅ Google BigQuery 全新 AI 函式上線，讓資料分析師直接用 SQL 做情緒分析、文字分類，不用寫 prompt、不用串 API！</li>
+                    <li>✅ VS Code 推出「Agent HQ」介面，一站整合本地+雲端 AI 工具、Copilot，開發效率大升級！</li>
+                </ul>
+                <p><strong>🎯 這代表什麼？</strong><br>AI 正全面滲透我們熟悉的工作流程！不再需要高門檻技能，熟 SQL、會 VS Code 的你，現在就能上手 AI。</p>
+                <p>#SQL整合AI #VSCodeAgentHQ #資料分析革命 #AI開發必備</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
