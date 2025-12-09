@@ -77,19 +77,19 @@ def get_gemini_api_keys() -> list:
     取得所有可用的 Gemini API keys
 
     Returns:
-        list: API keys 列表，主要 key 在前，備用 key 在後
+        list: API keys 列表，備用 key 優先（因原主要 key 配額問題）
     """
     keys = []
 
-    # 主要 key
-    primary_key = os.getenv('GEMINI_API_KEY')
-    if primary_key:
-        keys.append(primary_key)
-
-    # 備用 key
+    # 優先使用備用 key（原主要 key 有配額問題）
     backup_key = os.getenv('GEMINI_API_KEY_BACKUP')
     if backup_key:
         keys.append(backup_key)
+
+    # 原主要 key 作為後備
+    primary_key = os.getenv('GEMINI_API_KEY')
+    if primary_key:
+        keys.append(primary_key)
 
     return keys
 
