@@ -72,6 +72,45 @@ def setup_apis():
     return openai_client
 
 
+def warmup_gemini_api() -> bool:
+    """
+    預熱 Gemini API 連接
+
+    在正式調用前先發送一個小請求，避免冷啟動問題
+
+    Returns:
+        bool: 預熱是否成功
+    """
+    api_keys = get_gemini_api_keys()
+
+    if not api_keys:
+        logger.warning("⚠️  沒有可用的 Gemini API key，跳過預熱")
+        return False
+
+    for i, api_key in enumerate(api_keys):
+        key_label = "主要" if i == 0 else f"備用 #{i}"
+        try:
+            logger.info(f"🔥 預熱 Gemini API 連接 ({key_label} key)...")
+
+            genai.configure(api_key=api_key)
+            model = genai.GenerativeModel('gemini-2.5-flash')
+
+            # 發送一個極簡請求來建立連接
+            response = model.generate_content("Hi")
+
+            logger.info(f"✅ Gemini API 預熱成功")
+            return True
+
+        except Exception as e:
+            logger.warning(f"⚠️  預熱失敗 ({key_label}): {str(e)}")
+            if i < len(api_keys) - 1:
+                time.sleep(2)
+                continue
+
+    logger.warning("⚠️  所有 key 預熱失敗，將在正式調用時重試")
+    return False
+
+
 def get_gemini_api_keys() -> list:
     """
     取得所有可用的 Gemini API keys
