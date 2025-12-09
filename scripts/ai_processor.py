@@ -133,6 +133,11 @@ def call_gemini_with_fallback(model_name: str, system_instruction: str, user_pro
 
             response = model.generate_content(user_prompt)
 
+            # 記錄 token 使用量
+            if hasattr(response, 'usage_metadata'):
+                usage = response.usage_metadata
+                logger.info(f"📊 Token 使用量: prompt={usage.prompt_token_count}, output={usage.candidates_token_count}, total={usage.total_token_count}")
+
             logger.info(f"✅ {key_label} Gemini API key 成功")
             return response.text
 
@@ -199,6 +204,11 @@ def call_gemini_html_with_fallback(combined_prompt: str, temperature: float = 0.
                     temperature=temperature,
                 )
             )
+
+            # 記錄 token 使用量
+            if hasattr(response, 'usage_metadata'):
+                usage = response.usage_metadata
+                logger.info(f"📊 Token 使用量 (HTML): prompt={usage.prompt_token_count}, output={usage.candidates_token_count}, total={usage.total_token_count}")
 
             logger.info(f"✅ {key_label} Gemini API key 成功 (HTML 生成)")
             return response.text
