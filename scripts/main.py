@@ -38,6 +38,7 @@ from rss_fetcher import fetch_all_rss_feeds
 from news_filter import filter_and_score_news
 from ai_processor import (
     setup_apis,
+    warmup_gemini_api,
     process_with_data_alchemist,
     process_with_tech_narrator,
     process_with_editor_in_chief,
@@ -60,6 +61,9 @@ def main():
         logger.info("🔑 設置 API Keys...")
         openai_client = setup_apis()
         logger.info("✅ API Keys 設置完成")
+
+        # 預熱 Gemini API（避免冷啟動 429 問題）
+        warmup_gemini_api()
 
         # ============================================
         # 步驟 1: 生成今日日期（台灣時區）
