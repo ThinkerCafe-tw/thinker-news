@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-12-27 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="台灣打造「台灣主權 AI 語料庫」，LangChain 爆資安漏洞 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .article-header {
+                padding: 25px 20px;
+            }
+
+            .article-title {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+
+        <header class="article-header">
+            <div class="article-date">📅 2025年12月27日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">台灣打造「台灣主權 AI 語料庫」，LangChain 爆資安漏洞</p>
+        </header>
+
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+
+            <h3>1. 獨家！數發部打造「台灣主權 AI 語料庫」，讓 AI 更懂台灣在地文化與用語！</h3>
+            <p>🔧 分類: AI 工具與應用</p>
+            <p>為了解決現有 AI 模型對台灣在地語言與文化理解不足的問題，台灣數位發展部正式發表了「台灣主權 AI 訓練語料庫」。這個語料庫廣泛蒐集台灣的高品質正體中文資料，涵蓋台灣特有詞彙、語句、流行文化與社會脈絡，目的是讓 AI 模型更貼近台灣使用者的語言習慣。</p>
+            <p>這項語料庫的建立，具有重大戰略意義。它能提升國產 AI 模型的效能，協助在教育、醫療與公共服務等領域發展更符合在地需求的 AI 應用。此外，它也強化了台灣數位主權，降低對國外大型模型的依賴，並保護本地語言與文化資產。</p>
+            <p>透過這一計畫，政府希望吸引更多本地企業與研究機構投入 AI 模型開發，建立屬於台灣的 AI 生態系統，並在國際舞台上提升競爭力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                本地語料庫是打造貼近市場需求 AI 模型的關鍵。初學者應了解語料品質與在地化對模型表現的影響，並思考如何將本地數據納入訓練過程。
+            </div>
+            <p><a href="https://technews.tw/2025/12/26/taiwan-specific-ai-language-dataset/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>2. 緊急！LangChain 核心驚爆「序列化注入漏洞」，恐釀 LLM 機密外洩！</h3>
+            <p>🔐 分類: 資安趨勢快訊</p>
+            <p>LangChain 團隊在其核心套件 `langchain-core` 中發現重大安全漏洞（CVE-2025-68664），屬於「序列化注入漏洞」，CVSS 評分高達 9.3，屬於「重大」級別。攻擊者可利用此漏洞讀取環境變數中的敏感資訊，甚至操縱大型語言模型的輸出內容。</p>
+            <p>受影響版本包括 `langchain-core` 小於 0.3.81，以及 1.0.0 至 1.2.5 之間的版本。目前官方已釋出修補版本，並修改 `load()` 和 `loads()` 函式的預設行為以降低風險。</p>
+            <p>此漏洞凸顯開源 AI 框架在安全性上的風險。LangChain 被廣泛使用於 LLM 應用開發，許多開發者在未加防範的情況下導入該框架，恐導致 API 金鑰、資料庫憑證等敏感資料外洩。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者應培養資安意識，特別是在使用開源工具時，了解常見漏洞類型如序列化攻擊，並定期追蹤套件更新與資安公告。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/173052" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>3. AI 雙雄世紀對決！黃仁勳、蘇姿丰 CES 大會登場，供應鏈提前備戰 AI 戰局！</h3>
+            <p>📊 分類: 產業趨勢與新聞</p>
+            <p>2026 年美國 CES 消費性電子展將於 1 月 6 日開幕，兩位 AI 晶片巨頭——NVIDIA 執行長黃仁勳與 AMD 執行長蘇姿丰——將同步登台發表重要演講。這場「AI 雙雄」對決預料將揭示未來 AI 技術、晶片產品與資料中心架構的重大發展方向。</p>
+            <p>台積電、鴻海等供應鏈廠商也密切關注兩位領袖對先進製程、AI 晶片需求與下一代硬體布局的看法。這些戰略動向將直接影響全球 AI 基礎建設與半導體供應鏈。</p>
+            <p>對初學者而言，這是觀察產業趨勢與職涯規劃的最佳時機。黃仁勳與蘇姿丰的演講內容，將成為未來一年 AI 技術與產業走向的重要風向球。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者應關注晶片與硬體架構如何影響 AI 模型部署與效能，並理解產業鏈角色及其對職涯技能的需求。
+            </div>
+            <p><a href="https://technews.tw/2025/12/26/ces-2026-jensen-huang-lisa-su-to-speak-on-jan-5/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>🛠 AI工具與應用焦點</h3>
+            <h3>Google AI Pro 限時半價優惠，Gemini AI 體驗升級趁現在！</h3>
+            <p>Google 推出「Google AI Pro」年繳方案五折優惠，讓使用者以更低門檻體驗 Gemini 模型進階功能，包括更快的生成速度與專屬功能。此舉旨在提升用戶轉換率並強化 AI 生態系。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                對初學者而言，是實際使用大型模型的絕佳機會，可用於程式生成、資料分析等任務。
+            </div>
+            <p><a href="https://technews.tw/2025/12/26/google-one-offers-50-percent-discount-on-annual-google-ai-pro-plans/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>擷發科自研 NFC 晶片投片成功，布局工業 AI 市場</h3>
+            <p>台灣擷發科技成功投片首顆自研 NFC 晶片，良率高達 99%。該晶片結合 AI 解決方案，將用於智慧工廠、物流與資產管理，推動邊緣 AI 應用落地。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可關注邊緣運算與 AI 晶片的融合趨勢，了解 AI 如何從雲端擴展到物聯網場景。
+            </div>
+            <p><a href="https://technews.tw/2025/12/26/microip-1-nfc-chip/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>📊 產業趨勢與新聞</h3>
+            <h3>WSJ：AI 電力股熱潮將退，乾淨能源成新寵</h3>
+            <p>華爾街日報指出，AI 對電力需求激增，使電力股大漲，但未來市場將轉向太陽能、風能等乾淨能源，作為 AI 運算的主要能源來源。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者應關注 AI 對能源結構的影響，思考模型開發如何兼顧能源效率與永續性。
+            </div>
+            <p><a href="https://finance.technews.tw/2025/12/26/clean-energy-stocks-poised-for-further-gains/" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>🔐 資安趨勢快訊</h3>
+            <h3>NVIDIA Isaac 平台爆 3 個 RCE 資安漏洞</h3>
+            <p>NVIDIA Isaac 機器人平台出現 3 個遠端程式碼執行漏洞，風險值高達 9.8。若遭利用，可導致機器人被控制並造成實體風險。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者應關注 AI 應用與物理互動時的資安防護，特別是在自動化與機器人應用中。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/173048" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>🌍 產業動態與AI職涯</h3>
+            <h3>【深度解析】台灣企業 GenAI 進化之路（上、下）</h3>
+            <p>IDC 調查指出，台灣企業導入 GenAI 面臨四大挑戰：資料安全、應用價值、人才培育與信任風險。200 多位 CIO 與 IT 主管分享實務經驗與導入策略。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可據此了解企業導入 GenAI 的實際難處與技能需求，有助於規劃學習重點與職涯方向。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/173053" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>💡 深度觀點與建議</h3>
+            <h3>AI 狂潮襲擊！企業 IT 正在發生質變</h3>
+            <p>F5 調查顯示，96% 企業已部署 AI，主要應用於系統效能提升與資安防護。AI 已成企業核心資產，轉型勢不可擋。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者應聚焦於 AI 在 IT 維運與資安的應用，這些是企業最即時的需求領域。
+            </div>
+            <p><a href="https://www.ithome.com.tw/voice/173047" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>日報後記</h3>
+            <p>今天的新聞揭示了三大趨勢：</p>
+            <p>1. <strong>在地化與主權 AI 的興起</strong>：台灣語料庫計畫代表一個新方向，AI 不再只是全球標準，更需貼近在地文化與語言。</p>
+            <p>2. <strong>資安成為 AI 發展的必修課</strong>：從 LangChain 到 NVIDIA Isaac，資安漏洞再次提醒我們，AI 開發不能忽視資安基本功。</p>
+            <p>3. <strong>產業全面 AI 化已成事實</strong>：從企業導入率到供應鏈競爭，AI 不再是「選項」，而是每個領域的「必要條件」。</p>
+            <p>對於初學者而言，現在正是學習與實作 AI 技術、理解產業脈動，並建立資安意識的最佳時機。明天見！</p>
+        </div>
+
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🤖 今日AI重點 (LINE版)</h3>
+                <p><strong>🚀 台灣打造「主權AI」語料庫！LLM資安也拉警報！</strong></p>
+                <p>今天AI圈兩大焦點:</p>
+                <p>🇹🇼 數發部推出「台灣主權 AI 語料庫」，強化在地文化理解，打造屬於台灣的 AI 生態系！</p>
+                <p>🛡️ LangChain 爆「序列化注入漏洞」，恐外洩機密資料，CVSS 高達 9.3，開發者要立即更新！</p>
+                <p>為什麼這很重要？</p>
+                <p>✅ 台灣語料庫是推動本土 AI 崛起的關鍵</p>
+                <p>✅ 資安已成 AI 應用的最基本門檻，不能再忽視！</p>
+                <p>#AI本土化 #LangChain漏洞 #資安意識 #台灣AI #LLM安全</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
