@@ -6,7 +6,7 @@ Thinker News 每日新聞自動生成系統
 核心流程：
 1. 讀取 RSS feeds
 2. 台灣本地化篩選
-3. AI 處理鏈（Gemini → OpenAI → OpenAI）
+3. AI 處理鏈（DeepSeek → OpenAI → OpenAI → DeepSeek）
 4. 生成 HTML 頁面
 5. 更新 GitHub repo
 """
@@ -38,7 +38,6 @@ from rss_fetcher import fetch_all_rss_feeds
 from news_filter import filter_and_score_news
 from ai_processor import (
     setup_apis,
-    warmup_gemini_api,
     process_with_data_alchemist,
     process_with_tech_narrator,
     process_with_editor_in_chief,
@@ -59,11 +58,8 @@ def main():
         # 步驟 0: 設置 API Keys
         # ============================================
         logger.info("🔑 設置 API Keys...")
-        openai_client = setup_apis()
+        openai_client, deepseek_client = setup_apis()
         logger.info("✅ API Keys 設置完成")
-
-        # 預熱 Gemini API（避免冷啟動 429 問題）
-        warmup_gemini_api()
 
         # ============================================
         # 步驟 1: 生成今日日期（台灣時區）
@@ -124,8 +120,8 @@ def main():
         # ============================================
         logger.info("🤖 開始 AI 處理鏈...")
 
-        # 4.1 數據煉金術師 (Gemini)
-        exec_logger.log_node_start("數據煉金術師 (Gemini)", "ai", "使用 Gemini AI 進行標題轉譯、內容摘要和智能分類")
+        # 4.1 數據煉金術師 (DeepSeek)
+        exec_logger.log_node_start("數據煉金術師 (DeepSeek)", "ai", "使用 DeepSeek AI 進行標題轉譯、內容摘要和智能分類")
         logger.info("  ⚗️  數據煉金術師處理中...")
         alchemist_output = process_with_data_alchemist(filtered_news, today_date)
         alchemist_json = validate_json_output(alchemist_output, "數據煉金術師")
@@ -135,9 +131,9 @@ def main():
                            for key, value in alchemist_json.items() if isinstance(value, list)}
 
         exec_logger.log_node_success(
-            "數據煉金術師 (Gemini)",
+            "數據煉金術師 (DeepSeek)",
             alchemist_json,
-            {"模型": "Gemini 2.5 Flash", "處理新聞": f"{len(filtered_news)} 則",
+            {"模型": "DeepSeek-V3", "處理新聞": f"{len(filtered_news)} 則",
              "輸出分類": f"{len(categories_count)} 個", "JSON 修復": "是"}
         )
 
@@ -173,8 +169,8 @@ def main():
 
         logger.info("✅ AI 處理鏈（前3步）完成")
 
-        # 4.4 HTML 生成器 (Gemini)
-        exec_logger.log_node_start("HTML 生成器 (Gemini)", "ai", "使用 Gemini 生成完整 HTML 文檔（對齊 n8n 架構）")
+        # 4.4 HTML 生成器 (DeepSeek)
+        exec_logger.log_node_start("HTML 生成器 (DeepSeek)", "ai", "使用 DeepSeek 生成完整 HTML 文檔（對齊 n8n 架構）")
         logger.info("  🎨 HTML 生成器處理中...")
 
         html_full_content = process_with_html_generator(
@@ -184,9 +180,9 @@ def main():
         )
 
         exec_logger.log_node_success(
-            "HTML 生成器 (Gemini)",
+            "HTML 生成器 (DeepSeek)",
             {"html_length": len(html_full_content)},
-            {"模型": "Gemini 2.0 Flash", "輸出": "完整 HTML 文檔"}
+            {"模型": "DeepSeek-V3", "輸出": "完整 HTML 文檔"}
         )
 
         logger.info("✅ AI 處理鏈完成")

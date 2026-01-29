@@ -1,11 +1,11 @@
 """
 AI 處理鏈
-四段式處理：Gemini → OpenAI → OpenAI → Gemini
+四段式處理：DeepSeek → OpenAI → OpenAI → DeepSeek
 
-1. 數據煉金術師 (Data Alchemist) - Gemini
+1. 數據煉金術師 (Data Alchemist) - DeepSeek
 2. 科技導讀人 (Tech Narrator) - OpenAI
 3. 總編輯 (Editor-in-Chief) - OpenAI
-4. HTML 生成器 (HTML Generator) - Gemini
+4. HTML 生成器 (HTML Generator) - DeepSeek
 """
 
 import os
@@ -14,7 +14,6 @@ import json
 import time
 from typing import List, Dict, Callable, Any
 from functools import wraps
-import google.generativeai as genai
 from openai import OpenAI
 
 logger = logging.getLogger(__name__)
@@ -55,225 +54,56 @@ def retry_on_failure(max_retries: int = 2, delay: int = 3):
 
 def setup_apis():
     """設置 API keys"""
-    google_api_key = os.getenv('GEMINI_API_KEY')
     openai_api_key = os.getenv('OPENAI_API_KEY')
+    deepseek_api_key = os.getenv('DEEPSEEK_API_KEY')
 
-    if not google_api_key:
-        raise ValueError("❌ GEMINI_API_KEY 環境變數未設置")
     if not openai_api_key:
         raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
-
-    # 配置 Gemini
-    genai.configure(api_key=google_api_key)
+    if not deepseek_api_key:
+        raise ValueError("❌ DEEPSEEK_API_KEY 環境變數未設置")
 
     # 配置 OpenAI
     openai_client = OpenAI(api_key=openai_api_key)
 
-    return openai_client
+    # 配置 DeepSeek (OpenAI 相容 API)
+    deepseek_client = OpenAI(api_key=deepseek_api_key, base_url="https://api.deepseek.com")
+
+    return openai_client, deepseek_client
 
 
-def warmup_gemini_api() -> bool:
+def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7) -> str:
     """
-    預熱 Gemini API 連接
-
-    在正式調用前先發送一個小請求，避免冷啟動問題
-
-    Returns:
-        bool: 預熱是否成功
-    """
-    api_keys = get_gemini_api_keys()
-
-    if not api_keys:
-        logger.warning("⚠️  沒有可用的 Gemini API key，跳過預熱")
-        return False
-
-    for i, api_key in enumerate(api_keys):
-        key_label = "主要" if i == 0 else f"備用 #{i}"
-        try:
-            logger.info(f"🔥 預熱 Gemini API 連接 ({key_label} key)...")
-
-            genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-2.5-flash')
-
-            # 發送一個極簡請求來建立連接
-            response = model.generate_content("Hi")
-
-            logger.info(f"✅ Gemini API 預熱成功")
-            return True
-
-        except Exception as e:
-            logger.warning(f"⚠️  預熱失敗 ({key_label}): {str(e)}")
-            if i < len(api_keys) - 1:
-                time.sleep(2)
-                continue
-
-    logger.warning("⚠️  所有 key 預熱失敗，將在正式調用時重試")
-    return False
-
-
-def get_gemini_api_keys() -> list:
-    """
-    取得所有可用的 Gemini API keys
-
-    Returns:
-        list: API keys 列表，備用 key 優先（因原主要 key 配額問題）
-    """
-    keys = []
-
-    # 優先使用備用 key（原主要 key 有配額問題）
-    backup_key = os.getenv('GEMINI_API_KEY_BACKUP')
-    if backup_key:
-        keys.append(backup_key)
-
-    # 原主要 key 作為後備
-    primary_key = os.getenv('GEMINI_API_KEY')
-    if primary_key:
-        keys.append(primary_key)
-
-    return keys
-
-
-def call_gemini_with_fallback(model_name: str, system_instruction: str, user_prompt: str) -> str:
-    """
-    呼叫 Gemini API，支援備用 key 自動切換
-
-    當主要 key 失敗（配額用盡、API 錯誤等）時，自動切換到備用 key
+    呼叫 DeepSeek API（OpenAI 相容介面）
 
     Args:
-        model_name: Gemini 模型名稱
         system_instruction: 系統提示詞
         user_prompt: 使用者提示詞
-
-    Returns:
-        str: API 回應文字
-
-    Raises:
-        Exception: 所有 key 都失敗時拋出例外
-    """
-    api_keys = get_gemini_api_keys()
-
-    if not api_keys:
-        raise ValueError("❌ 沒有可用的 GEMINI_API_KEY")
-
-    last_error = None
-
-    for i, api_key in enumerate(api_keys):
-        key_label = "主要" if i == 0 else f"備用 #{i}"
-        try:
-            logger.info(f"🔑 嘗試使用 {key_label} Gemini API key...")
-
-            # 重新配置 API key
-            genai.configure(api_key=api_key)
-
-            model = genai.GenerativeModel(
-                model_name=model_name,
-                system_instruction=system_instruction
-            )
-
-            response = model.generate_content(user_prompt)
-
-            # 記錄 token 使用量
-            if hasattr(response, 'usage_metadata'):
-                usage = response.usage_metadata
-                logger.info(f"📊 Token 使用量: prompt={usage.prompt_token_count}, output={usage.candidates_token_count}, total={usage.total_token_count}")
-
-            logger.info(f"✅ {key_label} Gemini API key 成功")
-            return response.text
-
-        except Exception as e:
-            last_error = e
-            error_msg = str(e).lower()
-
-            # 檢查是否為配額相關錯誤
-            is_quota_error = any(keyword in error_msg for keyword in [
-                'quota', 'rate limit', 'resource exhausted', '429', 'limit exceeded'
-            ])
-
-            if is_quota_error:
-                logger.warning(f"⚠️  {key_label} key 配額已用盡: {str(e)}")
-            else:
-                logger.warning(f"⚠️  {key_label} key 發生錯誤: {str(e)}")
-
-            # 如果還有其他 key，繼續嘗試
-            if i < len(api_keys) - 1:
-                logger.info(f"🔄 切換到下一個備用 key...")
-                time.sleep(1)  # 短暫延遲避免太快切換
-            else:
-                logger.error(f"❌ 所有 Gemini API keys 都已嘗試失敗")
-
-    raise last_error
-
-
-def call_gemini_html_with_fallback(combined_prompt: str, temperature: float = 0.3) -> str:
-    """
-    呼叫 Gemini API 生成 HTML，支援備用 key 自動切換
-
-    專門用於 HTML 生成，使用合併的 prompt 和自訂 temperature
-
-    Args:
-        combined_prompt: 合併後的系統提示詞與使用者提示詞
         temperature: 生成溫度參數
 
     Returns:
         str: API 回應文字
-
-    Raises:
-        Exception: 所有 key 都失敗時拋出例外
     """
-    api_keys = get_gemini_api_keys()
+    _, deepseek_client = setup_apis()
 
-    if not api_keys:
-        raise ValueError("❌ 沒有可用的 GEMINI_API_KEY")
+    logger.info("🔑 呼叫 DeepSeek API...")
 
-    last_error = None
+    response = deepseek_client.chat.completions.create(
+        model="deepseek-chat",
+        messages=[
+            {"role": "system", "content": system_instruction},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=temperature
+    )
 
-    for i, api_key in enumerate(api_keys):
-        key_label = "主要" if i == 0 else f"備用 #{i}"
-        try:
-            logger.info(f"🔑 嘗試使用 {key_label} Gemini API key (HTML 生成)...")
+    output = response.choices[0].message.content
 
-            # 重新配置 API key
-            genai.configure(api_key=api_key)
+    if hasattr(response, 'usage') and response.usage:
+        usage = response.usage
+        logger.info(f"📊 Token 使用量: prompt={usage.prompt_tokens}, output={usage.completion_tokens}, total={usage.total_tokens}")
 
-            model = genai.GenerativeModel('gemini-2.5-flash')
-
-            response = model.generate_content(
-                combined_prompt,
-                generation_config=genai.types.GenerationConfig(
-                    temperature=temperature,
-                )
-            )
-
-            # 記錄 token 使用量
-            if hasattr(response, 'usage_metadata'):
-                usage = response.usage_metadata
-                logger.info(f"📊 Token 使用量 (HTML): prompt={usage.prompt_token_count}, output={usage.candidates_token_count}, total={usage.total_token_count}")
-
-            logger.info(f"✅ {key_label} Gemini API key 成功 (HTML 生成)")
-            return response.text
-
-        except Exception as e:
-            last_error = e
-            error_msg = str(e).lower()
-
-            # 檢查是否為配額相關錯誤
-            is_quota_error = any(keyword in error_msg for keyword in [
-                'quota', 'rate limit', 'resource exhausted', '429', 'limit exceeded'
-            ])
-
-            if is_quota_error:
-                logger.warning(f"⚠️  {key_label} key 配額已用盡 (HTML 生成): {str(e)}")
-            else:
-                logger.warning(f"⚠️  {key_label} key 發生錯誤 (HTML 生成): {str(e)}")
-
-            # 如果還有其他 key，繼續嘗試
-            if i < len(api_keys) - 1:
-                logger.info(f"🔄 切換到下一個備用 key...")
-                time.sleep(1)
-            else:
-                logger.error(f"❌ 所有 Gemini API keys 都已嘗試失敗 (HTML 生成)")
-
-    raise last_error
+    logger.info("✅ DeepSeek API 呼叫成功")
+    return output
 
 
 # ============================================
@@ -520,7 +350,7 @@ LINE群組中對 AI 與資料科學感興趣的初學者,需要快速可讀的�
 @retry_on_failure(max_retries=2, delay=5)
 def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> str:
     """
-    數據煉金術師 - 使用 Gemini（支援備用 key 自動切換）
+    數據煉金術師 - 使用 DeepSeek
     包含自動重試機制
 
     Args:
@@ -555,9 +385,7 @@ def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> s
 {today_date}"""
 
     try:
-        # 使用支援 fallback 的函數呼叫 Gemini API
-        output = call_gemini_with_fallback(
-            model_name='gemini-2.5-flash',
+        output = call_deepseek(
             system_instruction=DATA_ALCHEMIST_SYSTEM_PROMPT,
             user_prompt=user_prompt
         )
@@ -585,7 +413,7 @@ def process_with_tech_narrator(alchemist_json: Dict, today_date: str) -> str:
     """
     logger.info("📰 科技導讀人處理中...")
 
-    openai_client = setup_apis()
+    openai_client, _ = setup_apis()
 
     # 構建 prompt
     user_prompt = f"""數據煉金術師 OUTPUT: {json.dumps(alchemist_json, ensure_ascii=False)}
@@ -628,7 +456,7 @@ def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
     """
     logger.info("✍️  總編輯處理中...")
 
-    openai_client = setup_apis()
+    openai_client, _ = setup_apis()
 
     # 構建 prompt
     notion_text = narrator_json.get('notion_daily_report_text', '')
@@ -661,7 +489,7 @@ def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_html_generator(notion_content: str, line_content: str, today_date: str) -> str:
     """
-    HTML 生成器 - 使用 Gemini（支援備用 key 自動切換）
+    HTML 生成器 - 使用 DeepSeek
     完全對齊 n8n 架構：給 AI 完整的 HTML 範本，讓 AI 照抄並替換內容
 
     Args:
@@ -996,9 +824,9 @@ LINE消息版：
 請輸出完整的 HTML 代碼"""
 
     try:
-        # 使用支援 fallback 的函數呼叫 Gemini API
-        output = call_gemini_html_with_fallback(
-            combined_prompt=f"{system_prompt}\n\n{user_prompt}",
+        output = call_deepseek(
+            system_instruction=system_prompt,
+            user_prompt=user_prompt,
             temperature=0.3
         )
 
