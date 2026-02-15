@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 25 / 100
-- **Current Phase:** PHASE_3
+- **Total Rounds:** 26 / 100
+- **Current Phase:** PHASE_4
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 01:49 (Round 25)
+- **Last Run:** 2026-02-16 01:59 (Round 26)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -50,7 +50,7 @@
 - [x] 改進 index.html 首頁設計（✅ 動態日報列表、feature grid、移除冗餘學習洞察/訂閱區塊）
 - [x] 加入 RSS output feed（讓別人訂閱）（✅ rss_feed.py 產生 RSS 2.0 feed.xml，20 篇日報，整合至 pipeline + 模板 autodiscovery）
 - [x] 加入 error notification（生成失敗時通知 Cruz）（✅ error_notifier.py 支援 Slack+LINE，整合至 main.py + GitHub Actions failure step）
-- [ ] GitHub Actions workflow 優化
+- [x] GitHub Actions workflow 優化（✅ 加入 health_check 步驟、concurrency 控制、15 分鐘 timeout、精確 git add、LINE secrets 整合）
 
 ### PHASE_4: 文件與收尾 (Rounds 81-100)
 - [ ] 更新 README.md（反映新架構）
@@ -94,6 +94,7 @@
 | 23 | 2026-02-16 01:31 | PHASE_3 | 改進 index.html 首頁設計 | 模板重設計：今日亮點卡片 + 動態日報列表（掃描 archive/）+ feature grid，移除硬編碼學習洞察/訂閱/明日預告，header 顯示總期數 |
 | 24 | 2026-02-16 01:39 | PHASE_3 | 新增 RSS output feed | rss_feed.py 產生 RSS 2.0 feed.xml（20 篇），整合至 main.py pipeline，模板 + SEO 注入加入 autodiscovery，首頁新增 RSS 訂閱卡片 |
 | 25 | 2026-02-16 01:49 | PHASE_3 | 新增錯誤通知機制 | error_notifier.py 支援 Slack Webhook + LINE Push，main.py 整合（Pipeline 例外 + 健檢失敗），GitHub Actions 新增 failure step |
+| 26 | 2026-02-16 01:59 | PHASE_3 | 優化 GitHub Actions workflow | 加入 health_check 步驟、concurrency 防重複、15 分鐘 timeout、精確 git add（只 commit 產出檔）、LINE secrets 整合至主步驟，PHASE_3 全部完成 ✅ |
 
 ---
 
