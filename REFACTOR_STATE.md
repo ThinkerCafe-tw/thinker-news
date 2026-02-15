@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 15 / 100
+- **Total Rounds:** 16 / 100
 - **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 00:09 (Round 15)
+- **Last Run:** 2026-02-16 00:19 (Round 16)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -34,7 +34,7 @@
 - [x] 每步都 git commit，commit message 清楚
 
 ### PHASE_2: 程式碼重構 (Rounds 16-50)
-- [ ] ai_processor.py (623行) — 拆分、簡化 prompt、改進錯誤處理（✅ prompts 已抽取至 prompts.py）
+- [x] ai_processor.py (623→501行) — API 單例化、統一呼叫介面、移除重複程式碼（✅ prompts.py + 單例 client + call_openai）
 - [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式（✅ HTML 模板已抽取至 scripts/templates/，778→101 行）
 - [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字（✅ 篩選配置已抽取至 filter_config.py，362→214 行）
 - [x] rss_fetcher.py (109行) — 新增 RSS 來源、改進容錯（✅ 新增 INSIDE 來源 + timeout/retry，109→145 行）
@@ -84,6 +84,7 @@
 | 13 | 2026-02-15 23:49 | PHASE_2 | 抽取篩選配置至 filter_config.py | 新增 scripts/filter_config.py（來源配置+關鍵字集合+標籤），news_filter.py 從 362→214 行（-41%），import 驗證通過 |
 | 14 | 2026-02-15 23:59 | PHASE_2 | 重構 rss_fetcher.py | 新增 INSIDE 來源（修復 filter_config 孤兒）、urllib timeout 15s、retry 2 次、User-Agent header、失敗來源記錄，109→145 行 |
 | 15 | 2026-02-16 00:09 | PHASE_2 | 重構 main.py | 新增 retry_call() 通用重試、拆分 4 個 pipeline step 函式、簡化 exec_logger 整合，272→267 行 |
+| 16 | 2026-02-16 00:19 | PHASE_2 | 重構 ai_processor.py | API client 單例化（不再每次呼叫重建）、新增 call_openai() 統一介面、HTML prompt 改用 prompts.py、移除冗餘 try/except，623→501 行（-20%） |
 
 ---
 
