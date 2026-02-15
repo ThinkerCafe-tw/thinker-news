@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 19 / 100
-- **Current Phase:** PHASE_2
+- **Total Rounds:** 21 / 100
+- **Current Phase:** PHASE_3
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 00:50 (Round 19)
+- **Last Run:** 2026-02-16 01:09 (Round 21)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -44,8 +44,8 @@
 - [x] 加入基本 health check 機制（✅ 新增 health_check.py，檢查 env/套件/模板/目錄/網路，整合至 main.py）
 
 ### PHASE_3: 新功能 & 穩定性 (Rounds 51-80)
-- [ ] 建立 AGENTS.md for thinker-news agent（讓 /news 回覆穩定）
-- [ ] 加入 LINE /news 指令的確定性處理（不經 AI 加工）
+- [x] 建立 AGENTS.md for thinker-news agent（讓 /news 回覆穩定）（✅ 改名 AGENT_GUIDE.md 避免 .gitignore 衝突）
+- [x] 加入 LINE /news 指令的確定性處理（不經 AI 加工）（✅ line_handler.py — webhook + CLI + /help，Python 3.9 相容）
 - [ ] SEO 基礎：OG tags、meta description、結構化資料
 - [ ] 改進 index.html 首頁設計
 - [ ] 加入 RSS output feed（讓別人訂閱）
@@ -88,6 +88,8 @@
 | 17 | 2026-02-16 00:31 | PHASE_2 | 統一 logging 格式 | 新增 log_config.py（統一格式+單次初始化），8 個模組移除 import logging 改用 get_logger()，補勾 html_generator + news_filter checkbox |
 | 18 | 2026-02-16 00:39 | PHASE_2 | /news 回覆一致性修復 | 新增 get_latest_news.py，讀 latest.json 原文照發，支援 line/notion/url/json/reply 五種格式，含 format_news_reply() 供訊息平台直接使用 |
 | 19 | 2026-02-16 00:50 | PHASE_2 | 加入 health check 機制 | 新增 scripts/health_check.py（6 項檢查：env vars、packages、templates、output dirs、RSS、API），整合至 main.py 步驟 0，支援 CLI 獨立執行（--network --json），PHASE_2 全部完成 ✅ |
+| 20 | 2026-02-16 01:00 | PHASE_3 | 建立 AGENT_GUIDE.md | 新增專案 agent 指引文件（專案概述、目錄結構、/news 處理流程、latest.json 結構、健康檢查用法），避免與 OpenClaw AGENTS.md 衝突改用 AGENT_GUIDE.md |
+| 21 | 2026-02-16 01:09 | PHASE_3 | LINE /news 確定性處理 | 新增 line_handler.py（webhook + CLI），/news 直讀 latest.json 不經 AI、/help 指令、LINE 簽名驗證、修復 get_latest_news.py Python 3.9 相容性 |
 
 ---
 
