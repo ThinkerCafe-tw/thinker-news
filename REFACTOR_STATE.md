@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 14 / 100
+- **Total Rounds:** 15 / 100
 - **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 23:59 (Round 14)
+- **Last Run:** 2026-02-16 00:09 (Round 15)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -38,7 +38,7 @@
 - [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式（✅ HTML 模板已抽取至 scripts/templates/，778→101 行）
 - [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字（✅ 篩選配置已抽取至 filter_config.py，362→214 行）
 - [x] rss_fetcher.py (109行) — 新增 RSS 來源、改進容錯（✅ 新增 INSIDE 來源 + timeout/retry，109→145 行）
-- [ ] main.py (272行) — 簡化流程、加入更好的 retry/fallback
+- [x] main.py (272行) — 簡化流程、加入更好的 retry/fallback（✅ 新增 retry_call + 拆分 4 個 step 函式，272→267 行）
 - [ ] 加入 /news 回覆一致性修復（讀 latest.json → 原文照發）
 - [ ] 統一 logging 格式
 - [ ] 加入基本 health check 機制
@@ -83,6 +83,7 @@
 | 12 | 2026-02-15 23:39 | PHASE_2 | 抽取 HTML 模板至獨立檔案 | 新增 scripts/templates/（daily_news.html + index.html），html_generator.py 從 778→101 行（-87%），模板渲染驗證通過 |
 | 13 | 2026-02-15 23:49 | PHASE_2 | 抽取篩選配置至 filter_config.py | 新增 scripts/filter_config.py（來源配置+關鍵字集合+標籤），news_filter.py 從 362→214 行（-41%），import 驗證通過 |
 | 14 | 2026-02-15 23:59 | PHASE_2 | 重構 rss_fetcher.py | 新增 INSIDE 來源（修復 filter_config 孤兒）、urllib timeout 15s、retry 2 次、User-Agent header、失敗來源記錄，109→145 行 |
+| 15 | 2026-02-16 00:09 | PHASE_2 | 重構 main.py | 新增 retry_call() 通用重試、拆分 4 個 pipeline step 函式、簡化 exec_logger 整合，272→267 行 |
 
 ---
 
