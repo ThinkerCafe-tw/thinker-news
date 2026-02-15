@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 26 / 100
+- **Total Rounds:** 27 / 100
 - **Current Phase:** PHASE_4
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 01:59 (Round 26)
+- **Last Run:** 2026-02-16 02:09 (Round 27)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -53,7 +53,7 @@
 - [x] GitHub Actions workflow 優化（✅ 加入 health_check 步驟、concurrency 控制、15 分鐘 timeout、精確 git add、LINE secrets 整合）
 
 ### PHASE_4: 文件與收尾 (Rounds 81-100)
-- [ ] 更新 README.md（反映新架構）
+- [x] 更新 README.md（反映新架構）（✅ 全面改寫：移除 n8n 內容、更新 15 個模組結構、8 個 RSS 來源、新增 health check/RSS feed/LINE Bot 段落）
 - [ ] 清理舊文件（OVERVIEW.md, DEPLOYMENT.md, N8N_INTEGRATION_GUIDE.md, FINAL_IMPLEMENTATION_GUIDE.md）
 - [ ] 產出最終 ARCHITECTURE.md
 - [ ] 產出 CHANGELOG.md
@@ -95,6 +95,7 @@
 | 24 | 2026-02-16 01:39 | PHASE_3 | 新增 RSS output feed | rss_feed.py 產生 RSS 2.0 feed.xml（20 篇），整合至 main.py pipeline，模板 + SEO 注入加入 autodiscovery，首頁新增 RSS 訂閱卡片 |
 | 25 | 2026-02-16 01:49 | PHASE_3 | 新增錯誤通知機制 | error_notifier.py 支援 Slack Webhook + LINE Push，main.py 整合（Pipeline 例外 + 健檢失敗），GitHub Actions 新增 failure step |
 | 26 | 2026-02-16 01:59 | PHASE_3 | 優化 GitHub Actions workflow | 加入 health_check 步驟、concurrency 防重複、15 分鐘 timeout、精確 git add（只 commit 產出檔）、LINE secrets 整合至主步驟，PHASE_3 全部完成 ✅ |
+| 27 | 2026-02-16 02:09 | PHASE_4 | 更新 README.md | 全面改寫：移除 n8n 遷移內容、更新 15 模組專案結構、8 個 RSS 來源、新增 health check/RSS feed/LINE Bot/錯誤通知說明，116 行新增 215 行刪除 |
 
 ---
 
