@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 5 / 100
+- **Total Rounds:** 7 / 100
 - **Current Phase:** PHASE_1
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 22:29 (Round 5)
+- **Last Run:** 2026-02-15 22:49 (Round 7)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -26,8 +26,8 @@
 ### PHASE_1: 垃圾清理 (Rounds 6-15)
 - [x] 建立 refactor branch
 - [x] 把 137 個日報 HTML 移到 `archive/` 目錄
-- [ ] 刪除廢棄根目錄 .py 檔（generate_daily_news_old.py, enhanced_news_generator.py, etc.）
-- [ ] 刪除 n8n/vercel 殘留（api/, vercel.json, webhook_receiver.*, unified_webhook.*）
+- [x] 刪除廢棄根目錄 .py 檔（generate_daily_news_old.py, enhanced_news_generator.py, etc.）
+- [x] 刪除 n8n/vercel 殘留（api/, vercel.json, webhook_receiver.*, unified_webhook.*）
 - [ ] 刪除過期 .txt/.log 檔
 - [ ] 清理 .gitignore（加入 *.log, __pycache__, .env 等）
 - [ ] 整理 requirements.txt（移除不需要的 deps）
@@ -74,6 +74,8 @@
 | 3 | 2026-02-15 22:09 | PHASE_0 | 讀懂核心 pipeline + 產出 ARCHITECTURE.md | 完整分析 6 個核心檔案：main.py→rss_fetcher→news_filter→ai_processor→html_generator→utils，繪製資料流圖，識別 10 個已知問題（API client 重複建立、INSIDE 來源孤兒、無 fallback 等） |
 | 4 | 2026-02-15 22:19 | PHASE_0 | 產出 CLEANUP_MANIFEST.md | 列出 21 個待刪檔案（9 .py + 3 Vercel + 5 txt/log + 4 md）+ 137 個日報 HTML 移動計畫，PHASE_0 全部完成 ✅ |
 | 5 | 2026-02-15 22:29 | PHASE_1 | 移動 137 個日報 HTML 至 archive/ | git mv 137 個 HTML（含 dashboard.html、test_secret_entrance.html）至 archive/，根目錄大幅瘦身，branch 已就緒 |
+| 6 | 2026-02-15 22:39 | PHASE_1 | 刪除 9 個廢棄根目錄 .py 檔 | git rm 9 個未被引用的 .py（generate_daily_news*.py、enhanced_news_generator.py、email_subscription_manager.py 等），共刪 2670 行 |
+| 7 | 2026-02-15 22:49 | PHASE_1 | 刪除 n8n/Vercel 殘留 | git rm api/（debug.js、line-webhook.js）、vercel.json、webhook_receiver.log、unified_webhook.log，共刪 233 行 |
 
 ---
 
