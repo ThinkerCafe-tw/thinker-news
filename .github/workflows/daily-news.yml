@@ -9,9 +9,14 @@ on:
 permissions:
   contents: write  # 允許 push 到 repo
 
+concurrency:
+  group: daily-news-pipeline
+  cancel-in-progress: false  # 不取消進行中的，排隊等待
+
 jobs:
   generate-news:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # 防止 API hang 導致無限等待
 
     steps:
       - name: Checkout 代碼
@@ -19,37 +24,50 @@ jobs:
         with:
           repository: ThinkerCafe-tw/thinker-news
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: 設置 Python 環境
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: 安裝依賴
-        run: |
-          pip install -r requirements.txt
-      
-      - name: 執行新聞生成腳本
+        run: pip install -r requirements.txt
+
+      - name: 健康檢查
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/health_check.py
+
+      - name: 執行新聞生成 Pipeline
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: |
-          python scripts/main.py
-      
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_NOTIFY_USER_ID: ${{ secrets.LINE_NOTIFY_USER_ID }}
+        run: python scripts/main.py
+
       - name: 提交變更到 GitHub
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "🤖 自動生成 $(date +'%Y-%m-%d') AI 新聞日報" || echo "No changes to commit"
+          git add -A -- \
+            '*.html' \
+            'archive/' \
+            'latest.json' \
+            'feed.xml' \
+            'index.html'
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "🤖 自動生成 $(date -u +'%Y-%m-%d') AI 新聞日報"
           git push
-      
+
       - name: 發送 Slack 通知
         if: success()
-        run: |
-          python scripts/notify_slack.py
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python scripts/notify_slack.py
 
       - name: 發送錯誤通知
         if: failure()
