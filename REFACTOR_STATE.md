@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 12 / 100
+- **Total Rounds:** 13 / 100
 - **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 23:39 (Round 12)
+- **Last Run:** 2026-02-15 23:49 (Round 13)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -36,7 +36,7 @@
 ### PHASE_2: 程式碼重構 (Rounds 16-50)
 - [ ] ai_processor.py (623行) — 拆分、簡化 prompt、改進錯誤處理（✅ prompts 已抽取至 prompts.py）
 - [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式（✅ HTML 模板已抽取至 scripts/templates/，778→101 行）
-- [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字
+- [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字（✅ 篩選配置已抽取至 filter_config.py，362→214 行）
 - [ ] rss_fetcher.py (109行) — 新增 RSS 來源、改進容錯
 - [ ] main.py (272行) — 簡化流程、加入更好的 retry/fallback
 - [ ] 加入 /news 回覆一致性修復（讀 latest.json → 原文照發）
@@ -81,6 +81,7 @@
 | 10 | 2026-02-15 23:19 | PHASE_1 | 整理 requirements.txt | 移除未使用的 python-dateutil（grep 驗證無 import），保留 6 個實際依賴。PHASE_1 全部完成 ✅ |
 | 11 | 2026-02-15 23:29 | PHASE_2 | 抽取 system prompts 至 prompts.py | 新增 scripts/prompts.py，3 大 prompt 從 ai_processor.py 移出，847→623 行（-224 行），import 驗證通過 |
 | 12 | 2026-02-15 23:39 | PHASE_2 | 抽取 HTML 模板至獨立檔案 | 新增 scripts/templates/（daily_news.html + index.html），html_generator.py 從 778→101 行（-87%），模板渲染驗證通過 |
+| 13 | 2026-02-15 23:49 | PHASE_2 | 抽取篩選配置至 filter_config.py | 新增 scripts/filter_config.py（來源配置+關鍵字集合+標籤），news_filter.py 從 362→214 行（-41%），import 驗證通過 |
 
 ---
 
