@@ -34,6 +34,7 @@ from ai_processor import (
     process_with_html_generator
 )
 from html_generator import generate_daily_html, update_index_html
+from rss_feed import generate_rss_feed
 from utils import get_taiwan_date, validate_json_output
 from execution_logger import ExecutionLogger
 from health_check import run_health_check
@@ -180,6 +181,11 @@ def step_generate_output(today_date, narrator_json, editor_json, html_content):
     with open('latest.json', 'w', encoding='utf-8') as f:
         json.dump(final_output['news_json'], f, ensure_ascii=False, indent=2)
     logger.info("💾 latest.json 已儲存")
+
+    # 生成 RSS feed
+    feed_path = generate_rss_feed()
+    if feed_path:
+        logger.info(f"📡 RSS feed: {feed_path}")
 
     return final_output
 

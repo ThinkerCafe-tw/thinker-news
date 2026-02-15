@@ -44,6 +44,8 @@ def _inject_seo_meta(html: str, date: str) -> str:
     page_url = f"{SITE_URL}/{date}.html"
 
     seo_block = f"""
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Thinker News RSS" href="{SITE_URL}/feed.xml">
     <!-- SEO: Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="{date} AI 科技日報 | {SITE_NAME}">
