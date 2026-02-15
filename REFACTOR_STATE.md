@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 9 / 100
+- **Total Rounds:** 10 / 100
 - **Current Phase:** PHASE_1
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 23:09 (Round 9)
+- **Last Run:** 2026-02-15 23:19 (Round 10)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -30,8 +30,8 @@
 - [x] 刪除 n8n/vercel 殘留（api/, vercel.json, webhook_receiver.*, unified_webhook.*）
 - [x] 刪除過期 .txt/.log 檔（含 4 個廢棄 .md）
 - [x] 清理 .gitignore（加入 *.log, __pycache__, .env 等）
-- [ ] 整理 requirements.txt（移除不需要的 deps）
-- [ ] 每步都 git commit，commit message 清楚
+- [x] 整理 requirements.txt（移除不需要的 deps）
+- [x] 每步都 git commit，commit message 清楚
 
 ### PHASE_2: 程式碼重構 (Rounds 16-50)
 - [ ] ai_processor.py (847行) — 拆分、簡化 prompt、改進錯誤處理
@@ -78,6 +78,7 @@
 | 7 | 2026-02-15 22:49 | PHASE_1 | 刪除 n8n/Vercel 殘留 | git rm api/（debug.js、line-webhook.js）、vercel.json、webhook_receiver.log、unified_webhook.log，共刪 233 行 |
 | 8 | 2026-02-15 22:59 | PHASE_1 | 刪除過期 .txt/.log + 廢棄 .md | git rm 7 個孤兒檔（3 txt + 4 md），共刪 407 行，CLEANUP_MANIFEST 清單 3+4 全部完成 |
 | 9 | 2026-02-15 23:09 | PHASE_1 | 清理 .gitignore | 加入 execution_log.json、OpenClaw workspace 檔案、macOS/Node 忽略規則；untrack execution_log.json（runtime 產物不入 repo） |
+| 10 | 2026-02-15 23:19 | PHASE_1 | 整理 requirements.txt | 移除未使用的 python-dateutil（grep 驗證無 import），保留 6 個實際依賴。PHASE_1 全部完成 ✅ |
 
 ---
 
