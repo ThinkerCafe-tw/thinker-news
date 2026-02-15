@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 23 / 100
+- **Total Rounds:** 24 / 100
 - **Current Phase:** PHASE_3
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 01:31 (Round 23)
+- **Last Run:** 2026-02-16 01:39 (Round 24)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -48,7 +48,7 @@
 - [x] 加入 LINE /news 指令的確定性處理（不經 AI 加工）（✅ line_handler.py — webhook + CLI + /help，Python 3.9 相容）
 - [x] SEO 基礎：OG tags、meta description、結構化資料（✅ OG + Twitter Card + canonical + JSON-LD，模板 + AI 生成路徑皆覆蓋）
 - [x] 改進 index.html 首頁設計（✅ 動態日報列表、feature grid、移除冗餘學習洞察/訂閱區塊）
-- [ ] 加入 RSS output feed（讓別人訂閱）
+- [x] 加入 RSS output feed（讓別人訂閱）（✅ rss_feed.py 產生 RSS 2.0 feed.xml，20 篇日報，整合至 pipeline + 模板 autodiscovery）
 - [ ] 加入 error notification（生成失敗時通知 Cruz）
 - [ ] GitHub Actions workflow 優化
 
@@ -92,6 +92,7 @@
 | 21 | 2026-02-16 01:09 | PHASE_3 | LINE /news 確定性處理 | 新增 line_handler.py（webhook + CLI），/news 直讀 latest.json 不經 AI、/help 指令、LINE 簽名驗證、修復 get_latest_news.py Python 3.9 相容性 |
 | 22 | 2026-02-16 01:21 | PHASE_3 | SEO 基礎建設 | 兩個模板加入 OG tags + Twitter Card + canonical + JSON-LD；html_generator.py 新增 _inject_seo_meta() 自動注入 AI 生成 HTML，含冪等檢查 |
 | 23 | 2026-02-16 01:31 | PHASE_3 | 改進 index.html 首頁設計 | 模板重設計：今日亮點卡片 + 動態日報列表（掃描 archive/）+ feature grid，移除硬編碼學習洞察/訂閱/明日預告，header 顯示總期數 |
+| 24 | 2026-02-16 01:39 | PHASE_3 | 新增 RSS output feed | rss_feed.py 產生 RSS 2.0 feed.xml（20 篇），整合至 main.py pipeline，模板 + SEO 注入加入 autodiscovery，首頁新增 RSS 訂閱卡片 |
 
 ---
 
