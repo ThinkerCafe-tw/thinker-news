@@ -36,6 +36,7 @@ from ai_processor import (
 from html_generator import generate_daily_html, update_index_html
 from utils import get_taiwan_date, validate_json_output
 from execution_logger import ExecutionLogger
+from health_check import run_health_check
 
 
 # ---------------------------------------------------------------------------
@@ -192,8 +193,17 @@ def main():
     exec_logger = ExecutionLogger()
 
     try:
-        # 步驟 0: 驗證 API Keys（單例初始化）
-        logger.info("🔑 驗證 API Keys...")
+        # 步驟 0: 健檢（環境變數 + 依賴 + 模板 + 輸出目錄）
+        logger.info("🏥 執行健檢...")
+        hc = run_health_check(include_network=False)
+        if not hc["healthy"]:
+            logger.error("❌ 健檢未通過，終止執行")
+            exec_logger.complete_execution("error")
+            exec_logger.save_to_file("execution_log.json")
+            return 1
+
+        # 初始化 API 單例
+        logger.info("🔑 初始化 API clients...")
         get_openai_client()
         get_deepseek_client()
 
