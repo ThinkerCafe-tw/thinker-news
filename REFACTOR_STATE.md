@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 16 / 100
+- **Total Rounds:** 17 / 100
 - **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 00:19 (Round 16)
+- **Last Run:** 2026-02-16 00:31 (Round 17)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -35,12 +35,12 @@
 
 ### PHASE_2: 程式碼重構 (Rounds 16-50)
 - [x] ai_processor.py (623→501行) — API 單例化、統一呼叫介面、移除重複程式碼（✅ prompts.py + 單例 client + call_openai）
-- [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式（✅ HTML 模板已抽取至 scripts/templates/，778→101 行）
-- [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字（✅ 篩選配置已抽取至 filter_config.py，362→214 行）
+- [x] html_generator.py (778行) — 模板化、移除 hardcoded 樣式（✅ HTML 模板已抽取至 scripts/templates/，778→101 行）
+- [x] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字（✅ 篩選配置已抽取至 filter_config.py，362→214 行）
 - [x] rss_fetcher.py (109行) — 新增 RSS 來源、改進容錯（✅ 新增 INSIDE 來源 + timeout/retry，109→145 行）
 - [x] main.py (272行) — 簡化流程、加入更好的 retry/fallback（✅ 新增 retry_call + 拆分 4 個 step 函式，272→267 行）
 - [ ] 加入 /news 回覆一致性修復（讀 latest.json → 原文照發）
-- [ ] 統一 logging 格式
+- [x] 統一 logging 格式（✅ 新增 log_config.py，8 模組統一用 get_logger()）
 - [ ] 加入基本 health check 機制
 
 ### PHASE_3: 新功能 & 穩定性 (Rounds 51-80)
@@ -85,6 +85,7 @@
 | 14 | 2026-02-15 23:59 | PHASE_2 | 重構 rss_fetcher.py | 新增 INSIDE 來源（修復 filter_config 孤兒）、urllib timeout 15s、retry 2 次、User-Agent header、失敗來源記錄，109→145 行 |
 | 15 | 2026-02-16 00:09 | PHASE_2 | 重構 main.py | 新增 retry_call() 通用重試、拆分 4 個 pipeline step 函式、簡化 exec_logger 整合，272→267 行 |
 | 16 | 2026-02-16 00:19 | PHASE_2 | 重構 ai_processor.py | API client 單例化（不再每次呼叫重建）、新增 call_openai() 統一介面、HTML prompt 改用 prompts.py、移除冗餘 try/except，623→501 行（-20%） |
+| 17 | 2026-02-16 00:31 | PHASE_2 | 統一 logging 格式 | 新增 log_config.py（統一格式+單次初始化），8 個模組移除 import logging 改用 get_logger()，補勾 html_generator + news_filter checkbox |
 
 ---
 
