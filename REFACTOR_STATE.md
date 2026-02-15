@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 11 / 100
+- **Total Rounds:** 12 / 100
 - **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 23:29 (Round 11)
+- **Last Run:** 2026-02-15 23:39 (Round 12)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -35,7 +35,7 @@
 
 ### PHASE_2: 程式碼重構 (Rounds 16-50)
 - [ ] ai_processor.py (623行) — 拆分、簡化 prompt、改進錯誤處理（✅ prompts 已抽取至 prompts.py）
-- [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式
+- [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式（✅ HTML 模板已抽取至 scripts/templates/，778→101 行）
 - [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字
 - [ ] rss_fetcher.py (109行) — 新增 RSS 來源、改進容錯
 - [ ] main.py (272行) — 簡化流程、加入更好的 retry/fallback
@@ -80,6 +80,7 @@
 | 9 | 2026-02-15 23:09 | PHASE_1 | 清理 .gitignore | 加入 execution_log.json、OpenClaw workspace 檔案、macOS/Node 忽略規則；untrack execution_log.json（runtime 產物不入 repo） |
 | 10 | 2026-02-15 23:19 | PHASE_1 | 整理 requirements.txt | 移除未使用的 python-dateutil（grep 驗證無 import），保留 6 個實際依賴。PHASE_1 全部完成 ✅ |
 | 11 | 2026-02-15 23:29 | PHASE_2 | 抽取 system prompts 至 prompts.py | 新增 scripts/prompts.py，3 大 prompt 從 ai_processor.py 移出，847→623 行（-224 行），import 驗證通過 |
+| 12 | 2026-02-15 23:39 | PHASE_2 | 抽取 HTML 模板至獨立檔案 | 新增 scripts/templates/（daily_news.html + index.html），html_generator.py 從 778→101 行（-87%），模板渲染驗證通過 |
 
 ---
 
