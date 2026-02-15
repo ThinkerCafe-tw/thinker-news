@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 21 / 100
+- **Total Rounds:** 23 / 100
 - **Current Phase:** PHASE_3
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 01:09 (Round 21)
+- **Last Run:** 2026-02-16 01:31 (Round 23)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -46,8 +46,8 @@
 ### PHASE_3: 新功能 & 穩定性 (Rounds 51-80)
 - [x] 建立 AGENTS.md for thinker-news agent（讓 /news 回覆穩定）（✅ 改名 AGENT_GUIDE.md 避免 .gitignore 衝突）
 - [x] 加入 LINE /news 指令的確定性處理（不經 AI 加工）（✅ line_handler.py — webhook + CLI + /help，Python 3.9 相容）
-- [ ] SEO 基礎：OG tags、meta description、結構化資料
-- [ ] 改進 index.html 首頁設計
+- [x] SEO 基礎：OG tags、meta description、結構化資料（✅ OG + Twitter Card + canonical + JSON-LD，模板 + AI 生成路徑皆覆蓋）
+- [x] 改進 index.html 首頁設計（✅ 動態日報列表、feature grid、移除冗餘學習洞察/訂閱區塊）
 - [ ] 加入 RSS output feed（讓別人訂閱）
 - [ ] 加入 error notification（生成失敗時通知 Cruz）
 - [ ] GitHub Actions workflow 優化
@@ -90,6 +90,8 @@
 | 19 | 2026-02-16 00:50 | PHASE_2 | 加入 health check 機制 | 新增 scripts/health_check.py（6 項檢查：env vars、packages、templates、output dirs、RSS、API），整合至 main.py 步驟 0，支援 CLI 獨立執行（--network --json），PHASE_2 全部完成 ✅ |
 | 20 | 2026-02-16 01:00 | PHASE_3 | 建立 AGENT_GUIDE.md | 新增專案 agent 指引文件（專案概述、目錄結構、/news 處理流程、latest.json 結構、健康檢查用法），避免與 OpenClaw AGENTS.md 衝突改用 AGENT_GUIDE.md |
 | 21 | 2026-02-16 01:09 | PHASE_3 | LINE /news 確定性處理 | 新增 line_handler.py（webhook + CLI），/news 直讀 latest.json 不經 AI、/help 指令、LINE 簽名驗證、修復 get_latest_news.py Python 3.9 相容性 |
+| 22 | 2026-02-16 01:21 | PHASE_3 | SEO 基礎建設 | 兩個模板加入 OG tags + Twitter Card + canonical + JSON-LD；html_generator.py 新增 _inject_seo_meta() 自動注入 AI 生成 HTML，含冪等檢查 |
+| 23 | 2026-02-16 01:31 | PHASE_3 | 改進 index.html 首頁設計 | 模板重設計：今日亮點卡片 + 動態日報列表（掃描 archive/）+ feature grid，移除硬編碼學習洞察/訂閱/明日預告，header 顯示總期數 |
 
 ---
 
