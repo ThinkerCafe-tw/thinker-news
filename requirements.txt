@@ -10,9 +10,6 @@ requests==2.32.3
 # HTML 模板
 Jinja2==3.1.4
 
-# 日期時間處理
-python-dateutil==2.9.0
-
 # JSON 修復
 json-repair==0.30.0
 
