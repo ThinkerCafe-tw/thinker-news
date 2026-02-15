@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 18 / 100
+- **Total Rounds:** 19 / 100
 - **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-16 00:39 (Round 18)
+- **Last Run:** 2026-02-16 00:50 (Round 19)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -41,7 +41,7 @@
 - [x] main.py (272行) — 簡化流程、加入更好的 retry/fallback（✅ 新增 retry_call + 拆分 4 個 step 函式，272→267 行）
 - [x] 加入 /news 回覆一致性修復（讀 latest.json → 原文照發）（✅ get_latest_news.py，5 種格式輸出）
 - [x] 統一 logging 格式（✅ 新增 log_config.py，8 模組統一用 get_logger()）
-- [ ] 加入基本 health check 機制
+- [x] 加入基本 health check 機制（✅ 新增 health_check.py，檢查 env/套件/模板/目錄/網路，整合至 main.py）
 
 ### PHASE_3: 新功能 & 穩定性 (Rounds 51-80)
 - [ ] 建立 AGENTS.md for thinker-news agent（讓 /news 回覆穩定）
@@ -87,6 +87,7 @@
 | 16 | 2026-02-16 00:19 | PHASE_2 | 重構 ai_processor.py | API client 單例化（不再每次呼叫重建）、新增 call_openai() 統一介面、HTML prompt 改用 prompts.py、移除冗餘 try/except，623→501 行（-20%） |
 | 17 | 2026-02-16 00:31 | PHASE_2 | 統一 logging 格式 | 新增 log_config.py（統一格式+單次初始化），8 個模組移除 import logging 改用 get_logger()，補勾 html_generator + news_filter checkbox |
 | 18 | 2026-02-16 00:39 | PHASE_2 | /news 回覆一致性修復 | 新增 get_latest_news.py，讀 latest.json 原文照發，支援 line/notion/url/json/reply 五種格式，含 format_news_reply() 供訊息平台直接使用 |
+| 19 | 2026-02-16 00:50 | PHASE_2 | 加入 health check 機制 | 新增 scripts/health_check.py（6 項檢查：env vars、packages、templates、output dirs、RSS、API），整合至 main.py 步驟 0，支援 CLI 獨立執行（--network --json），PHASE_2 全部完成 ✅ |
 
 ---
 
