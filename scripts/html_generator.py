@@ -132,9 +132,36 @@ def generate_daily_html(final_output: dict, html_full_content: str = None) -> st
     return str(output_path)
 
 
+def _scan_archive_reports(limit: int = 10) -> list:
+    """
+    掃描 archive/ 目錄取得近期日報列表
+
+    Args:
+        limit: 最多返回幾筆
+
+    Returns:
+        list of dict: [{'date': '2026-02-11', 'filename': '2026-02-11.html'}, ...]
+    """
+    import re
+    archive_dir = Path('archive')
+    if not archive_dir.exists():
+        return []
+
+    date_pattern = re.compile(r'^(\d{4}-\d{2}-\d{2})\.html$')
+    reports = []
+    for f in archive_dir.iterdir():
+        m = date_pattern.match(f.name)
+        if m:
+            reports.append({'date': m.group(1), 'filename': f.name})
+
+    # 按日期倒序排列
+    reports.sort(key=lambda r: r['date'], reverse=True)
+    return reports[:limit], len(reports)
+
+
 def update_index_html(today_date: str) -> str:
     """
-    更新首頁 index.html
+    更新首頁 index.html，動態列出近期日報
 
     Args:
         today_date: 今日日期
@@ -144,16 +171,18 @@ def update_index_html(today_date: str) -> str:
     """
     logger.info("📝 更新首頁 index.html...")
 
-    # 計算明日日期
-    today_dt = datetime.strptime(today_date, '%Y-%m-%d')
-    tomorrow_dt = today_dt + timedelta(days=1)
-    tomorrow_date = tomorrow_dt.strftime('%Y-%m-%d')
+    # 掃描 archive/ 取得近期日報
+    recent_reports, total_count = _scan_archive_reports(limit=10)
+    # 排除今日（今日已用亮點卡片展示）
+    recent_reports = [r for r in recent_reports if r['date'] != today_date]
 
     # 從模板生成
     template = _load_template("index.html")
     html_content = template.render(
         today_date=today_date,
-        tomorrow_date=tomorrow_date
+        recent_reports=recent_reports,
+        total_reports=total_count,
+        has_more_reports=(total_count > 10)
     )
 
     # 寫入文件
@@ -161,5 +190,5 @@ def update_index_html(today_date: str) -> str:
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
-    logger.info(f"✅ index.html 已更新")
+    logger.info(f"✅ index.html 已更新（列出 {len(recent_reports)} 篇近期日報，共 {total_count} 篇）")
     return str(output_path)
