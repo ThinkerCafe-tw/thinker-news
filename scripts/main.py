@@ -38,6 +38,7 @@ from rss_feed import generate_rss_feed
 from utils import get_taiwan_date, validate_json_output
 from execution_logger import ExecutionLogger
 from health_check import run_health_check
+from error_notifier import notify_error
 
 
 # ---------------------------------------------------------------------------
@@ -204,6 +205,8 @@ def main():
         hc = run_health_check(include_network=False)
         if not hc["healthy"]:
             logger.error("❌ 健檢未通過，終止執行")
+            failed_checks = [c["name"] for c in hc.get("checks", []) if not c.get("ok")]
+            notify_error("健康檢查", f"健檢未通過: {', '.join(failed_checks)}")
             exec_logger.complete_execution("error")
             exec_logger.save_to_file("execution_log.json")
             return 1
@@ -265,6 +268,11 @@ def main():
 
     except Exception as e:
         logger.error(f"❌ 執行錯誤: {e}", exc_info=True)
+        # 發送錯誤通知
+        try:
+            notify_error("Pipeline 執行", e)
+        except Exception:
+            logger.warning("⚠️ 錯誤通知發送失敗")
         try:
             exec_logger.complete_execution("error")
             exec_logger.save_to_file("execution_log.json")

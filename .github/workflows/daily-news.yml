@@ -50,3 +50,15 @@ jobs:
         if: success()
         run: |
           python scripts/notify_slack.py
+
+      - name: 發送錯誤通知
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_NOTIFY_USER_ID: ${{ secrets.LINE_NOTIFY_USER_ID }}
+        run: |
+          python -c "
+          from scripts.error_notifier import notify_error
+          notify_error('GitHub Actions', 'Pipeline 執行失敗，請查看 Actions 日誌')
+          "
