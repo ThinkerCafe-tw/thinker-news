@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 10 / 100
-- **Current Phase:** PHASE_1
+- **Total Rounds:** 11 / 100
+- **Current Phase:** PHASE_2
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 23:19 (Round 10)
+- **Last Run:** 2026-02-15 23:29 (Round 11)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -34,7 +34,7 @@
 - [x] 每步都 git commit，commit message 清楚
 
 ### PHASE_2: 程式碼重構 (Rounds 16-50)
-- [ ] ai_processor.py (847行) — 拆分、簡化 prompt、改進錯誤處理
+- [ ] ai_processor.py (623行) — 拆分、簡化 prompt、改進錯誤處理（✅ prompts 已抽取至 prompts.py）
 - [ ] html_generator.py (778行) — 模板化、移除 hardcoded 樣式
 - [ ] news_filter.py (362行) — 評審篩選邏輯、更新關鍵字
 - [ ] rss_fetcher.py (109行) — 新增 RSS 來源、改進容錯
@@ -79,6 +79,7 @@
 | 8 | 2026-02-15 22:59 | PHASE_1 | 刪除過期 .txt/.log + 廢棄 .md | git rm 7 個孤兒檔（3 txt + 4 md），共刪 407 行，CLEANUP_MANIFEST 清單 3+4 全部完成 |
 | 9 | 2026-02-15 23:09 | PHASE_1 | 清理 .gitignore | 加入 execution_log.json、OpenClaw workspace 檔案、macOS/Node 忽略規則；untrack execution_log.json（runtime 產物不入 repo） |
 | 10 | 2026-02-15 23:19 | PHASE_1 | 整理 requirements.txt | 移除未使用的 python-dateutil（grep 驗證無 import），保留 6 個實際依賴。PHASE_1 全部完成 ✅ |
+| 11 | 2026-02-15 23:29 | PHASE_2 | 抽取 system prompts 至 prompts.py | 新增 scripts/prompts.py，3 大 prompt 從 ai_processor.py 移出，847→623 行（-224 行），import 驗證通過 |
 
 ---
 
