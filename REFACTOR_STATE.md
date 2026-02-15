@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 7 / 100
+- **Total Rounds:** 9 / 100
 - **Current Phase:** PHASE_1
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 22:49 (Round 7)
+- **Last Run:** 2026-02-15 23:09 (Round 9)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -28,8 +28,8 @@
 - [x] 把 137 個日報 HTML 移到 `archive/` 目錄
 - [x] 刪除廢棄根目錄 .py 檔（generate_daily_news_old.py, enhanced_news_generator.py, etc.）
 - [x] 刪除 n8n/vercel 殘留（api/, vercel.json, webhook_receiver.*, unified_webhook.*）
-- [ ] 刪除過期 .txt/.log 檔
-- [ ] 清理 .gitignore（加入 *.log, __pycache__, .env 等）
+- [x] 刪除過期 .txt/.log 檔（含 4 個廢棄 .md）
+- [x] 清理 .gitignore（加入 *.log, __pycache__, .env 等）
 - [ ] 整理 requirements.txt（移除不需要的 deps）
 - [ ] 每步都 git commit，commit message 清楚
 
@@ -76,6 +76,8 @@
 | 5 | 2026-02-15 22:29 | PHASE_1 | 移動 137 個日報 HTML 至 archive/ | git mv 137 個 HTML（含 dashboard.html、test_secret_entrance.html）至 archive/，根目錄大幅瘦身，branch 已就緒 |
 | 6 | 2026-02-15 22:39 | PHASE_1 | 刪除 9 個廢棄根目錄 .py 檔 | git rm 9 個未被引用的 .py（generate_daily_news*.py、enhanced_news_generator.py、email_subscription_manager.py 等），共刪 2670 行 |
 | 7 | 2026-02-15 22:49 | PHASE_1 | 刪除 n8n/Vercel 殘留 | git rm api/（debug.js、line-webhook.js）、vercel.json、webhook_receiver.log、unified_webhook.log，共刪 233 行 |
+| 8 | 2026-02-15 22:59 | PHASE_1 | 刪除過期 .txt/.log + 廢棄 .md | git rm 7 個孤兒檔（3 txt + 4 md），共刪 407 行，CLEANUP_MANIFEST 清單 3+4 全部完成 |
+| 9 | 2026-02-15 23:09 | PHASE_1 | 清理 .gitignore | 加入 execution_log.json、OpenClaw workspace 檔案、macOS/Node 忽略規則；untrack execution_log.json（runtime 產物不入 repo） |
 
 ---
 
