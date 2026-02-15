@@ -6,11 +6,11 @@ import os
 import sys
 import json
 import requests
-import logging
 from datetime import datetime
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+logger = get_logger(__name__)
 
 
 def send_slack_notification():
@@ -77,8 +77,4 @@ def send_slack_notification():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
     send_slack_notification()

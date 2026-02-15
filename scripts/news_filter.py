@@ -10,10 +10,10 @@
 篩選配置見 filter_config.py
 """
 
-import logging
 from datetime import datetime, timedelta
 from typing import List, Dict
 
+from log_config import get_logger
 from filter_config import (
     SOURCES, TAIWAN_SOURCES, INTERNATIONAL_SOURCES,
     TAIWAN_INTERESTS, GLOBAL_TAIWAN_FOCUS,
@@ -21,7 +21,7 @@ from filter_config import (
     SOURCE_LABELS,
 )
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def calculate_relevance(item: Dict) -> int:

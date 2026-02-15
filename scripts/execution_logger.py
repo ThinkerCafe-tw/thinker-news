@@ -4,12 +4,12 @@
 """
 
 import json
-import logging
 from datetime import datetime
 from typing import Dict, Any, List
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+logger = get_logger(__name__)
 
 
 class ExecutionLogger:

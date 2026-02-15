@@ -14,22 +14,14 @@ import os
 import sys
 import json
 import time
-import logging
 from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('news_generation.log'),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+logger = get_logger(__name__)
 
 from rss_fetcher import fetch_all_rss_feeds
 from news_filter import filter_and_score_news

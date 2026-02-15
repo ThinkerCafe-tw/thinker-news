@@ -9,13 +9,13 @@ AI 處理鏈
 """
 
 import os
-import logging
 import json
 import time
 from typing import List, Dict, Callable, Any
 from functools import wraps
 from openai import OpenAI
 
+from log_config import get_logger
 from prompts import (
     DATA_ALCHEMIST_SYSTEM_PROMPT,
     TECH_NARRATOR_SYSTEM_PROMPT,
@@ -23,7 +23,7 @@ from prompts import (
     HTML_GENERATOR_SYSTEM_PROMPT,
 )
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 # ============================================
 # 重試裝飾器

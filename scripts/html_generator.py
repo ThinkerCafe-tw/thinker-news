@@ -8,12 +8,12 @@ HTML 生成模組
   - index.html: 首頁模板
 """
 
-import logging
 from pathlib import Path
 from datetime import datetime, timedelta
 from jinja2 import Template
 
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+logger = get_logger(__name__)
 
 # 模板目錄
 TEMPLATE_DIR = Path(__file__).parent / "templates"

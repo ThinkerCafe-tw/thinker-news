@@ -4,14 +4,14 @@ RSS Feed 讀取模組
 """
 
 import feedparser
-import logging
 import time
 import urllib.request
 from datetime import datetime
 from typing import List, Dict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+logger = get_logger(__name__)
 
 # === RSS 來源配置 ===
 # region: 'intl' 國際 | 'tw' 台灣 | 'ai' AI 專題
