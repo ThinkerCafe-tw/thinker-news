@@ -19,6 +19,7 @@
   python get_latest_news.py --format url
   python get_latest_news.py --format json
 """
+from __future__ import annotations
 
 import json
 import sys

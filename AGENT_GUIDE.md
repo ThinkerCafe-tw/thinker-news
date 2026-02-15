@@ -23,6 +23,7 @@ scripts/           核心程式碼
   prompts.py       System prompts 集中管理
   html_generator.py HTML 頁面生成（模板渲染）
   get_latest_news.py /news 查詢模組
+  line_handler.py  LINE /news 確定性處理（webhook + CLI）
   health_check.py  系統健康檢查
   log_config.py    統一 logging
   utils.py         共用工具
@@ -42,6 +43,37 @@ latest.json        最新一期日報快取
 1. **不要用 AI 重新生成或改寫內容**
 2. 直接讀取 `latest.json`
 3. 使用 `get_latest_news.py` 的 `format_news_reply()` 回傳
+
+### LINE Webhook 確定性處理
+
+`scripts/line_handler.py` 提供 LINE `/news` 指令的確定性回覆：
+
+- **`/news`** → 直接讀 `latest.json`，原文照發
+- **`/help`** → 顯示可用指令
+- **其他訊息** → 不回覆（回傳 None）
+
+```bash
+# 測試指令
+python scripts/line_handler.py --test '/news'
+
+# 啟動 Webhook 伺服器（需 flask）
+python scripts/line_handler.py --serve --port 5000
+# Webhook endpoint: POST /webhook/line
+```
+
+### 程式碼引用
+
+```python
+# 簡單取得回覆文字
+from scripts.line_handler import handle_command
+reply = handle_command("/news")  # 確定性，不經 AI
+
+# 完整 LINE 事件處理
+from scripts.line_handler import handle_line_event
+handle_line_event(event, access_token)
+```
+
+### 底層 API
 
 ```python
 from scripts.get_latest_news import get_latest_news, format_news_reply
