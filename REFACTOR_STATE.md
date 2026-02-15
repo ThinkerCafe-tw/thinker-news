@@ -5,10 +5,10 @@
 
 ## 🏁 Overall Progress
 
-- **Total Rounds:** 2 / 100
+- **Total Rounds:** 3 / 100
 - **Current Phase:** PHASE_0
 - **Status:** IN_PROGRESS
-- **Last Run:** 2026-02-15 22:00 (Round 2)
+- **Last Run:** 2026-02-15 22:09 (Round 3)
 - **Branch:** refactor/cleanup-v1
 
 ---
@@ -19,9 +19,9 @@
 - [x] 完整掃描 repo 結構，列出所有檔案用途
 - [x] 識別廢棄檔案（不被任何 scripts/ 引用的 .py/.js）
 - [x] 識別可清理的歷史產物（舊 HTML、logs、n8n/vercel 殘留）
-- [ ] 讀懂核心 pipeline：main.py → rss_fetcher → news_filter → ai_processor → html_generator
+- [x] 讀懂核心 pipeline：main.py → rss_fetcher → news_filter → ai_processor → html_generator
 - [ ] 產出 CLEANUP_MANIFEST.md（待刪清單 + 理由）
-- [ ] 產出 ARCHITECTURE.md（現有架構圖 + 問題診斷）
+- [x] 產出 ARCHITECTURE.md（現有架構圖 + 問題診斷）
 
 ### PHASE_1: 垃圾清理 (Rounds 6-15)
 - [ ] 建立 refactor branch
@@ -71,6 +71,7 @@
 |-------|------|-------|--------|--------|
 | 1 | 2026-02-15 21:49 | PHASE_0 | 完整掃描 repo 結構 | 產出 REPO_INVENTORY.md，盤點 170+ 檔案，識別 9 廢棄 .py、135 日報 HTML、Vercel/n8n 殘留 |
 | 2 | 2026-02-15 22:00 | PHASE_0 | 驗證廢棄檔案 + 歷史產物 | grep 交叉驗證：9 .py 全確認孤兒、2 .js 仍被 scripts/ 引用（保留）、api/ 2 檔 + vercel.json 確認廢棄、5 txt/log + 4 md 確認孤兒、execution_log.json 仍活躍 |
+| 3 | 2026-02-15 22:09 | PHASE_0 | 讀懂核心 pipeline + 產出 ARCHITECTURE.md | 完整分析 6 個核心檔案：main.py→rss_fetcher→news_filter→ai_processor→html_generator→utils，繪製資料流圖，識別 10 個已知問題（API client 重複建立、INSIDE 來源孤兒、無 fallback 等） |
 
 ---
 
