@@ -20,6 +20,7 @@ from prompts import (
     DATA_ALCHEMIST_SYSTEM_PROMPT,
     TECH_NARRATOR_SYSTEM_PROMPT,
     EDITOR_IN_CHIEF_SYSTEM_PROMPT,
+    HTML_GENERATOR_SYSTEM_PROMPT,
 )
 
 logger = logging.getLogger(__name__)
@@ -55,45 +56,47 @@ def retry_on_failure(max_retries: int = 2, delay: int = 3):
     return decorator
 
 # ============================================
-# API 配置
+# API 配置（單例模式，避免每次呼叫重建 client）
 # ============================================
 
-def setup_apis():
-    """設置 API keys"""
-    openai_api_key = os.getenv('OPENAI_API_KEY')
-    deepseek_api_key = os.getenv('DEEPSEEK_API_KEY')
+_openai_client = None
+_deepseek_client = None
 
-    if not openai_api_key:
-        raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
-    if not deepseek_api_key:
-        raise ValueError("❌ DEEPSEEK_API_KEY 環境變數未設置")
 
-    # 配置 OpenAI
-    openai_client = OpenAI(api_key=openai_api_key)
+def get_openai_client() -> OpenAI:
+    """取得 OpenAI client（單例）"""
+    global _openai_client
+    if _openai_client is None:
+        api_key = os.getenv('OPENAI_API_KEY')
+        if not api_key:
+            raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
+        _openai_client = OpenAI(api_key=api_key)
+    return _openai_client
 
-    # 配置 DeepSeek (OpenAI 相容 API)
-    deepseek_client = OpenAI(api_key=deepseek_api_key, base_url="https://api.deepseek.com")
 
-    return openai_client, deepseek_client
+def get_deepseek_client() -> OpenAI:
+    """取得 DeepSeek client（單例）"""
+    global _deepseek_client
+    if _deepseek_client is None:
+        api_key = os.getenv('DEEPSEEK_API_KEY')
+        if not api_key:
+            raise ValueError("❌ DEEPSEEK_API_KEY 環境變數未設置")
+        _deepseek_client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+    return _deepseek_client
+
+
+def _log_usage(response, provider: str):
+    """記錄 API token 使用量"""
+    if hasattr(response, 'usage') and response.usage:
+        u = response.usage
+        logger.info(f"📊 {provider} Token: prompt={u.prompt_tokens}, output={u.completion_tokens}, total={u.total_tokens}")
 
 
 def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7) -> str:
-    """
-    呼叫 DeepSeek API（OpenAI 相容介面）
-
-    Args:
-        system_instruction: 系統提示詞
-        user_prompt: 使用者提示詞
-        temperature: 生成溫度參數
-
-    Returns:
-        str: API 回應文字
-    """
-    _, deepseek_client = setup_apis()
-
+    """呼叫 DeepSeek API"""
     logger.info("🔑 呼叫 DeepSeek API...")
-
-    response = deepseek_client.chat.completions.create(
+    client = get_deepseek_client()
+    response = client.chat.completions.create(
         model="deepseek-chat",
         messages=[
             {"role": "system", "content": system_instruction},
@@ -101,15 +104,26 @@ def call_deepseek(system_instruction: str, user_prompt: str, temperature: float 
         ],
         temperature=temperature
     )
-
-    output = response.choices[0].message.content
-
-    if hasattr(response, 'usage') and response.usage:
-        usage = response.usage
-        logger.info(f"📊 Token 使用量: prompt={usage.prompt_tokens}, output={usage.completion_tokens}, total={usage.total_tokens}")
-
+    _log_usage(response, "DeepSeek")
     logger.info("✅ DeepSeek API 呼叫成功")
-    return output
+    return response.choices[0].message.content
+
+
+def call_openai(system_instruction: str, user_prompt: str, model: str = "chatgpt-4o-latest", temperature: float = 0.7) -> str:
+    """呼叫 OpenAI API"""
+    logger.info(f"🔑 呼叫 OpenAI API ({model})...")
+    client = get_openai_client()
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": system_instruction},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=temperature
+    )
+    _log_usage(response, "OpenAI")
+    logger.info("✅ OpenAI API 呼叫成功")
+    return response.choices[0].message.content
 
 
 # ============================================
@@ -125,29 +139,12 @@ def call_deepseek(system_instruction: str, user_prompt: str, temperature: float 
 
 @retry_on_failure(max_retries=2, delay=5)
 def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> str:
-    """
-    數據煉金術師 - 使用 DeepSeek
-    包含自動重試機制
-
-    Args:
-        filtered_news: 篩選後的新聞列表
-        today_date: 今日日期
-
-    Returns:
-        JSON 格式的處理結果
-    """
+    """數據煉金術師 - 使用 DeepSeek，分析原始新聞並產出結構化 JSON"""
     logger.info("⚗️  數據煉金術師處理中...")
 
-    # 準備新聞數據
-    news_data = []
-    for item in filtered_news:
-        news_data.append({
-            'title': item['title'],
-            'link': item['link'],
-            'content': item['content']
-        })
+    news_data = [{'title': item['title'], 'link': item['link'], 'content': item['content']}
+                 for item in filtered_news]
 
-    # 構建 prompt
     user_prompt = f"""新聞標題
 {json.dumps([n['title'] for n in news_data], ensure_ascii=False, indent=2)}
 
@@ -160,81 +157,31 @@ def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> s
 今日日期
 {today_date}"""
 
-    try:
-        output = call_deepseek(
-            system_instruction=DATA_ALCHEMIST_SYSTEM_PROMPT,
-            user_prompt=user_prompt
-        )
-
-        logger.info("✅ 數據煉金術師處理完成")
-        return output
-
-    except Exception as e:
-        logger.error(f"❌ 數據煉金術師處理失敗: {str(e)}")
-        raise
+    output = call_deepseek(DATA_ALCHEMIST_SYSTEM_PROMPT, user_prompt)
+    logger.info("✅ 數據煉金術師處理完成")
+    return output
 
 
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_tech_narrator(alchemist_json: Dict, today_date: str) -> str:
-    """
-    科技導讀人 - 使用 OpenAI
-    包含自動重試機制
-
-    Args:
-        alchemist_json: 數據煉金術師的 JSON 輸出
-        today_date: 今日日期
-
-    Returns:
-        JSON 格式的處理結果
-    """
+    """科技導讀人 - 使用 OpenAI，將結構化新聞轉為 Notion 日報"""
     logger.info("📰 科技導讀人處理中...")
 
-    openai_client, _ = setup_apis()
-
-    # 構建 prompt
     user_prompt = f"""數據煉金術師 OUTPUT: {json.dumps(alchemist_json, ensure_ascii=False)}
 
 今日日期
 {today_date}"""
 
-    try:
-        response = openai_client.chat.completions.create(
-            model="chatgpt-4o-latest",
-            messages=[
-                {"role": "system", "content": TECH_NARRATOR_SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7
-        )
-
-        output = response.choices[0].message.content
-
-        logger.info("✅ 科技導讀人處理完成")
-        return output
-
-    except Exception as e:
-        logger.error(f"❌ 科技導讀人處理失敗: {str(e)}")
-        raise
+    output = call_openai(TECH_NARRATOR_SYSTEM_PROMPT, user_prompt)
+    logger.info("✅ 科技導讀人處理完成")
+    return output
 
 
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
-    """
-    總編輯 - 使用 OpenAI
-    包含自動重試機制
-
-    Args:
-        narrator_json: 科技導讀人的 JSON 輸出
-        today_date: 今日日期
-
-    Returns:
-        JSON 格式的處理結果
-    """
+    """總編輯 - 使用 OpenAI，產出 LINE 精華版"""
     logger.info("✍️  總編輯處理中...")
 
-    openai_client, _ = setup_apis()
-
-    # 構建 prompt
     notion_text = narrator_json.get('notion_daily_report_text', '')
     user_prompt = f"""【Notion 版 AI 日報】:
 {notion_text}
@@ -242,76 +189,16 @@ def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
 今日日期
 {today_date}"""
 
-    try:
-        response = openai_client.chat.completions.create(
-            model="chatgpt-4o-latest",
-            messages=[
-                {"role": "system", "content": EDITOR_IN_CHIEF_SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7
-        )
-
-        output = response.choices[0].message.content
-
-        logger.info("✅ 總編輯處理完成")
-        return output
-        
-    except Exception as e:
-        logger.error(f"❌ 總編輯處理失敗: {str(e)}")
-        raise
+    output = call_openai(EDITOR_IN_CHIEF_SYSTEM_PROMPT, user_prompt)
+    logger.info("✅ 總編輯處理完成")
+    return output
 
 
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_html_generator(notion_content: str, line_content: str, today_date: str) -> str:
-    """
-    HTML 生成器 - 使用 DeepSeek
-    完全對齊 n8n 架構：給 AI 完整的 HTML 範本，讓 AI 照抄並替換內容
-
-    Args:
-        notion_content: Notion 版本的 Markdown 內容
-        line_content: LINE 版本的 Markdown 內容
-        today_date: 今日日期
-
-    Returns:
-        完整的 HTML 文檔（從 <!DOCTYPE html> 到 </html>）
-    """
+    """HTML 生成器 - 使用 DeepSeek，將 Markdown 內容轉為完整 HTML 頁面"""
     logger.info("🎨 HTML 生成器處理中...")
 
-    # System prompt - 對齊 n8n 的設定
-    system_prompt = """你是專業的版面管理 Agent，專門負責確保網頁格式完全一致。
-
-核心職責:
-1. 嚴格按照提供的標準範本格式
-2. 保持 CSS 樣式完全相同
-3. 確保 HTML 結構完全一致
-4. 不得添加任何額外的說明文字
-5. 輸出純淨的 HTML 代碼
-
-格式要求:
-- 完全複製範本的 CSS 樣式
-- 保持相同的 HTML 結構
-- 只替換內容，不改變格式
-- 特別注意 LINE 精華版區塊的粉紅色漸層
-- 確保響應式設計和動畫效果
-- 絕對不在 </html> 後面添加任何文字
-
-**關鍵轉換規則（非常重要）:**
-1. 看到 Markdown 中的 `💡 **學習價值:**` 或 `💡 學習價值：` 段落時
-2. 必須將整個段落包裝在 <div class="highlight-box"> 裡面
-3. 範例中的每個新聞項目都有 highlight-box，你也要為每個項目都生成
-4. highlight-box 的結構：
-   <div class="highlight-box">
-       <strong>💡 學習價值：</strong><br>
-       學習價值的內容文字...
-   </div>
-
-**重要警告:**
-- 輸出結束於 </html> 標籤
-- 不得添加任何解釋或說明文字
-- 不得輸出 markdown 代碼塊標記"""
-
-    # User prompt - 完全對齊 n8n 的 prompt
     user_prompt = f"""請基於以下標準範本，將 n8n 新聞內容格式化為完全相同的格式。
 
 標準範本 HTML:
@@ -599,25 +486,16 @@ LINE消息版：
 
 請輸出完整的 HTML 代碼"""
 
-    try:
-        output = call_deepseek(
-            system_instruction=system_prompt,
-            user_prompt=user_prompt,
-            temperature=0.3
-        )
+    output = call_deepseek(HTML_GENERATOR_SYSTEM_PROMPT, user_prompt, temperature=0.3)
 
-        # 清理可能的 markdown 代碼塊標記
-        if output.startswith('```html'):
-            output = output[7:]
-        if output.startswith('```'):
-            output = output[3:]
-        if output.endswith('```'):
-            output = output[:-3]
-        output = output.strip()
+    # 清理可能的 markdown 代碼塊標記
+    if output.startswith('```html'):
+        output = output[7:]
+    if output.startswith('```'):
+        output = output[3:]
+    if output.endswith('```'):
+        output = output[:-3]
+    output = output.strip()
 
-        logger.info("✅ HTML 生成器處理完成")
-        return output
-
-    except Exception as e:
-        logger.error(f"❌ HTML 生成器處理失敗: {str(e)}")
-        raise
+    logger.info("✅ HTML 生成器處理完成")
+    return output
