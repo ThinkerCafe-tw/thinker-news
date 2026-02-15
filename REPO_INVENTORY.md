@@ -54,11 +54,11 @@ thinker-news/
 | `unified_webhook_service.py` | 統一 Webhook | ❌ |
 | `webhook_receiver.py` | Webhook 接收器 | ❌ |
 
-### 🗑️ 疑似廢棄 .js 檔（根目錄）
-| 檔案 | 推測用途 | 被引用？ |
-|------|----------|----------|
-| `thinker_secret_entrance.js` | 彩蛋入口 JS | ⚠️ 被 ai_processor.py / html_generator.py 的 HTML 模板引用 |
-| `email_subscription_handler.js` | 訂閱表單前端 | ⚠️ 被 html_generator.py 引用 |
+### ✅ 活躍 .js 檔（根目錄，被 scripts/ HTML 模板引用）
+| 檔案 | 用途 | 被引用？ |
+|------|------|----------|
+| `thinker_secret_entrance.js` | 彩蛋入口 JS | ✅ ai_processor.py:803 + html_generator.py:273 |
+| `email_subscription_handler.js` | 訂閱表單前端 | ✅ html_generator.py:761 + index.html |
 
 ### 🗑️ 廢棄文字 / 日誌檔
 | 檔案 | 類型 |
@@ -81,7 +81,7 @@ thinker-news/
 | 檔案 | 類型 |
 |------|------|
 | `vercel.json` | Vercel 配置（已不用 Vercel） |
-| `execution_log.json` | 執行日誌 |
+| `execution_log.json` | 執行日誌 — ✅ 被 scripts/main.py + execution_logger.py 引用，活躍 |
 
 ### 🗑️ Vercel / n8n 殘留
 | 路徑 | 說明 |
