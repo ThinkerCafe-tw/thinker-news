@@ -93,6 +93,48 @@ def _inject_seo_meta(html: str, date: str) -> str:
     return html
 
 
+def _inject_line_section(html: str, line_content: str) -> str:
+    """
+    在 AI 生成的 HTML 中注入 LINE 精華版區塊。
+    插入位置：</div> 最後一個 container 結尾前，或 </body> 前。
+    如果已經存在 LINE 精華版則跳過。
+    """
+    if 'LINE 精華版' in html:
+        logger.info("📱 LINE 精華版已存在，跳過注入")
+        return html
+
+    import html as html_module
+    escaped_content = html_module.escape(line_content)
+    # 將換行轉為 <br> 以保持格式
+    formatted_content = escaped_content.replace('\n', '<br>\n')
+
+    line_block = f"""
+        <div class="content-section" style="background: linear-gradient(135deg, #00B900 0%, #00C300 100%); color: white; border-radius: 16px; padding: 30px; margin-top: 30px;">
+            <h2 style="color: white; border-bottom: 3px solid rgba(255,255,255,0.5); padding-bottom: 10px; margin-bottom: 20px;">📱 LINE 精華版</h2>
+            <div class="line-content" style="font-size: 0.95em; line-height: 1.8; white-space: pre-wrap;">
+{line_content}
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為 LINE 推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+"""
+
+    # 嘗試在 footer-nav 前注入
+    if 'footer-nav' in html:
+        html = html.replace('<div class="footer-nav">', line_block + '        <div class="footer-nav">', 1)
+        logger.info("📱 已注入 LINE 精華版區塊（footer-nav 前）")
+    elif '</body>' in html:
+        html = html.replace('</body>', line_block + '</body>', 1)
+        logger.info("📱 已注入 LINE 精華版區塊（</body> 前）")
+    else:
+        logger.warning("⚠️  找不到注入點，LINE 精華版未注入")
+
+    return html
+
+
 def generate_daily_html(final_output: dict, html_full_content: str = None) -> str:
     """
     生成今日新聞 HTML 頁面
@@ -109,9 +151,12 @@ def generate_daily_html(final_output: dict, html_full_content: str = None) -> st
 
     date = final_output['final_date']
 
-    # 如果有 AI 生成的完整 HTML，注入 SEO meta tags 後使用
+    # 如果有 AI 生成的完整 HTML，注入 SEO meta tags + LINE 精華版後使用
     if html_full_content:
         html_content = _inject_seo_meta(html_full_content, date)
+        line_content = final_output.get('line_content', '')
+        if line_content:
+            html_content = _inject_line_section(html_content, line_content)
     else:
         # 降級方案：使用模板方式
         logger.warning("⚠️  未提供 HTML body 內容，使用降級方案")
