@@ -64,3 +64,5 @@ test_output/
 
 # 排除臨時測試文件，但保留日期格式的新聞文件
 # 保留: 2025-*.html, latest.json, index.html
+data/
+experiments/

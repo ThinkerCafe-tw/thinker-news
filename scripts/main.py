@@ -104,6 +104,15 @@ def step_filter_news(all_feeds, today_date):
         raise RuntimeError("沒有新聞通過篩選，流程終止")
     local = sum(1 for n in filtered if n.get('is_taiwan_news', False))
     logger.info(f"🔍 篩選後 {len(filtered)} 則（台灣 {local} / 國際 {len(filtered) - local}）")
+
+    # 保存篩選後的新聞供實驗用
+    data_dir = Path("data")
+    data_dir.mkdir(exist_ok=True)
+    filtered_path = data_dir / f"filtered_{today_date}.json"
+    with open(filtered_path, 'w', encoding='utf-8') as f:
+        json.dump(filtered, f, ensure_ascii=False, indent=2)
+    logger.info(f"💾 篩選結果已保存: {filtered_path}")
+
     return filtered
 
 
