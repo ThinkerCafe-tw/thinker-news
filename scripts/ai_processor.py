@@ -92,7 +92,7 @@ def _log_usage(response, provider: str):
         logger.info(f"📊 {provider} Token: prompt={u.prompt_tokens}, output={u.completion_tokens}, total={u.total_tokens}")
 
 
-def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7) -> str:
+def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7, max_tokens: int = 8192) -> str:
     """呼叫 DeepSeek API"""
     logger.info("🔑 呼叫 DeepSeek API...")
     client = get_deepseek_client()
@@ -102,7 +102,8 @@ def call_deepseek(system_instruction: str, user_prompt: str, temperature: float 
             {"role": "system", "content": system_instruction},
             {"role": "user", "content": user_prompt}
         ],
-        temperature=temperature
+        temperature=temperature,
+        max_tokens=max_tokens
     )
     _log_usage(response, "DeepSeek")
     logger.info("✅ DeepSeek API 呼叫成功")

@@ -96,17 +96,11 @@ def _inject_seo_meta(html: str, date: str) -> str:
 def _inject_line_section(html: str, line_content: str) -> str:
     """
     在 AI 生成的 HTML 中注入 LINE 精華版區塊。
-    插入位置：</div> 最後一個 container 結尾前，或 </body> 前。
-    如果已經存在 LINE 精華版則跳過。
+    處理 DeepSeek 輸出可能被截斷（無 </body>）的情況。
     """
     if 'LINE 精華版' in html:
         logger.info("📱 LINE 精華版已存在，跳過注入")
         return html
-
-    import html as html_module
-    escaped_content = html_module.escape(line_content)
-    # 將換行轉為 <br> 以保持格式
-    formatted_content = escaped_content.replace('\n', '<br>\n')
 
     line_block = f"""
         <div class="content-section" style="background: linear-gradient(135deg, #00B900 0%, #00C300 100%); color: white; border-radius: 16px; padding: 30px; margin-top: 30px;">
@@ -122,15 +116,27 @@ def _inject_line_section(html: str, line_content: str) -> str:
         </div>
 """
 
-    # 嘗試在 footer-nav 前注入
-    if 'footer-nav' in html:
-        html = html.replace('<div class="footer-nav">', line_block + '        <div class="footer-nav">', 1)
+    footer_close = """
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+</body>
+</html>"""
+
+    # 嘗試在 <div class="footer-nav"> (HTML body) 前注入
+    if '<div class="footer-nav">' in html:
+        html = html.replace('<div class="footer-nav">', line_block + '\n        <div class="footer-nav">', 1)
         logger.info("📱 已注入 LINE 精華版區塊（footer-nav 前）")
     elif '</body>' in html:
-        html = html.replace('</body>', line_block + '</body>', 1)
+        html = html.replace('</body>', line_block + '\n</body>', 1)
         logger.info("📱 已注入 LINE 精華版區塊（</body> 前）")
     else:
-        logger.warning("⚠️  找不到注入點，LINE 精華版未注入")
+        # HTML 被截斷（DeepSeek token limit），直接追加到末尾
+        logger.warning("⚠️  HTML 似乎被截斷（無 </body>），追加 LINE 精華版 + 收尾標籤")
+        html = html.rstrip() + '\n' + line_block + footer_close
+        logger.info("📱 已追加 LINE 精華版區塊 + 收尾 HTML")
 
     return html
 
