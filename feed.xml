@@ -5,25 +5,59 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Mon, 16 Feb 2026 01:40:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Feb 2026 11:15:02 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-02-16 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-16.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-16.html</guid>
+      <pubDate>Mon, 16 Feb 2026 08:30:00 +0800</pubDate>
+      <description>🚨 AI 不是只用來節省成本了！
+
+Airbnb 宣布：三分之一客服已交由 AI 處理，未來還要幫你規劃整趟旅程！
+執行長放話：「AI 客服品質將超越真人」💬
+
+這不只是客服自動化，而是將 AI 深度整合進整體用戶體驗，從工具變成企業主力引擎。
+
+同時，Anthropic CEO 提醒大家：
+❗「AI 投資如果時機抓錯，一年就可能破產！」
+
+AI 的技術、商業與財務，三者缺一不可。
+
+#AI應用 #AirbnbAI #AI商業策略 #生成式AI #客服革命</description>
+      <category>AI 科技新聞</category>
+    </item>
+    <item>
+      <title>2026-02-15 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-15.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-15.html</guid>
+      <pubDate>Sun, 15 Feb 2026 08:30:00 +0800</pubDate>
+      <description>Airbnb全面AI化，微軟預言白領工作自動化 - 今日AI科技重點新聞精選</description>
+      <category>AI 科技新聞</category>
+    </item>
+    <item>
+      <title>2026-02-14 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-14.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-14.html</guid>
+      <pubDate>Sat, 14 Feb 2026 08:30:00 +0800</pubDate>
+      <description>n8n 新聞內容 - 今日AI科技重點新聞精選</description>
+      <category>AI 科技新聞</category>
+    </item>
+    <item>
+      <title>2026-02-13 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-13.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-13.html</guid>
+      <pubDate>Fri, 13 Feb 2026 08:30:00 +0800</pubDate>
+      <description>Spotify工程師靠AI寫程式，OpenAI推出閃電級編碼模型 - 今日AI科技重點新聞精選</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-11 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-11.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-11.html</guid>
       <pubDate>Wed, 11 Feb 2026 08:30:00 +0800</pubDate>
-      <description>🚀 AI 正在重塑社交媒體與商業模式!
-
-今天有兩大亮點值得關注:
-
-✅ Facebook 推出動畫頭像、文字背景一鍵生成，讓你輕鬆打造吸睛內容
-✅ OpenAI 開始在 ChatGPT 測試廣告，邁向可持續商業化
-
-為什麼重要?
-Facebook 展示了生成式 AI 如何「平民化」，讓人人都是創作者；而 OpenAI 的廣告實驗則揭示了 AI 工具變現的下一步，對產品經營與用戶體驗都是關鍵指標。
-
-#生成式AI #ChatGPT #社群創作 #AI商業模式</description>
+      <description>Nvidia投資OpenAI巨額資金，AI安全挑戰並存 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -144,38 +178,6 @@ Facebook 展示了生成式 AI 如何「平民化」，讓人人都是創作者�
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-26.html</guid>
       <pubDate>Mon, 26 Jan 2026 08:30:00 +0800</pubDate>
       <description>Apple與Google聯手打造AI Siri，AWS推出巨型主機，台灣AI技術征服日本市場 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-25 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-25.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-25.html</guid>
-      <pubDate>Sun, 25 Jan 2026 08:30:00 +0800</pubDate>
-      <description>AI玩寶可夢？AI主管上任！Google前工程師打造AI學習App - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-24 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-24.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-24.html</guid>
-      <pubDate>Sat, 24 Jan 2026 08:30:00 +0800</pubDate>
-      <description>OpenAI揭密Codex代理循環，AI晶片戰升溫 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-23 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-23.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-23.html</guid>
-      <pubDate>Fri, 23 Jan 2026 08:30:00 +0800</pubDate>
-      <description>OpenAI資料庫擴展秘訣，Google AI個人化升級，AI協作新戰場 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-22 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-22.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-22.html</guid>
-      <pubDate>Thu, 22 Jan 2026 08:30:00 +0800</pubDate>
-      <description>AI人型機器人、YouTube AI分身與資安挑戰 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
