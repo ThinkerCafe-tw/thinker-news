@@ -5,27 +5,36 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Mon, 16 Feb 2026 11:25:31 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Feb 2026 06:11:38 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-02-17 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-17.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-17.html</guid>
+      <pubDate>Tue, 17 Feb 2026 08:30:00 +0800</pubDate>
+      <description>🚀 AI 本土勢力崛起！
+
+今天兩大亮點值得關注：
+
+🇨🇳 字節跳動發表「豆包 2.0」，挑戰 GPT-5.2！
+➡️ 多模態強化 + 推理升級，意圖與 OpenAI、Google 正面交鋒。
+
+🇹🇼 台灣「落雨小幫手」App 升級，支援台語語音查天氣！
+➡️ 生成式 AI 融入民生，長輩也能輕鬆用。
+
+🎯 為什麼重要？
+本土 AI 不再只是追趕，而是開始主導日常應用場景，從語言文化、法規到使用者習慣，打造差異化優勢。
+
+#AI本土化 #語音識別 #生成式AI #多模態理解</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-16 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-16.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-16.html</guid>
       <pubDate>Mon, 16 Feb 2026 08:30:00 +0800</pubDate>
-      <description>❓ 今天AI圈最熱的話題?
-
-答案:「AI 不再只是工具，而是你的數位夥伴」
-
-🏠 Airbnb 測試對話式找房，讓 AI 成為旅行規劃師——不只是找住宿，還能規劃整趟行程。CEO 親自喊話：「AI 將超越真人客服」
-
-🧠 蘋果推「Sales Coach」AI 教練，訓練門市員工即時應對顧客問題，生成式 AI 正進軍內部訓練場景
-
-🌍 印度規劃巨型數據城，力拼成為全球 AI 算力重鎮，從「AI 消費國」邁向「AI 生產基地」
-
-這些趨勢共同指向：AI 正從工具升級為全方位的「企業神隊友」，從客服、訓練到基礎建設一手包辦。
-
-#AI應用 #對話式AI #企業數位轉型 #生成式AI #印度AI戰略</description>
+      <description>Airbnb對話式找房、印度巨型數據城、微軟ClickFix攻擊 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -170,14 +179,6 @@
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-27.html</guid>
       <pubDate>Tue, 27 Jan 2026 08:30:00 +0800</pubDate>
       <description>Claude大升級，Android Studio AI功能強化，Mac mini因開源AI助理熱銷 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-26 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-26.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-26.html</guid>
-      <pubDate>Mon, 26 Jan 2026 08:30:00 +0800</pubDate>
-      <description>Apple與Google聯手打造AI Siri，AWS推出巨型主機，台灣AI技術征服日本市場 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
