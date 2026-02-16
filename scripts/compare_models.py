@@ -270,5 +270,6 @@ def print_summary(results: list):
 if __name__ == "__main__":
     import sys
     date = sys.argv[1] if len(sys.argv) > 1 else datetime.now().strftime("%Y-%m-%d")
-    results = run_experiment(date, sample_size=3)
+    sample_size = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+    results = run_experiment(date, sample_size=sample_size)
     print_summary(results)

@@ -1,0 +1,97 @@
+name: 模型品質比較實驗
+
+on:
+  workflow_dispatch:
+    inputs:
+      sample_size:
+        description: '抽樣新聞數量'
+        required: false
+        default: '3'
+      date:
+        description: '測試日期 (YYYY-MM-DD，留空用今天)'
+        required: false
+        default: ''
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install openai anthropic google-generativeai feedparser requests
+
+      - name: Fetch & Filter News
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          DATE="${{ github.event.inputs.date }}"
+          if [ -z "$DATE" ]; then
+            DATE=$(date +%Y-%m-%d)
+          fi
+          echo "DATE=$DATE" >> $GITHUB_ENV
+          
+          python3 -c "
+          from scripts.rss_fetcher import fetch_all_feeds
+          from scripts.news_filter import filter_and_score_news
+          import json
+          from pathlib import Path
+
+          date = '$DATE'
+          print(f'📡 抓取 RSS feeds...')
+          feeds = fetch_all_feeds()
+          print(f'   共 {len(feeds)} 則')
+
+          print(f'🔍 篩選中...')
+          filtered = filter_and_score_news(feeds, date)
+          print(f'   篩選後 {len(filtered)} 則')
+
+          data_dir = Path('data')
+          data_dir.mkdir(exist_ok=True)
+          path = data_dir / f'filtered_{date}.json'
+          with open(path, 'w', encoding='utf-8') as f:
+              json.dump(filtered, f, ensure_ascii=False, indent=2)
+          print(f'💾 已保存: {path}')
+          "
+
+      - name: Run Model Comparison
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 scripts/compare_models.py ${{ env.DATE }} ${{ github.event.inputs.sample_size || '3' }}
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment-results-${{ env.DATE }}
+          path: |
+            experiments/
+            data/
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          echo "## 🧪 實驗結果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "experiments/compare_${{ env.DATE }}.json" ]; then
+            echo "✅ 實驗完成，結果已上傳至 Artifacts" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            head -100 "experiments/compare_${{ env.DATE }}.json" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ 實驗失敗，請查看 logs" >> $GITHUB_STEP_SUMMARY
+          fi
