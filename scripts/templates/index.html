@@ -17,6 +17,8 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Thinker News — AI 科技日報精選">
     <meta name="twitter:description" content="每日精選 AI 科技新聞，為資料科學初學者打造。">
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Thinker News RSS" href="https://thinkercafe-tw.github.io/thinker-news/feed.xml">
     <!-- JSON-LD 結構化資料 -->
     <script type="application/ld+json">
     {
@@ -321,7 +323,7 @@
                     <div class="stat-label">智能篩選</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">135</div>
+                    <div class="stat-number">{{ total_reports }}</div>
                     <div class="stat-label">期日報</div>
                 </div>
             </div>
@@ -331,101 +333,36 @@
         <div class="news-section">
             <h2 class="section-title">📅 最新日報</h2>
             <div class="today-card">
-                <div class="news-date">📅 2026-02-16（最新）</div>
+                <div class="news-date">📅 {{ today_date }}（最新）</div>
                 <div class="news-title">🚀 今日 AI 科技重點新聞精選</div>
                 <div class="news-description">
                     涵蓋最新的工具應用、產業趨勢與深度分析，為你精選今日最值得關注的科技動態。
                 </div>
-                <a href="./2026-02-16.html" class="news-link">閱讀完整報告 📖</a>
+                <a href="./{{ today_date }}.html" class="news-link">閱讀完整報告 📖</a>
             </div>
-
         </div>
 
         <!-- 近期日報列表 -->
-        
+        {% if recent_reports %}
         <div class="news-section">
             <h2 class="section-title">📚 近期日報</h2>
-            
+            {% for report in recent_reports %}
             <div class="news-item">
                 <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-10</div>
+                    <div class="news-date">📅 {{ report.date }}</div>
                     <div class="news-title">AI 科技日報精選</div>
                 </div>
-                <a href="./archive/2026-02-10.html" class="news-link">閱讀 →</a>
+                <a href="./archive/{{ report.filename }}" class="news-link">閱讀 →</a>
             </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-09</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-09.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-08</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-08.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-07</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-07.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-06</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-06.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-05</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-05.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-04</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-04.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-03</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-03.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-item-info">
-                    <div class="news-date">📅 2026-02-02</div>
-                    <div class="news-title">AI 科技日報精選</div>
-                </div>
-                <a href="./archive/2026-02-02.html" class="news-link">閱讀 →</a>
-            </div>
-            
-            
+            {% endfor %}
+            {% if has_more_reports %}
             <div class="archive-note">
-                📁 共收錄 135 期日報 · 更早的報告請查看
+                📁 共收錄 {{ total_reports }} 期日報 · 更早的報告請查看
                 <a href="https://github.com/ThinkerCafe-tw/thinker-news/tree/main/archive" style="color: #667eea; font-weight: 600;">完整歸檔</a>
             </div>
-            
+            {% endif %}
         </div>
-        
+        {% endif %}
 
         <!-- 關於我們 -->
         <div class="news-section">
@@ -454,6 +391,13 @@
                     <div class="feature-icon">⏰</div>
                     <div class="feature-title">準時更新</div>
                     <div class="feature-desc">每日 08:30 發布，養成學習習慣</div>
+                </div>
+                <div class="feature-card">
+                    <a href="feed.xml" style="text-decoration:none;color:inherit;" title="訂閱 RSS Feed">
+                        <div class="feature-icon">📡</div>
+                        <div class="feature-title">RSS 訂閱</div>
+                        <div class="feature-desc">用你喜歡的閱讀器追蹤每日更新</div>
+                    </a>
                 </div>
             </div>
         </div>

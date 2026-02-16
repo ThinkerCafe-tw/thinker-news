@@ -26,6 +26,9 @@ wheels/
 # 日誌文件
 *.log
 
+# 執行紀錄（runtime 產生）
+execution_log.json
+
 # 環境變數
 .env
 .env.local
@@ -39,6 +42,22 @@ wheels/
 
 # macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Node（如有前端工具）
+node_modules/
+
+# OpenClaw workspace（agent 管理檔，不屬於專案）
+AGENTS.md
+SOUL.md
+USER.md
+IDENTITY.md
+TOOLS.md
+HEARTBEAT.md
+BOOTSTRAP.md
+MEMORY.md
+memory/
 
 # 測試生成的臨時文件（但保留日期命名的 HTML/JSON）
 test_output/

@@ -3,13 +3,13 @@
 """
 
 import json
-import logging
 import re
 from datetime import datetime, timedelta
 from typing import Dict
 from json_repair import repair_json
 
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+logger = get_logger(__name__)
 
 
 def get_taiwan_date() -> str:

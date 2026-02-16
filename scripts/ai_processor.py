@@ -9,14 +9,21 @@ AI 處理鏈
 """
 
 import os
-import logging
 import json
 import time
 from typing import List, Dict, Callable, Any
 from functools import wraps
 from openai import OpenAI
 
-logger = logging.getLogger(__name__)
+from log_config import get_logger
+from prompts import (
+    DATA_ALCHEMIST_SYSTEM_PROMPT,
+    TECH_NARRATOR_SYSTEM_PROMPT,
+    EDITOR_IN_CHIEF_SYSTEM_PROMPT,
+    HTML_GENERATOR_SYSTEM_PROMPT,
+)
+
+logger = get_logger(__name__)
 
 # ============================================
 # 重試裝飾器
@@ -49,45 +56,47 @@ def retry_on_failure(max_retries: int = 2, delay: int = 3):
     return decorator
 
 # ============================================
-# API 配置
+# API 配置（單例模式，避免每次呼叫重建 client）
 # ============================================
 
-def setup_apis():
-    """設置 API keys"""
-    openai_api_key = os.getenv('OPENAI_API_KEY')
-    deepseek_api_key = os.getenv('DEEPSEEK_API_KEY')
+_openai_client = None
+_deepseek_client = None
 
-    if not openai_api_key:
-        raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
-    if not deepseek_api_key:
-        raise ValueError("❌ DEEPSEEK_API_KEY 環境變數未設置")
 
-    # 配置 OpenAI
-    openai_client = OpenAI(api_key=openai_api_key)
+def get_openai_client() -> OpenAI:
+    """取得 OpenAI client（單例）"""
+    global _openai_client
+    if _openai_client is None:
+        api_key = os.getenv('OPENAI_API_KEY')
+        if not api_key:
+            raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
+        _openai_client = OpenAI(api_key=api_key)
+    return _openai_client
 
-    # 配置 DeepSeek (OpenAI 相容 API)
-    deepseek_client = OpenAI(api_key=deepseek_api_key, base_url="https://api.deepseek.com")
 
-    return openai_client, deepseek_client
+def get_deepseek_client() -> OpenAI:
+    """取得 DeepSeek client（單例）"""
+    global _deepseek_client
+    if _deepseek_client is None:
+        api_key = os.getenv('DEEPSEEK_API_KEY')
+        if not api_key:
+            raise ValueError("❌ DEEPSEEK_API_KEY 環境變數未設置")
+        _deepseek_client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+    return _deepseek_client
+
+
+def _log_usage(response, provider: str):
+    """記錄 API token 使用量"""
+    if hasattr(response, 'usage') and response.usage:
+        u = response.usage
+        logger.info(f"📊 {provider} Token: prompt={u.prompt_tokens}, output={u.completion_tokens}, total={u.total_tokens}")
 
 
 def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7) -> str:
-    """
-    呼叫 DeepSeek API（OpenAI 相容介面）
-
-    Args:
-        system_instruction: 系統提示詞
-        user_prompt: 使用者提示詞
-        temperature: 生成溫度參數
-
-    Returns:
-        str: API 回應文字
-    """
-    _, deepseek_client = setup_apis()
-
+    """呼叫 DeepSeek API"""
     logger.info("🔑 呼叫 DeepSeek API...")
-
-    response = deepseek_client.chat.completions.create(
+    client = get_deepseek_client()
+    response = client.chat.completions.create(
         model="deepseek-chat",
         messages=[
             {"role": "system", "content": system_instruction},
@@ -95,252 +104,33 @@ def call_deepseek(system_instruction: str, user_prompt: str, temperature: float 
         ],
         temperature=temperature
     )
-
-    output = response.choices[0].message.content
-
-    if hasattr(response, 'usage') and response.usage:
-        usage = response.usage
-        logger.info(f"📊 Token 使用量: prompt={usage.prompt_tokens}, output={usage.completion_tokens}, total={usage.total_tokens}")
-
+    _log_usage(response, "DeepSeek")
     logger.info("✅ DeepSeek API 呼叫成功")
-    return output
+    return response.choices[0].message.content
+
+
+def call_openai(system_instruction: str, user_prompt: str, model: str = "chatgpt-4o-latest", temperature: float = 0.7) -> str:
+    """呼叫 OpenAI API"""
+    logger.info(f"🔑 呼叫 OpenAI API ({model})...")
+    client = get_openai_client()
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": system_instruction},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=temperature
+    )
+    _log_usage(response, "OpenAI")
+    logger.info("✅ OpenAI API 呼叫成功")
+    return response.choices[0].message.content
 
 
 # ============================================
-# 系統提示詞（與 n8n 完全一致）
+# 系統提示詞已移至 prompts.py
 # ============================================
-
-DATA_ALCHEMIST_SYSTEM_PROMPT = """# 數據煉金術師 (Data Alchemist)
-
----
-
-## ROLE (人格設定)
-你是一位資深的「數據煉金術師」兼「新聞內容策展師」。你同時具備:
-- 數據科學家的嚴謹分析能力  
-- 頂尖內容策略師對市場脈動的敏銳嗅覺
-- **新聞編輯的內容整理能力** (新增)
-
-你的任務是將每日雜亂的 AI 新聞原料,提煉成**既有深度又易讀**的完整新聞內容。
-
-## TARGET AUDIENCE PROFILE (目標讀者輪廓)
-- **年齡:** 30 - 60 歲
-- **背景:** 曾有 R 或 Python 資料分析經驗
-- **興趣:** 對資料科學充滿好奇,渴望踏入 AI 領域
-- **程度:** 入門級、小白 (Beginner)
-- **閱讀需求:** 希望直接在網站獲得完整資訊,而非只看標題
-
-## CORE MISSION (核心任務)
-請嚴格遵循以下步驟,處理我提供的「原始新聞列表」:
-
-1. **標題轉譯 (Headline Translation):** 將每一則英文標題,轉譯為繁體中文。風格必須「高度吸引人、符合台灣網路社群語感、能激發點擊慾望」。
-
-2. **📰 完整內容摘要 (Detailed Content Summary)**
-   為每篇文章生成 **3-4 個段落的完整新聞摘要**,包含:
-   - **發生了什麼** (What happened)
-   - **具體細節** (Key details) 
-   - **影響範圍** (Impact scope)
-   - **為什麼重要** (Significance)
-
-2. **🎯 實用要點 (Practical Takeaways)** 
-   為每篇新聞提煉出 2-3 個學員可直接應用的要點
-
-3. **智慧分類 (Smart Categorization):** 歸入指定分類
-
-4. **價值排序 (Value-based Ranking):** 根據對目標群體的價值排序
-
-5. **JSON 輸出 (JSON Output):** 封裝成JSON格式
-
-## AVAILABLE CATEGORIES (可用分類)
-- "ai_applications_and_tools"
-- "industry_trends_and_news"  
-- "security_alerts"
-- "perspectives_and_analysis"
-- "other"
-
-## OUTPUT FORMAT (JSON 結構)
-```json
-{
-  "ai_applications_and_tools": [
-    {
-      "rank": 1,
-      "title": "[轉譯後的中文標題]",
-      "detailed_content": "[3-4段完整新聞內容摘要,讓讀者無需外跳就能完全理解新聞]",
-      "practical_takeaways": [
-        "學員可直接應用的要點1",
-        "學員可直接應用的要點2"  
-      ],
-      "link": "[原文連結]"
-    }
-  ],
-  "industry_trends_and_news": [],
-  "security_alerts": [],
-  "perspectives_and_analysis": [],
-  "other": []
-}
-```
-
-## 重要提醒
-- **絕對不要**輸出 JSON 以外的任何文字
-- `detailed_content` 必須足夠詳細,讓讀者看完就知道具體發生了什麼
-- 所有內容都要服務於「讓初學者能直接學習而不困惑」的目標"""
-
-TECH_NARRATOR_SYSTEM_PROMPT = """# 科技導讀人 (Tech Narrator)
-
----
-
-## ROLE (人格設定)
-你是一位資深的「AI 科技新聞編輯」。你擁有:
-- 技術佈道師 (Tech Evangelist) 的熱情與洞察
-- 新聞編輯的內容組織能力 
-- 教育工作者的解釋技巧 
-
-你的核心任務是將完整的新聞內容,以**清晰易懂的方式**呈現給資料科學初學者。
-
-## TARGET AUDIENCE PROFILE (目標讀者輪廓)
-- **年齡:** 30 - 60 歲
-- **背景:** 曾有 R 或 Python 資料分析經驗
-- **興趣:** 對資料科學充滿好奇,渴望踏入 AI 領域
-- **程度:** 入門級、小白 (Beginner)
-- **閱讀期待:** 希望直接獲得完整新聞內容,而不只是推薦理由
-
-## CORE MISSION (核心任務)
-從「數據煉金術師」提供的 JSON 數據中,精選 8-10 則最值得閱讀的內容,並撰寫成一份**內容完整**的 Notion 日報。
-
-## CONTENT STRUCTURE REVOLUTION (內容結構革命)
-
-### ❌ 舊結構 (要避免的)
-```
-標題 → 推薦理由 → 短評 → 外連
-```
-
-### ✅ 新結構 (要採用的)  
-```
-標題 → 完整新聞內容 → 學習價值分析 → 外連(可選)
-```
-
-## WRITING GUIDELINES (寫作指南)
-
-### 1. 內容優先原則
-- **70% 篇幅**: 基於 `detailed_content` 撰寫完整新聞內容
-- **20% 篇幅**: 學習價值分析 (為什麼重要)
-- **10% 篇幅**: 實用建議
-
-### 2. 新聞內容寫作要求
-- 必須讓讀者看完就知道**具體發生了什麼**
-- 包含關鍵細節:時間、地點、人物、事件、原因、影響
-- 用初學者能理解的語言解釋技術概念
-- **絕對不要**只寫推薦理由而忽略實際內容
-
-### 3. 學習價值分析
-- 簡潔說明這則新聞對他們的技能樹或職涯規劃的意義
-- 避免過度行銷話術
-- 重點在實用價值而非推銷
-
-## OUTPUT FORMAT (輸出格式) - 【結構優化】
-```json
-{
-  "notion_daily_report_text": "## 🤖 AI 科技日報精選\\n**日期:** [YYYY-MM-DD]\\n\\n### ✨ 今日必讀 TOP 3\\n\\n**1. [標題]**\\n🔧 分類:[中文分類]\\n\\n[完整新聞內容 - 3-4個段落,包含所有關鍵資訊]\\n\\n💡 **學習價值:** [為什麼對初學者重要,如何應用]\\n\\n🔗 [閱讀原文]([連結])\\n\\n**2. [下一則新聞...]**\\n\\n### 🛠 AI工具與應用焦點\\n[其他分類的新聞,同樣結構]\\n\\n### 📊 產業趨勢與新聞\\n[同樣結構]\\n\\n### 🔐 資安趨勢快訊  \\n[同樣結構]\\n\\n### 🌍 產業動態與AI職涯\\n[同樣結構]\\n\\n### 💡 深度觀點與建議\\n[同樣結構]\\n\\n---\\n\\n📬 **日報後記**\\n[整體趨勢分析和學習建議]"
-}
-```
-
-## 重要提醒 
-- **內容為王**:每則新聞必須包含完整的新聞內容,而不只是推薦理由
-- **讀者體驗**:讀完應該知道具體發生了什麼,而不只是為什麼要關注
-- **學習導向**:所有內容都要服務於初學者的學習需求
-- **絕對不要**輸出任何 JSON 格式以外的文字"""
-
-EDITOR_IN_CHIEF_SYSTEM_PROMPT = """# 總編輯 (Editor-in-Chief)
-
-
----
-
-## ROLE (人格設定)
-你是一位頂尖的「社群內容總編輯」兼「智能品管師」。你的超能力包括:
-- 將深度長文蒸餾成瘋傳社群快訊的能力
-- **自動檢測並修正內容錯誤的智能品管能力**
-- **清理不適合公開發布內容的專業判斷**
-
-## TARGET AUDIENCE PROFILE (目標讀者輪廓)
-LINE群組中對 AI 與資料科學感興趣的初學者,需要快速可讀的懶人包。
-
-## CONTEXT (情境)
-你將收到一份詳細的【Notion 版 AI 日報】,需要提煉成適合LINE傳播的快訊。
-
-## CORE MISSION (核心任務) 
-1. **內容提煉**:將長文報告提煉成LINE快訊
-2. **🔧 智能品管** **(新增核心功能)**:自動檢測並修正以下問題
-
-## INTELLIGENT QUALITY CONTROL (智能品管規則) 
-
-### 🗓️ 日期智能修正
-- **檢測**:如果內容中出現錯誤日期(如 2025-09-24)
-- **修正**:自動校正為當前正確日期(如 2025-09-25)
-- **適用範圍**:標題、內文、任何日期標示
-
-### 🧹 生成痕跡清理
-自動移除以下不適合公開的生成資訊:
-- "由 n8n 高品質工作流程自動生成"
-- "更新時間: 2025-XX-XX XX:XX"  
-- "AI 工作流程處理"
-- 任何包含 "n8n"、"自動生成"、"工作流程" 的技術說明
-
-### 🔗 連結策略
-- **不提供原文連結**:LINE版本專注於內容本身
-- **導引策略**:讀者如需詳細資訊會自然前往完整日報網站
-
-### 🏷️ Hashtags 格式優化
-- 確保 hashtags 使用正確的 `#` 符號
-- 排版美觀,適當間距
-- 內容相關且有意義
-
-## WRITING GUIDELINES (寫作指南)
-- **提煉,而非重寫**:基於 Notion 版內容進行精煉
-- **抓取主題**:找出最核心的 1-2 個趨勢作為主題
-- **聚焦「So What」**:一針見血的價值分析
-
-## OUTPUT FORMAT (輸出格式) - 【創意自由版】
-你不必拘泥於固定格式,請根據當日新聞特色,選擇最吸引人的呈現方式:
-
-**可以是重點突出型:**
-```json
-{
-  "line_message_text": "🚨 AI重大突破!\\n\\n今天發生兩件大事:\\n✅ [第一件大事]\\n✅ [第二件大事]\\n\\n為什麼重要?\\n[簡潔有力的分析]\\n\\n#[標籤] #[標籤]"
-}
-```
-
-**可以是故事敘述型:**
-```json
-{
-  "line_message_text": "【今日AI圈大事件】\\n\\n想像一下:\\n[情境描述]\\n\\n所以今天同時出現了:\\n🔓 [現象一]\\n🔒 [現象二]\\n\\n#[標籤] #[標籤]"
-}
-```
-
-**或是問答引導型:**
-```json
-{
-  "line_message_text": "❓ 今天AI圈最熱的話題?\\n\\n答案:「[核心主題]」\\n\\n🎯 [重點一]\\n🛡️ [重點二]\\n\\n這組合意味著什麼?\\n[深層意義]\\n\\n#[標籤] #[標籤]"
-}
-```
-
-**核心原則:**
-- 格式生動有趣,避免死板
-- 適合手機螢幕閱讀
-- 引發分享慾望
-
-## QUALITY CONTROL CHECKLIST (品管檢查清單)
-在輸出前,請確認已完成:
-- ✅ 日期已校正為正確日期
-- ✅ 所有生成痕跡已清除  
-- ✅ 無效連結已移除
-- ✅ Hashtags 格式正確美觀
-- ✅ 內容適合公開分享
-- ✅ 符合 JSON 格式要求
-
-## 重要提醒
-- **品質優先**:寧可多花時間檢查,也不要發出有問題的內容
-- **用戶體驗**:LINE讀者看到的應該是專業、乾淨、有價值的內容
-- **智能化**:讓手動修正成為過去式,一次生成就完美
-- **絕對不要**輸出任何 JSON 格式以外的文字"""
+# DATA_ALCHEMIST_SYSTEM_PROMPT, TECH_NARRATOR_SYSTEM_PROMPT,
+# EDITOR_IN_CHIEF_SYSTEM_PROMPT 透過檔案頂部 import 引入。
 
 
 # ============================================
@@ -349,29 +139,12 @@ LINE群組中對 AI 與資料科學感興趣的初學者,需要快速可讀的�
 
 @retry_on_failure(max_retries=2, delay=5)
 def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> str:
-    """
-    數據煉金術師 - 使用 DeepSeek
-    包含自動重試機制
-
-    Args:
-        filtered_news: 篩選後的新聞列表
-        today_date: 今日日期
-
-    Returns:
-        JSON 格式的處理結果
-    """
+    """數據煉金術師 - 使用 DeepSeek，分析原始新聞並產出結構化 JSON"""
     logger.info("⚗️  數據煉金術師處理中...")
 
-    # 準備新聞數據
-    news_data = []
-    for item in filtered_news:
-        news_data.append({
-            'title': item['title'],
-            'link': item['link'],
-            'content': item['content']
-        })
+    news_data = [{'title': item['title'], 'link': item['link'], 'content': item['content']}
+                 for item in filtered_news]
 
-    # 構建 prompt
     user_prompt = f"""新聞標題
 {json.dumps([n['title'] for n in news_data], ensure_ascii=False, indent=2)}
 
@@ -384,81 +157,31 @@ def process_with_data_alchemist(filtered_news: List[Dict], today_date: str) -> s
 今日日期
 {today_date}"""
 
-    try:
-        output = call_deepseek(
-            system_instruction=DATA_ALCHEMIST_SYSTEM_PROMPT,
-            user_prompt=user_prompt
-        )
-
-        logger.info("✅ 數據煉金術師處理完成")
-        return output
-
-    except Exception as e:
-        logger.error(f"❌ 數據煉金術師處理失敗: {str(e)}")
-        raise
+    output = call_deepseek(DATA_ALCHEMIST_SYSTEM_PROMPT, user_prompt)
+    logger.info("✅ 數據煉金術師處理完成")
+    return output
 
 
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_tech_narrator(alchemist_json: Dict, today_date: str) -> str:
-    """
-    科技導讀人 - 使用 OpenAI
-    包含自動重試機制
-
-    Args:
-        alchemist_json: 數據煉金術師的 JSON 輸出
-        today_date: 今日日期
-
-    Returns:
-        JSON 格式的處理結果
-    """
+    """科技導讀人 - 使用 OpenAI，將結構化新聞轉為 Notion 日報"""
     logger.info("📰 科技導讀人處理中...")
 
-    openai_client, _ = setup_apis()
-
-    # 構建 prompt
     user_prompt = f"""數據煉金術師 OUTPUT: {json.dumps(alchemist_json, ensure_ascii=False)}
 
 今日日期
 {today_date}"""
 
-    try:
-        response = openai_client.chat.completions.create(
-            model="chatgpt-4o-latest",
-            messages=[
-                {"role": "system", "content": TECH_NARRATOR_SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7
-        )
-
-        output = response.choices[0].message.content
-
-        logger.info("✅ 科技導讀人處理完成")
-        return output
-
-    except Exception as e:
-        logger.error(f"❌ 科技導讀人處理失敗: {str(e)}")
-        raise
+    output = call_openai(TECH_NARRATOR_SYSTEM_PROMPT, user_prompt)
+    logger.info("✅ 科技導讀人處理完成")
+    return output
 
 
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
-    """
-    總編輯 - 使用 OpenAI
-    包含自動重試機制
-
-    Args:
-        narrator_json: 科技導讀人的 JSON 輸出
-        today_date: 今日日期
-
-    Returns:
-        JSON 格式的處理結果
-    """
+    """總編輯 - 使用 OpenAI，產出 LINE 精華版"""
     logger.info("✍️  總編輯處理中...")
 
-    openai_client, _ = setup_apis()
-
-    # 構建 prompt
     notion_text = narrator_json.get('notion_daily_report_text', '')
     user_prompt = f"""【Notion 版 AI 日報】:
 {notion_text}
@@ -466,76 +189,16 @@ def process_with_editor_in_chief(narrator_json: Dict, today_date: str) -> str:
 今日日期
 {today_date}"""
 
-    try:
-        response = openai_client.chat.completions.create(
-            model="chatgpt-4o-latest",
-            messages=[
-                {"role": "system", "content": EDITOR_IN_CHIEF_SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7
-        )
-
-        output = response.choices[0].message.content
-
-        logger.info("✅ 總編輯處理完成")
-        return output
-        
-    except Exception as e:
-        logger.error(f"❌ 總編輯處理失敗: {str(e)}")
-        raise
+    output = call_openai(EDITOR_IN_CHIEF_SYSTEM_PROMPT, user_prompt)
+    logger.info("✅ 總編輯處理完成")
+    return output
 
 
 @retry_on_failure(max_retries=2, delay=3)
 def process_with_html_generator(notion_content: str, line_content: str, today_date: str) -> str:
-    """
-    HTML 生成器 - 使用 DeepSeek
-    完全對齊 n8n 架構：給 AI 完整的 HTML 範本，讓 AI 照抄並替換內容
-
-    Args:
-        notion_content: Notion 版本的 Markdown 內容
-        line_content: LINE 版本的 Markdown 內容
-        today_date: 今日日期
-
-    Returns:
-        完整的 HTML 文檔（從 <!DOCTYPE html> 到 </html>）
-    """
+    """HTML 生成器 - 使用 DeepSeek，將 Markdown 內容轉為完整 HTML 頁面"""
     logger.info("🎨 HTML 生成器處理中...")
 
-    # System prompt - 對齊 n8n 的設定
-    system_prompt = """你是專業的版面管理 Agent，專門負責確保網頁格式完全一致。
-
-核心職責:
-1. 嚴格按照提供的標準範本格式
-2. 保持 CSS 樣式完全相同
-3. 確保 HTML 結構完全一致
-4. 不得添加任何額外的說明文字
-5. 輸出純淨的 HTML 代碼
-
-格式要求:
-- 完全複製範本的 CSS 樣式
-- 保持相同的 HTML 結構
-- 只替換內容，不改變格式
-- 特別注意 LINE 精華版區塊的粉紅色漸層
-- 確保響應式設計和動畫效果
-- 絕對不在 </html> 後面添加任何文字
-
-**關鍵轉換規則（非常重要）:**
-1. 看到 Markdown 中的 `💡 **學習價值:**` 或 `💡 學習價值：` 段落時
-2. 必須將整個段落包裝在 <div class="highlight-box"> 裡面
-3. 範例中的每個新聞項目都有 highlight-box，你也要為每個項目都生成
-4. highlight-box 的結構：
-   <div class="highlight-box">
-       <strong>💡 學習價值：</strong><br>
-       學習價值的內容文字...
-   </div>
-
-**重要警告:**
-- 輸出結束於 </html> 標籤
-- 不得添加任何解釋或說明文字
-- 不得輸出 markdown 代碼塊標記"""
-
-    # User prompt - 完全對齊 n8n 的 prompt
     user_prompt = f"""請基於以下標準範本，將 n8n 新聞內容格式化為完全相同的格式。
 
 標準範本 HTML:
@@ -823,25 +486,16 @@ LINE消息版：
 
 請輸出完整的 HTML 代碼"""
 
-    try:
-        output = call_deepseek(
-            system_instruction=system_prompt,
-            user_prompt=user_prompt,
-            temperature=0.3
-        )
+    output = call_deepseek(HTML_GENERATOR_SYSTEM_PROMPT, user_prompt, temperature=0.3)
 
-        # 清理可能的 markdown 代碼塊標記
-        if output.startswith('```html'):
-            output = output[7:]
-        if output.startswith('```'):
-            output = output[3:]
-        if output.endswith('```'):
-            output = output[:-3]
-        output = output.strip()
+    # 清理可能的 markdown 代碼塊標記
+    if output.startswith('```html'):
+        output = output[7:]
+    if output.startswith('```'):
+        output = output[3:]
+    if output.endswith('```'):
+        output = output[:-3]
+    output = output.strip()
 
-        logger.info("✅ HTML 生成器處理完成")
-        return output
-
-    except Exception as e:
-        logger.error(f"❌ HTML 生成器處理失敗: {str(e)}")
-        raise
+    logger.info("✅ HTML 生成器處理完成")
+    return output
