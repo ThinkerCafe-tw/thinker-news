@@ -5,29 +5,34 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Thu, 19 Feb 2026 10:39:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Feb 2026 06:14:25 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-02-20 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-20.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-20.html</guid>
+      <pubDate>Fri, 20 Feb 2026 08:30:00 +0800</pubDate>
+      <description>🚀【AI圈今日快訊】2026-02-20
+
+1️⃣ Claude Sonnet 4.6 登陸 GitHub Copilot，付費用戶專享頂級程式碼助手！AI 能理解開發全局、協助自動修正錯誤，寫程式更聰明更高效。
+
+2️⃣ AI 教母李飛飛 World Labs 拿下 10 億美元融資，NVIDIA、AMD 助陣，推進 AI 與物理世界結合的「具身智能」。學術 x 商業合作更緊密，AI 學習與應用正加速落地。
+
+3️⃣ OpenAI x Paradigm 推出 EVMBench，AI 自動檢測並修補以太坊智能合約漏洞，資安與 AI 深度結合！
+
+【So What？】
+AI 技術正從程式開發、產業投資到資安防護全面滲透。初學者現在開始學會用 AI 工具、關注資安，未來競爭力大不同！
+
+#AI工具 #產業趨勢 #資安新知 #AI職涯</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-19 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-19.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-19.html</guid>
       <pubDate>Thu, 19 Feb 2026 08:30:00 +0800</pubDate>
-      <description>🚀 今日AI快訊 (2026-02-19)
-
-1️⃣ Meta AI代理Manus正式進駐Telegram！
-用戶可直接在聊天中用AI執行多步驟任務，語音、圖片、傳檔一鍵搞定。AI助手正無縫融入日常通訊，降低入門門檻。
-
-2️⃣ NVIDIA &amp; Meta簽下AI晶片超級大單！
-NVIDIA首度獨立推出Grace CPU，搶攻資料中心市場，挑戰Intel、AMD。AI硬體戰升溫，產業格局大洗牌。
-
-3️⃣ 蘋果AI智慧眼鏡計畫曝光！
-傳三款AI穿戴裝置將上市，AirPods也將支援AI離線語音與即時翻譯，AI助理進入生活每個角落。
-
-🔍 So What?
-AI代理與生成式應用快速落地主流通訊、穿戴裝置和資料中心，意味著AI已從雲端走向你我日常，未來人機互動更直覺、更智慧。
-
-#AI代理 #生成式AI #AI硬體 #產業趨勢</description>
+      <description>Meta AI代理進駐Telegram，NVIDIA與Meta簽下AI晶片超級大單 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -172,14 +177,6 @@ AI代理與生成式應用快速落地主流通訊、穿戴裝置和資料中心
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-29.html</guid>
       <pubDate>Thu, 29 Jan 2026 08:30:00 +0800</pubDate>
       <description>Chrome AI代理上線，n8n自動化新趨勢 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-28 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-28.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-28.html</guid>
-      <pubDate>Wed, 28 Jan 2026 08:30:00 +0800</pubDate>
-      <description>Claude介面大進化，AI深入時尚與自主代理時代 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
