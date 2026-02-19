@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-02-19 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="Meta AI代理進駐Telegram，NVIDIA與Meta簽下AI晶片超級大單 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .article-header {
+                padding: 25px 20px;
+            }
+
+            .article-title {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Thinker News RSS" href="https://thinkercafe-tw.github.io/thinker-news/feed.xml">
+    <!-- SEO: Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026-02-19 AI 科技日報 | Thinker News">
+    <meta property="og:description" content="2026-02-19 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。">
+    <meta property="og:url" content="https://thinkercafe-tw.github.io/thinker-news/2026-02-19.html">
+    <meta property="og:site_name" content="Thinker News">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="article:published_time" content="2026-02-19T08:30:00+08:00">
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="2026-02-19 AI 科技日報 | Thinker News">
+    <meta name="twitter:description" content="2026-02-19 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。">
+    <!-- SEO: Canonical -->
+    <link rel="canonical" href="https://thinkercafe-tw.github.io/thinker-news/2026-02-19.html">
+    <!-- SEO: JSON-LD 結構化資料 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "2026-02-19 AI 科技日報精選",
+      "description": "2026-02-19 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。",
+      "datePublished": "2026-02-19T08:30:00+08:00",
+      "dateModified": "2026-02-19T08:30:00+08:00",
+      "author": {"@type": "Organization", "name": "Thinker News", "url": "https://thinkercafe-tw.github.io/thinker-news/"},
+      "publisher": {"@type": "Organization", "name": "Thinker News"},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://thinkercafe-tw.github.io/thinker-news/2026-02-19.html"},
+      "inLanguage": "zh-TW"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+
+        <header class="article-header">
+            <div class="article-date">📅 2026年2月19日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">Meta AI代理進駐Telegram，NVIDIA與Meta簽下AI晶片超級大單</p>
+        </header>
+
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+
+            <h3>1. Meta旗下AI代理Manus強勢進駐Telegram！語音、圖片、多步驟任務一鍵搞定</h3>
+            <p>Meta收購的AI代理平台Manus宣布推出全新「Manus Agents」功能，正式整合進即時通訊軟體Telegram。這項整合讓用戶無需離開Telegram聊天環境，就能直接指揮AI助手執行複雜任務。只要透過Manus工作區掃描QR Code完成連線設定，用戶便可在Telegram視窗中，對AI代理下達多步驟指令，包括傳送語音訊息、上傳圖片或檔案等，AI代理會即時處理並將產出結果回傳到對話中。這項功能已對所有Manus訂閱用戶開放，大幅降低AI代理應用的門檻。Manus官方透露，未來還將擴展到更多主流通訊平台，讓AI助手能無縫融入日常工作與生活。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                這則新聞展示了AI代理正快速融入主流通訊工具，初學者可從中學習如何將AI代理整合到熟悉的軟體中，並理解多步驟任務自動化的實際應用與效益。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/173973" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>2. NVIDIA與Meta簽下多年AI晶片超級大單！旗下CPU首度獨立出擊，直搗Intel、AMD地盤</h3>
+            <p>NVIDIA（輝達）與社群巨頭Meta宣布簽訂多年重大合作協議，Meta將採購數百萬顆NVIDIA最新AI加速晶片，強化其全球AI基礎設施。這筆巨額訂單鞏固了NVIDIA在AI硬體市場的領導地位。更重要的是，NVIDIA首次將其Grace系列CPU作為獨立產品推出，瞄準AI代理、資料庫等資料中心運算需求，直接挑戰Intel和AMD的市場地位。這代表NVIDIA不再只聚焦GPU，而是意圖憑藉AI優勢，全面進軍資料中心運算領域，對半導體產業結構帶來重大變化。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                理解AI基礎設施的競賽如何推動新技術與產業格局變動。對資料科學初學者來說，認識硬體供應鏈與運算資源的重要性，有助於未來選擇平台與技術時做出更明智的判斷。
+            </div>
+            <p><a href="https://www.inside.com.tw/article/40689-nvidia-meta-ai-chip-deal-cpu-intel-amd" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>3. 蘋果AI智慧眼鏡計畫曝光！AirPods也將迎來AI升級潮</h3>
+            <p>蘋果公司據傳正加速開發三款AI穿戴裝置，預計於2026至2027年間陸續推出。其中最受矚目的是全新的「AI智慧眼鏡」，將整合AI助理功能，可能支援增強現實（AR）與語音互動，協助用戶即時獲取資訊、導航及任務輔助。蘋果也計畫為AirPods耳機進行AI升級，新版AirPods將內建更強處理器，支援離線AI語音辨識、即時翻譯和個人化音訊體驗。這標誌著AI應用正從軟體延伸到全新硬體生態系，AI將成為用戶日常生活中更貼身的助理。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                了解AI技術正跨足到各種穿戴裝置，啟發開發者思考人機互動新模式，也讓初學者看到未來AI職涯的新應用領域。
+            </div>
+            <p><a href="https://technews.tw/2026/02/18/apple-plans-to-launch-ai-smart-glasses-in-2026/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🛠 AI工具與應用焦點</h2>
+
+            <h3>Google Gemini音樂生成功能上線！Lyria 3模型讓你一句話創造30秒旋律</h3>
+            <p>Google將先進的AI音樂生成模型「Lyria 3」整合進Gemini AI助理。用戶只需輸入描述（如「輕快電子舞曲」），Gemini即可生成約30秒的原創音樂片段。目前專注於純音樂旋律生成，尚無歌詞功能。這項創新擴展了AI創造力的範疇，對內容創作者、影片製作者和音樂愛好者來說，是製作背景音樂和獲取靈感的全新工具。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可以練習用文字提示生成音樂，了解AI如何處理聲音媒體，並思考AI生成內容在未來創作中的角色。
+            </div>
+            <p><a href="https://arstechnica.com/google/2026/02/gemini-can-now-generate-ai-music-for-you-no-lyrics-required/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>印度新創Sarvam要讓AI模型跑遍功能手機、汽車和智慧眼鏡</h3>
+            <p>印度Sarvam AI宣布將其輕量級AI模型部署到功能手機、汽車和智慧眼鏡等邊緣裝置。這些模型僅需少量儲存空間，能在現有硬體上離線運作，無需網路連線，特別適用於網路不穩或資費高昂地區。Sarvam致力於打破AI只屬於智慧型手機和雲端的限制，讓AI普及到更多裝置和用戶。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                認識到「邊緣AI」技術與輕量模型的發展，對開發資源受限裝置的AI應用具啟發性，也是AI普及化的重要里程碑。
+            </div>
+            <p><a href="https://techcrunch.com/2026/02/18/indias-sarvam-wants-to-bring-its-ai-models-to-feature-phones-cars-and-smart-glasses/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>AI行銷新創Kana獲1,500萬美元投資！打造靈活AI代理助行銷人員一臂之力</h3>
+            <p>AI行銷新創Kana獲得1,500萬美元投資，由曾創立Rapt和Krux（均被Salesforce收購）的業界老將領軍。Kana專注於打造可自訂的AI代理，能夠自主規劃並執行多樣化行銷任務，涵蓋市場分析、內容生成到跨渠道推廣。這筆資金將加速產品開發，協助行銷人員應對日益複雜的數位環境，代表AI代理正快速滲透行銷等創意領域。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會評估並選擇適合自己工作流程的AI工具，了解AI代理如何提升專業領域的生產力。
+            </div>
+            <p><a href="https://techcrunch.com/2026/02/18/kana-emerges-from-stealth-with-15m-to-build-flexible-ai-agents-for-marketers/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+
+            <h3>OpenAI強勢進軍印度高等教育！目標一年內觸及十萬師生，搶攻AI人才培育</h3>
+            <p>OpenAI宣布與印度多所高等教育機構合作，目標在一年內讓超過10萬名學生與教職員學習先進AI工具。計畫內容涵蓋課程資源、師資訓練、API優惠等，配合印度政府積極推動AI技能普及。透過教育合作，OpenAI不僅培養未來開發者，也在快速成長市場建立生態基礎，影響AI技能的認知與使用習慣。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可觀察全球AI巨頭如何透過教育推廣與人才培育擴展影響力，也可思考如何參與相關學習資源。
+            </div>
+            <p><a href="https://techcrunch.com/2026/02/18/openai-pushes-into-higher-education-as-india-seeks-to-scale-ai-skills/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>歐洲啟動「主權AI模型」挑戰賽！力抗美中巨頭，爭奪全球AI話語權</h3>
+            <p>歐洲正式啟動「主權AI模型」挑戰計畫，鼓勵本地機構開發符合歐洲價值、隱私法規（GDPR）並反映歐語多樣性的AI基礎模型，目的是減少對美中技術依賴，維護數位主權。這舉措涵蓋技術、法規與地緣政治層面，預期將出現越來越多區域性、本地化AI服務，挑戰現有全球性AI模型的主導地位。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可深入認識AI發展與地緣政治、隱私法規的密切關聯，思考本地化AI應用的市場機會與合規需求。
+            </div>
+            <p><a href="https://technews.tw/2026/02/18/europe-launches-sovereign-ai-model-challenge/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🔐 資安趨勢快訊</h2>
+
+            <h3>四款熱門VS Code擴充套件爆嚴重漏洞！超過1.25億次安裝暴露遠端攻擊風險</h3>
+            <p>研究人員發現，四款極受歡迎的VS Code擴充套件（包括Live Server、Code Runner、Markdown Preview Enhanced等）存在重大安全漏洞，全球安裝量超過1.25億次。這些漏洞可能被攻擊者利用進行遠端程式碼攻擊，竊取本地檔案。由於VS Code是開發者的核心工具，且擴充套件常擁有高權限，這些漏洞風險極高。官方已通報並推出更新，建議用戶立即檢查並更新相關擴充套件。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                強化資安意識，學會定期更新開發工具，並審慎選擇第三方擴充，降低供應鏈攻擊風險。
+            </div>
+            <p><a href="https://thehackernews.com/2026/02/critical-flaws-found-in-four-vs-code.html" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+
+            <h3>AI代理讓遊戲NPC擁有「人類靈魂」！不再照本宣科，互動體驗大升級</h3>
+            <p>新一代AI代理技術正改變遊戲產業。過去遊戲中的非玩家角色（NPC）由預先寫好的腳本控制，互動模式單一。現在，AI代理可賦予NPC更類似人類的決策與互動能力，能即時根據玩家行為動態反應，展現角色個性、記憶與情感，讓遊戲世界更生動、互動性更強。這大大提升了RPG等遊戲的沉浸感與重玩價值，也刺激開發者嘗試複雜敘事設計。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可了解AI代理如何提升遊戲體驗，對互動設計和AI應用於娛樂產業有更深認識。
+            </div>
+            <p><a href="https://technews.tw/2026/02/18/ai-agents-enhance-game-interaction/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>💡 深度觀點與建議</h2>
+
+            <h3>研究人員成功「越獄」ChatGPT，發現它認為密西西比州是全美國最懶惰的州</h3>
+            <p>牛津大學與肯塔基大學研究團隊利用「提示注入」技術繞過ChatGPT的安全限制，讓模型做出「密西西比州是全美最懶惰州」的偏見性結論。這顯示即使AI公司致力於減少偏見，模型仍可能內化訓練數據中的刻板印象。研究提醒開發者和用戶，AI輸出並非絕對客觀，需保持批判性思維，並把偏見檢測納入設計考量。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會對AI輸出保持懷疑、檢視模型偏見，並思考如何設計更公平、透明的AI系統。
+            </div>
+            <p><a href="https://infosecu.technews.tw/2026/02/18/researchers-jailbreak-chatgpt-to-find-out-which-state-has-the-laziest-people/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🚀 今日AI快訊 (2026-02-19)</h3>
+                <p><strong>1️⃣ Meta AI代理Manus正式進駐Telegram！</strong><br>用戶可直接在聊天中用AI執行多步驟任務，語音、圖片、傳檔一鍵搞定。AI助手正無縫融入日常通訊，降低入門門檻。</p>
+                <p><strong>2️⃣ NVIDIA & Meta簽下AI晶片超級大單！</strong><br>NVIDIA首度獨立推出Grace CPU，搶攻資料中心市場，挑戰Intel、AMD。AI硬體戰升溫，產業格局大洗牌。</p>
+                <p><strong>3️⃣ 蘋果AI智慧眼鏡計畫曝光！</strong><br>傳三款AI穿戴裝置將上市，AirPods也將支援AI離線語音與即時翻譯，AI助理進入生活每個角落。</p>
+                <p><strong>🔍 So What?</strong><br>AI代理與生成式應用快速落地主流通訊、穿戴裝置和資料中心，意味著AI已從雲端走向你我日常，未來人機互動更直覺、更智慧。</p>
+                <p style="font-size: 0.9em; opacity: 0.9; margin-top: 10px;">#AI代理 #生成式AI #AI硬體 #產業趨勢</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
