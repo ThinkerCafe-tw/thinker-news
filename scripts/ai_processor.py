@@ -110,7 +110,7 @@ def call_deepseek(system_instruction: str, user_prompt: str, temperature: float 
     return response.choices[0].message.content
 
 
-def call_openai(system_instruction: str, user_prompt: str, model: str = "chatgpt-4o-latest", temperature: float = 0.7) -> str:
+def call_openai(system_instruction: str, user_prompt: str, model: str = "gpt-4.1", temperature: float = 0.7) -> str:
     """呼叫 OpenAI API"""
     logger.info(f"🔑 呼叫 OpenAI API ({model})...")
     client = get_openai_client()
