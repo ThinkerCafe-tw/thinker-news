@@ -5,26 +5,34 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Fri, 20 Feb 2026 06:14:25 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Feb 2026 06:11:02 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-02-21 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-21.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-21.html</guid>
+      <pubDate>Sat, 21 Feb 2026 08:30:00 +0800</pubDate>
+      <description>🚀 AI世界再進化！
+
+【今日必讀兩大重點】
+
+✅ Google發布Gemini 3.1 Pro，推理力暴增2倍，全面領跑AI模型大戰！企業和開發者可用更聰明的AI，打造自動客服、程式生成等應用，競爭格局大洗牌。
+
+✅ 研究揭露：用AI工具（如ChatGPT、Claude、Gemini）自動生成密碼，其實很容易被破解！密碼再亂也別掉以輕心，還是得遵循資安基本功，別全信AI產出。
+
+【So What？】
+AI競爭不只拼速度與智慧，資安和應用選擇也要跟上！學會判斷AI工具優劣、守住安全底線，才是資料科學人的必修課。
+
+#AI快訊 #Gemini31 #資安警示 #AI應用</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-20 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-20.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-20.html</guid>
       <pubDate>Fri, 20 Feb 2026 08:30:00 +0800</pubDate>
-      <description>🚀【AI圈今日快訊】2026-02-20
-
-1️⃣ Claude Sonnet 4.6 登陸 GitHub Copilot，付費用戶專享頂級程式碼助手！AI 能理解開發全局、協助自動修正錯誤，寫程式更聰明更高效。
-
-2️⃣ AI 教母李飛飛 World Labs 拿下 10 億美元融資，NVIDIA、AMD 助陣，推進 AI 與物理世界結合的「具身智能」。學術 x 商業合作更緊密，AI 學習與應用正加速落地。
-
-3️⃣ OpenAI x Paradigm 推出 EVMBench，AI 自動檢測並修補以太坊智能合約漏洞，資安與 AI 深度結合！
-
-【So What？】
-AI 技術正從程式開發、產業投資到資安防護全面滲透。初學者現在開始學會用 AI 工具、關注資安，未來競爭力大不同！
-
-#AI工具 #產業趨勢 #資安新知 #AI職涯</description>
+      <description>Claude Sonnet 4.6 登陸 GitHub Copilot，AI 教母李飛飛 World Labs 完成巨額融資 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -169,14 +177,6 @@ AI 技術正從程式開發、產業投資到資安防護全面滲透。初學�
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-30.html</guid>
       <pubDate>Fri, 30 Jan 2026 08:30:00 +0800</pubDate>
       <description>OpenAI 內部數據特工公開，AI 工具邁向決策輔助新階段 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-29 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-29.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-29.html</guid>
-      <pubDate>Thu, 29 Jan 2026 08:30:00 +0800</pubDate>
-      <description>Chrome AI代理上線，n8n自動化新趨勢 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
