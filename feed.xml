@@ -5,26 +5,34 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Sat, 21 Feb 2026 06:11:02 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Feb 2026 06:11:09 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-02-22 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-22.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-22.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:30:00 +0800</pubDate>
+      <description>🚀 AI圈今日最強話題！
+
+1️⃣ OpenAI 推出首款結合 ChatGPT 的智慧音箱，具備臉部與物體辨識，AI 互動進化到「看得見」你的新時代！未來家庭安全、教育互動、健康照護都將更智慧。
+
+2️⃣ Google Gemini 3.1 Pro 正式開放，推理效能直接翻倍，開發AI應用門檻再降低。學習聚焦：模型效能如何影響你的AI專案？
+
+3️⃣ iOS 26.4測試版來襲，Apple Intelligence 深度整合音樂、Podcast、CarPlay與通訊安全，蘋果讓AI「潛入」每個你用的服務。
+
+【So What？】
+AI從雲端走進你家、你車、你手機，未來應用不再只是聊天，還能感知環境、理解情境。身為初學者，現在是認識多模態AI、平台整合、與AI嵌入日常的最佳時機。
+
+#AI快訊 #多模態AI #智慧硬體 #模型效能 #AppleIntelligence</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-21 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-21.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-21.html</guid>
       <pubDate>Sat, 21 Feb 2026 08:30:00 +0800</pubDate>
-      <description>🚀 AI世界再進化！
-
-【今日必讀兩大重點】
-
-✅ Google發布Gemini 3.1 Pro，推理力暴增2倍，全面領跑AI模型大戰！企業和開發者可用更聰明的AI，打造自動客服、程式生成等應用，競爭格局大洗牌。
-
-✅ 研究揭露：用AI工具（如ChatGPT、Claude、Gemini）自動生成密碼，其實很容易被破解！密碼再亂也別掉以輕心，還是得遵循資安基本功，別全信AI產出。
-
-【So What？】
-AI競爭不只拼速度與智慧，資安和應用選擇也要跟上！學會判斷AI工具優劣、守住安全底線，才是資料科學人的必修課。
-
-#AI快訊 #Gemini31 #資安警示 #AI應用</description>
+      <description>Google公布Gemini 3.1 Pro，AI密碼安全警訊 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -169,14 +177,6 @@ AI競爭不只拼速度與智慧，資安和應用選擇也要跟上！學會判
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-31.html</guid>
       <pubDate>Sat, 31 Jan 2026 08:30:00 +0800</pubDate>
       <description>Google LiteRT大升級、Anthropic推智慧體外掛、DeepSeek布局AI搜尋 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-30 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-30.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-30.html</guid>
-      <pubDate>Fri, 30 Jan 2026 08:30:00 +0800</pubDate>
-      <description>OpenAI 內部數據特工公開，AI 工具邁向決策輔助新階段 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
