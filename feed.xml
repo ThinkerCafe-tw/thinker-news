@@ -5,26 +5,37 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Sun, 22 Feb 2026 06:11:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 23 Feb 2026 06:10:02 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-02-23 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-23.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-23.html</guid>
+      <pubDate>Mon, 23 Feb 2026 08:30:00 +0800</pubDate>
+      <description>🚀 AI 日報快訊｜2026-02-23
+
+❶ 「80% 的 App 將消失？」本地端 AI 助理崛起
+OpenClaw 創辦人預言：未來只要有一個懂你需求的 AI 助理，許多傳統 App 將被淘汰！本地 AI 不只提升效率，更能保護隱私、降低雲端依賴。現在開始學習本地/邊緣 AI，將資料分析流程自動化，就是搶先卡位！
+
+❷ AI 帶動半導體市值破兆元，台積電穩居全球霸主
+AI 晶片需求爆發，台積電成為 NVIDIA 等巨頭的唯一製造樞紐。先進製程晶片競賽，正決定未來科技領頭羊。懂硬體資源規劃，你的專案才不怕缺料！
+
+❸ 腦機介面從實驗室衝向市場，中國商業化領跑
+BCI（腦機介面）應用快速擴大，治療神經疾病、感覺重建有突破。想搶先布局？建議開始學腦波數據、訊號處理，為未來人機共融做好準備。
+
+【So What】
+AI 革命正從本地端、算力投資、腦機介面等多路並進，產業全面升級。越早掌握跨領域技能、關注硬體與產業鏈，越能在浪潮中脫穎而出。
+
+#AI趨勢 #本地端AI #半導體 #腦機介面 #資料科學 #產業動態</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-22 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-22.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-22.html</guid>
       <pubDate>Sun, 22 Feb 2026 08:30:00 +0800</pubDate>
-      <description>🚀 AI圈今日最強話題！
-
-1️⃣ OpenAI 推出首款結合 ChatGPT 的智慧音箱，具備臉部與物體辨識，AI 互動進化到「看得見」你的新時代！未來家庭安全、教育互動、健康照護都將更智慧。
-
-2️⃣ Google Gemini 3.1 Pro 正式開放，推理效能直接翻倍，開發AI應用門檻再降低。學習聚焦：模型效能如何影響你的AI專案？
-
-3️⃣ iOS 26.4測試版來襲，Apple Intelligence 深度整合音樂、Podcast、CarPlay與通訊安全，蘋果讓AI「潛入」每個你用的服務。
-
-【So What？】
-AI從雲端走進你家、你車、你手機，未來應用不再只是聊天，還能感知環境、理解情境。身為初學者，現在是認識多模態AI、平台整合、與AI嵌入日常的最佳時機。
-
-#AI快訊 #多模態AI #智慧硬體 #模型效能 #AppleIntelligence</description>
+      <description>OpenAI智慧音箱、Gemini 3.1 Pro開放、iOS AI整合 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -169,14 +180,6 @@ AI從雲端走進你家、你車、你手機，未來應用不再只是聊天，
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-02.html</guid>
       <pubDate>Mon, 02 Feb 2026 08:30:00 +0800</pubDate>
       <description>物流AI解導航盲點，AI代理人社群興起 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-01-31 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-31.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-01-31.html</guid>
-      <pubDate>Sat, 31 Jan 2026 08:30:00 +0800</pubDate>
-      <description>Google LiteRT大升級、Anthropic推智慧體外掛、DeepSeek布局AI搜尋 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
