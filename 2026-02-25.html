@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-02-25 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="AWS、OpenAI、微軟齊推AI代理新標準，產業整合與資安挑戰並存 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .article-header {
+                padding: 25px 20px;
+            }
+
+            .article-title {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Thinker News RSS" href="https://thinkercafe-tw.github.io/thinker-news/feed.xml">
+    <!-- SEO: Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026-02-25 AI 科技日報 | Thinker News">
+    <meta property="og:description" content="2026-02-25 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。">
+    <meta property="og:url" content="https://thinkercafe-tw.github.io/thinker-news/2026-02-25.html">
+    <meta property="og:site_name" content="Thinker News">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="article:published_time" content="2026-02-25T08:30:00+08:00">
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="2026-02-25 AI 科技日報 | Thinker News">
+    <meta name="twitter:description" content="2026-02-25 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。">
+    <!-- SEO: Canonical -->
+    <link rel="canonical" href="https://thinkercafe-tw.github.io/thinker-news/2026-02-25.html">
+    <!-- SEO: JSON-LD 結構化資料 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "2026-02-25 AI 科技日報精選",
+      "description": "2026-02-25 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。",
+      "datePublished": "2026-02-25T08:30:00+08:00",
+      "dateModified": "2026-02-25T08:30:00+08:00",
+      "author": {"@type": "Organization", "name": "Thinker News", "url": "https://thinkercafe-tw.github.io/thinker-news/"},
+      "publisher": {"@type": "Organization", "name": "Thinker News"},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://thinkercafe-tw.github.io/thinker-news/2026-02-25.html"},
+      "inLanguage": "zh-TW"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+
+        <header class="article-header">
+            <div class="article-date">📅 2026年2月25日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">AWS、OpenAI、微軟齊推AI代理新標準，產業整合與資安挑戰並存</p>
+        </header>
+
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 3</h2>
+
+            <h3>1. AWS 代理式 IDE Kiro 新增兩種工作流程，限縮 AI 代理程式碼改動範圍</h3>
+            <p>AWS 旗下的 AI 代理式整合開發環境 Kiro，針對維護與除錯現有應用程式的情境，擴充了「規格導向開發（Specs）」功能，推出「技術設計優先（Tech Design-first）」與「錯誤修正（Bugfix）」兩種新工作流程。這些新流程讓開發者能透過結構化的設計文件與測試案例，明確界定 AI 代理可改動的程式碼範圍。例如修復錯誤時，開發者可用 Specs 文件精確描述問題與修正區域，指示 AI 只動手有問題的程式區塊，避免擅自更動其他運作正常的程式碼，降低引入新錯誤的機率。這對維護大型、複雜遺留系統的團隊尤其重要，讓 AI 代理協助繁瑣維護工作時更安全、可控，展現 AI 工具從全自動走向人機協作、強調開發者主導權的趨勢。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者能了解如何用明確規格引導 AI 輔助工具精準修復 bug 或重構，避免全自動帶來的風險，學會把人機協作納入團隊開發流程設計。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174016" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>2. OpenAI 推論 API 新增 WebSocket 模式，代理式工具呼叫流程最高可加速 40%</h3>
+            <p>OpenAI 為 Responses API 新增 WebSocket 模式，使開發者能建立持久連線來呼叫 API，大幅提升多回合對話和密集工具調用效率。傳統 HTTP 請求需每次傳送完整對話歷史，造成冗餘與延遲，而 WebSocket 模式僅需傳送新增內容，並用回應 ID 銜接對話狀態，減少網路傳輸負擔。OpenAI 表示，這樣的優化在代理式工作流下可提升最高 40% 效能。此外，WebSocket 模式完全相容零資料保留（ZDR）隱私政策，非常適合處理敏感業務數據。這展現 OpenAI 積極強化 AI 代理應用的基礎設施，協助開發者打造更快、更省成本的智慧助理或自動化流程。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                對初學者來說，這是認識高效對話系統與自動化流程開發必備基礎，並學會在實際開發時選擇最合適的 API 傳輸模式與保障資料隱私。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174008" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>3. 接棒 Semantic Kernel 與 AutoGen，微軟統一代理框架 Agent Framework 進入 RC 階段</h3>
+            <p>微軟宣布開源的統一 AI 代理框架「Microsoft Agent Framework」進入 RC（發布候選）階段，並同時支援 .NET 與 Python。這個框架整合前代的 Semantic Kernel 和 AutoGen，核心目標是簡化多 AI 代理系統的開發與協作。它提供更一致、更高階的程式設計模型，讓開發者能定義具有不同技能的角色代理（如研究員、審核員），並協同完成複雜任務，強調代理間溝通、任務分解與結果彙整等編排（Orchestration）能力。RC 意味著 API 穩定，企業可開始評估導入至正式專案，如自動化報告生成、客服系統或複雜資料分析。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                初學者可了解多代理協作系統設計、跨語言開發與高階編排思維，是進階 AI 產品開發的重要基礎。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174011" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🛠 AI工具與應用焦點</h2>
+
+            <h3>Cloudflare 推出新 MCP 伺服器，僅兩介面簡化全套 Cloudflare API 存取</h3>
+            <p>Cloudflare 發布「模型上下文協定（MCP）」伺服器，僅提供 `search()` 和 `execute()` 兩個工具介面，讓 AI 代理能輕鬆探索並呼叫 Cloudflare 的完整 OpenAPI 規格，直接操作 DNS、Zero Trust 安全、Workers、R2 儲存等服務。只需自然語言指令，AI 代理即可完成複雜設定。MCP 工具上下文僅占 1,000 Token，不會因 API 端點增加而膨脹，有效支援高效能應用。這大幅降低操作 Cloudflare 服務的門檻，實現自然語言運維。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會利用 AI 代理簡化複雜系統操作，對 DevOps 與系統管理自動化有極大幫助。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174005" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>Oura 推出專注女性健康的專屬 AI 模型</h3>
+            <p>智慧戒指品牌 Oura 推出專為女性健康優化的 AI 模型，支援從初經、月經週期、生育預測到更年期的健康管理。該模型結合 Oura 智慧戒指的生理數據（如心率變異、皮膚溫度、睡眠階段）與用戶自述，提供個人化、情境化的健康洞察建議。這代表數據驅動產品結合專屬 AI 模型，能為特定族群帶來更高價值。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會如何利用領域特化 AI，將感測數據轉化為有用洞察，是未來產品設計的關鍵。
+            </div>
+            <p><a href="https://techcrunch.com/2026/02/24/oura-launches-a-proprietary-ai-model-focused-on-womens-health/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>JetBrains 發布 VS Code 擴充套件，可一鍵轉換 Java 檔成 Kotlin</h3>
+            <p>JetBrains 推出「Java to Kotlin（J2K）」擴充套件，讓開發者能在 VS Code 直接將 Java 程式碼一鍵轉換為 Kotlin，支援單檔與批次處理。這大大降低遺留 Java 程式庫遷移至現代化 Kotlin 的門檻與成本，讓團隊能專注新功能開發而非語言重寫。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                了解 AI 如何協助程式碼現代化與技術債償還，是實務開發的重要利器。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174006" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 產業趨勢與新聞</h2>
+
+            <h3>OpenAI COO 坦言：『我們尚未真正看到 AI 滲透企業業務流程』</h3>
+            <p>OpenAI 營運長在訪談中表示，所謂「AI 代理將接管企業流程」的說法仍屬誇大，AI 要從有趣的演示走到企業業務的關鍵組件，還有很長的路。企業流程複雜且需高可靠性、合規、深度整合，現有 LLM 難以完全滿足。這提醒資料科學家，理解企業真實痛點和整合挑戰，比單純追求模型效能更關鍵。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會聚焦業務痛點、流程整合及合規設計，這是企業級 AI 應用成功的關鍵。
+            </div>
+            <p><a href="https://techcrunch.com/2026/02/24/openai-coo-says-we-have-not-yet-really-seen-ai-penetrate-enterprise-business-processes/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>AMD、Meta 達成千億美元 AI 協議！將部署高達 6 吉瓦 AMD GPU</h3>
+            <p>Meta 與 AMD 宣布戰略合作，未來數年內 AMD 將供應高達 6 吉瓦算力的 AI GPU，市場估算規模達千億美元。此舉顯示 Meta AI 算力需求爆炸性成長，也讓 AMD 成為僅次 Nvidia 的 AI 晶片大廠，標誌產業將走向多元供應商策略，AI 硬體與軟體生態競爭加速。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                理解 AI 基礎設施多元化趨勢，對未來平台相容性與開源軟體生態要有基本認識。
+            </div>
+            <p><a href="https://technews.tw/2026/02/24/amd-and-meta-announce-expanded-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus/" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🔐 資安趨勢快訊</h2>
+
+            <h3>GitHub Codespaces 的 RoguePilot 漏洞，曾讓 Copilot 指令洩露 GITHUB_TOKEN</h3>
+            <p>Orca Security 發現 GitHub Codespaces 存在高風險 RoguePilot 漏洞，可讓攻擊者在議題或 PR 隱藏惡意指令，誘導 Copilot 執行竊取 GITHUB_TOKEN 等操作。攻擊者可竊取原始碼、植入後門等。微軟已修補此漏洞。這顯示 AI 與開發環境整合產生新型態風險，需警覺 AI 對自然語言指令的信任問題。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會辨識與防範開發流程中因 AI 助手導入而產生的新資安威脅，強化權限控管意識。
+            </div>
+            <p><a href="https://thehackernews.com/2026/02/roguepilot-flaw-in-github-codespaces.html" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>19個惡意NPM套件發動SANDWORM_MODE蠕蟲攻擊，竊取加密貨幣金鑰與CI/CD機密</h3>
+            <p>安全公司 Socket 揭露有 19 個惡意 NPM 套件進行 SANDWORM_MODE 攻擊，竊取開發者加密貨幣私鑰、Cookie、CI/CD 憑證，並能橫向移動感染更多開發者。這些套件還偽裝成 AI 開發工具，攻擊供應鏈與憑證安全。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                強化開源套件風險意識，學會在安裝前檢查來源、維護者與使用安全掃描工具，分離開發權限。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174009" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>🌍 產業動態與AI職涯</h2>
+
+            <h3>台灣大用 AI 協助數萬基地臺節能，2025 年省下 1,800 萬度電</h3>
+            <p>台灣大哥大透過 AI 節能系統，動態管理合併後的 3-4 萬座 4G/5G 基地臺，根據流量、行為、天氣等數據預測負載並調整功率，2025年預計節省超過 1,800 萬度電。這不僅降低成本，也是企業實踐 ESG 典範，展現 AI 在核心業務運營效率與永續發展的雙贏潛力。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                理解 AI 在產業節能與永續的實際應用，學會整合 IoT 與外部數據做預測模型。
+            </div>
+            <p><a href="https://www.ithome.com.tw/news/174020" class="news-link external-link" target="_blank">閱讀更多</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>💡 深度觀點與建議</h2>
+
+            <h3>Anthropic 揭中國 AI 實驗室「大規模蒸餾」：技術剽竊與美中晶片角力</h3>
+            <p>Anthropic 指控三家中國 AI 公司（深度求索、月之暗面、MiniMax）對其 Claude 模型進行工業規模能力蒸餾攻擊，創建 24,000 個帳戶，發動 1,600 萬次查詢，希望透過大量 API 輸出訓練自己的模型。這違反服務條款，也凸顯美中科技競爭下，中國企業在美國晶片出口受限情況下急於獲取頂尖 AI 技術。對所有 AI API 服務商來說，這是加強異常偵測與智慧財產權保護的警訊。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                學會關注 API 服務的安全與合規，理解地緣政治對技術取得的影響。
+            </div>
+            <p><a href="https://www.inside.com.tw/article/40720-anthropic-accuses-chinese-ai-labs-of-mining-claude-as-us-debates-ai-chip-exports" class="news-link external-link" target="_blank">閱讀更多</a></p>
+
+            <h3>日報後記</h3>
+            <p>AI 工具應用正持續深化於企業核心流程與產業基礎建設，從開發維運到節能減碳、從專用 AI 模型到跨平台協作，每一步都強調「與現有流程深度整合」與「人機協作」的實戰價值。同時，產業競爭（如 AMD 與 Nvidia、OpenAI 與 Anthropic）、安全威脅與投資生態也快速變化。對資料科學初學者而言，未來的發展關鍵在於掌握多元工具、理解產業真正需求、強化安全合規意識，以及持續學習跨領域整合應用。建議讀者將實務專案、工具評估與產業趨勢觀察結合，培養全方位的 AI 競爭力。</p>
+        </div>
+
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🚀【2026-02-25｜AI日報快訊】</h3>
+                <p><strong>今天AI圈最熱話題：</strong></p>
+                <p><strong>1️⃣ AWS、OpenAI、微軟三巨頭齊推『AI代理』開發新標準！</strong></p>
+                <ul style="color: white; margin-left: 20px;">
+                    <li>AWS Kiro IDE 新增「設計優先」與「錯誤修正」模式，讓AI修bug更精準、可控，維護大型系統超安全。</li>
+                    <li>OpenAI 推出WebSocket API，AI工具呼叫速度可提升40%，還能零資料保留，開發效率大升級。</li>
+                    <li>微軟統一 Agent Framework 進入RC階段，支援.NET與Python，簡化多AI協作，企業可正式導入。</li>
+                </ul>
+                <p><strong>為什麼重要？</strong><br>
+                AI開發正從「全自動」轉向「人機協作」與「工程規模」，初學者要學會善用規格設計、挑選高效API、理解多代理協作——這是未來AI專案成功的關鍵！</p>
+                <p><strong>🔥 產業大事快掃：</strong></p>
+                <ul style="color: white; margin-left: 20px;">
+                    <li>Cloudflare推極簡AI運維接口，AI直接管理DNS/安全/儲存。</li>
+                    <li>Oura專為女性健康打造專屬AI模型，數據驅動精準照護。</li>
+                    <li>JetBrains推VS Code插件，一鍵將Java轉Kotlin，技術升級好幫手。</li>
+                    <li>OpenAI COO直言：AI還沒真滲透企業流程，重點在整合與合規。</li>
+                    <li>Meta砸重金採購AMD GPU，AI硬體生態多元化加速。</li>
+                    <li>資安快訊：GitHub Codespaces、惡意NPM套件爆資安漏洞，AI助攻也要懂防禦！</li>
+                    <li>台灣大AI節能，2025年省下1,800萬度電，ESG與AI並進。</li>
+                    <li>Anthropic控中國AI實驗室大規模「蒸餾」取巧，美中技術戰火再升溫。</li>
+                </ul>
+                <p><strong>#AI代理 #人機協作 #開發工具 #產業趨勢 #資安警示 #AI職涯 #ESG永續</strong></p>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
