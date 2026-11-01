@@ -9,6 +9,7 @@ AI 處理鏈
 """
 
 import os
+import re
 import json
 import time
 from typing import List, Dict, Callable, Any
@@ -109,8 +110,12 @@ def call_gemini(system_instruction: str, user_prompt: str, temperature: float = 
                 return content
             except Exception as e:
                 last_err = e
-                logger.warning(f"⚠️  Gemini {model} 第 {attempt + 1} 次失敗: {str(e)[:200]}")
-                time.sleep(5 * (attempt + 1))
+                msg = str(e)
+                logger.warning(f"⚠️  Gemini {model} 第 {attempt + 1} 次失敗: {msg[:1500]}")
+                # 免費額度每分鐘上限:照錯誤裡建議的秒數等(最多 65 秒)
+                m = re.search(r"retry in ([0-9.]+)s|'retryDelay': '([0-9]+)s'", msg)
+                wait = float(m.group(1) or m.group(2)) + 2 if m else (35 if "429" in msg else 5 * (attempt + 1))
+                time.sleep(min(wait, 65))
     raise RuntimeError(f"所有 Gemini 模型都失敗: {last_err}")
 
 
