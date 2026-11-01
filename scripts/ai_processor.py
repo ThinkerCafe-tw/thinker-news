@@ -1,6 +1,6 @@
 """
 AI 處理鏈
-四段式處理：DeepSeek → OpenAI → OpenAI → DeepSeek
+四段式處理，全部走 Gemini 免費額度(2026-11 起)
 
 1. 數據煉金術師 (Data Alchemist) - DeepSeek
 2. 科技導讀人 (Tech Narrator) - OpenAI
@@ -56,33 +56,25 @@ def retry_on_failure(max_retries: int = 2, delay: int = 3):
     return decorator
 
 # ============================================
-# API 配置（單例模式，避免每次呼叫重建 client）
+# API 配置:2026-11 起全部改走 Gemini 免費額度(OpenAI 相容介面),每月零成本
 # ============================================
 
-_openai_client = None
-_deepseek_client = None
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
+# 依序嘗試;新模型常因尖峰回 503,就退到下一個
+GEMINI_MODELS = [m.strip() for m in os.getenv("GEMINI_MODELS", "gemini-2.5-flash,gemini-flash-latest").split(",") if m.strip()]
+
+_gemini_client = None
 
 
-def get_openai_client() -> OpenAI:
-    """取得 OpenAI client（單例）"""
-    global _openai_client
-    if _openai_client is None:
-        api_key = os.getenv('OPENAI_API_KEY')
+def get_gemini_client() -> OpenAI:
+    """取得 Gemini client(單例)"""
+    global _gemini_client
+    if _gemini_client is None:
+        api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
         if not api_key:
-            raise ValueError("❌ OPENAI_API_KEY 環境變數未設置")
-        _openai_client = OpenAI(api_key=api_key)
-    return _openai_client
-
-
-def get_deepseek_client() -> OpenAI:
-    """取得 DeepSeek client（單例）"""
-    global _deepseek_client
-    if _deepseek_client is None:
-        api_key = os.getenv('DEEPSEEK_API_KEY')
-        if not api_key:
-            raise ValueError("❌ DEEPSEEK_API_KEY 環境變數未設置")
-        _deepseek_client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-    return _deepseek_client
+            raise ValueError("❌ GEMINI_API_KEY 環境變數未設置")
+        _gemini_client = OpenAI(api_key=api_key, base_url=GEMINI_BASE_URL, max_retries=1, timeout=180)
+    return _gemini_client
 
 
 def _log_usage(response, provider: str):
@@ -92,39 +84,43 @@ def _log_usage(response, provider: str):
         logger.info(f"📊 {provider} Token: prompt={u.prompt_tokens}, output={u.completion_tokens}, total={u.total_tokens}")
 
 
-def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7, max_tokens: int = 8192) -> str:
-    """呼叫 DeepSeek API"""
-    logger.info("🔑 呼叫 DeepSeek API...")
-    client = get_deepseek_client()
-    response = client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[
-            {"role": "system", "content": system_instruction},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=temperature,
-        max_tokens=max_tokens
-    )
-    _log_usage(response, "DeepSeek")
-    logger.info("✅ DeepSeek API 呼叫成功")
-    return response.choices[0].message.content
+def call_gemini(system_instruction: str, user_prompt: str, temperature: float = 0.7, max_tokens: int = 16384) -> str:
+    """呼叫 Gemini;每個模型試 2 次,失敗換下一個模型"""
+    client = get_gemini_client()
+    last_err = None
+    for model in GEMINI_MODELS:
+        for attempt in range(2):
+            try:
+                logger.info(f"🔑 呼叫 Gemini ({model})...")
+                response = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": system_instruction},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    temperature=temperature,
+                    max_tokens=max_tokens
+                )
+                content = response.choices[0].message.content
+                if not content:
+                    raise ValueError("Gemini 回傳空內容")
+                _log_usage(response, f"Gemini {model}")
+                logger.info(f"✅ Gemini ({model}) 呼叫成功")
+                return content
+            except Exception as e:
+                last_err = e
+                logger.warning(f"⚠️  Gemini {model} 第 {attempt + 1} 次失敗: {str(e)[:200]}")
+                time.sleep(5 * (attempt + 1))
+    raise RuntimeError(f"所有 Gemini 模型都失敗: {last_err}")
 
 
-def call_openai(system_instruction: str, user_prompt: str, model: str = "gpt-4.1", temperature: float = 0.7) -> str:
-    """呼叫 OpenAI API"""
-    logger.info(f"🔑 呼叫 OpenAI API ({model})...")
-    client = get_openai_client()
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": system_instruction},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=temperature
-    )
-    _log_usage(response, "OpenAI")
-    logger.info("✅ OpenAI API 呼叫成功")
-    return response.choices[0].message.content
+# 舊函數名保留給呼叫端,內部一律走 Gemini
+def call_deepseek(system_instruction: str, user_prompt: str, temperature: float = 0.7, max_tokens: int = 16384) -> str:
+    return call_gemini(system_instruction, user_prompt, temperature=temperature, max_tokens=max_tokens)
+
+
+def call_openai(system_instruction: str, user_prompt: str, model: str = "", temperature: float = 0.7) -> str:
+    return call_gemini(system_instruction, user_prompt, temperature=temperature)
 
 
 # ============================================

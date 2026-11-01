@@ -35,8 +35,7 @@ logger = get_logger(__name__)
 # ---------------------------------------------------------------------------
 
 REQUIRED_ENV_VARS = [
-    "OPENAI_API_KEY",
-    "DEEPSEEK_API_KEY",
+    "GEMINI_API_KEY",
 ]
 
 OPTIONAL_ENV_VARS = [
@@ -59,8 +58,7 @@ REQUIRED_TEMPLATES = [
 
 # API 健檢 endpoint（只做 TCP 連線測試，不消耗 token）
 API_ENDPOINTS = {
-    "OpenAI": "https://api.openai.com",
-    "DeepSeek": "https://api.deepseek.com",
+    "Gemini": "https://generativelanguage.googleapis.com",
 }
 
 PROJECT_ROOT = Path(__file__).parent.parent

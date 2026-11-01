@@ -26,8 +26,7 @@ logger = get_logger(__name__)
 from rss_fetcher import fetch_all_rss_feeds
 from news_filter import filter_and_score_news
 from ai_processor import (
-    get_openai_client,
-    get_deepseek_client,
+    get_gemini_client,
     process_with_data_alchemist,
     process_with_tech_narrator,
     process_with_editor_in_chief,
@@ -222,8 +221,7 @@ def main():
 
         # 初始化 API 單例
         logger.info("🔑 初始化 API clients...")
-        get_openai_client()
-        get_deepseek_client()
+        get_gemini_client()
 
         # 步驟 1: 今日日期
         today_date = get_taiwan_date()
