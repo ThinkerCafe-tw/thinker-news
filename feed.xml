@@ -5,37 +5,39 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Wed, 25 Feb 2026 06:15:30 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 12:52:35 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-11-01 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-01.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-01.html</guid>
+      <pubDate>Sun, 01 Nov 2026 08:30:00 +0800</pubDate>
+      <description>🚨 2026-11-01 今日AI圈焦點快訊
+
+今天帶您快速掌握 3 大關鍵趨勢：
+
+🛰️ 1. 太空AI新突破
+Google 的「Project Suncatcher」成功在太空中運行 TPU 與 Gemma 4 模型，傳回第一首 AI 詩句，開啟邊緣運算新境界！
+
+🔒 2. 資安警訊：惡意 ChatGPT 連結
+研究指出點擊特定分享連結可能遭執行攻擊者代碼。提醒大家切勿隨意點擊不明對話連結，保護機敏資料。
+
+📉 3. 資本市場轉趨理性
+OpenAI 大幅下調募資目標至 1.25 兆美元，反映投資人對商業化變現與高昂基礎設施投入的務實考量。
+
+💡 為什麼重要？
+AI 的發展正從盲目追捧轉向成本效益、資安防護與實際商業價值的嚴格檢視。
+
+#AI科技日報 #人工智慧 #資料科學 #資安防護 #邊緣運算</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-02-25 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-02-25.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-02-25.html</guid>
       <pubDate>Wed, 25 Feb 2026 08:30:00 +0800</pubDate>
-      <description>🚀【2026-02-25｜AI日報快訊】
-
-今天AI圈最熱話題：
-
-1️⃣ AWS、OpenAI、微軟三巨頭齊推『AI代理』開發新標準！
-- AWS Kiro IDE 新增「設計優先」與「錯誤修正」模式，讓AI修bug更精準、可控，維護大型系統超安全。
-- OpenAI 推出WebSocket API，AI工具呼叫速度可提升40%，還能零資料保留，開發效率大升級。
-- 微軟統一 Agent Framework 進入RC階段，支援.NET與Python，簡化多AI協作，企業可正式導入。
-
-為什麼重要？
-AI開發正從「全自動」轉向「人機協作」與「工程規模」，初學者要學會善用規格設計、挑選高效API、理解多代理協作——這是未來AI專案成功的關鍵！
-
-🔥 產業大事快掃：
-- Cloudflare推極簡AI運維接口，AI直接管理DNS/安全/儲存。
-- Oura專為女性健康打造專屬AI模型，數據驅動精準照護。
-- JetBrains推VS Code插件，一鍵將Java轉Kotlin，技術升級好幫手。
-- OpenAI COO直言：AI還沒真滲透企業流程，重點在整合與合規。
-- Meta砸重金採購AMD GPU，AI硬體生態多元化加速。
-- 資安快訊：GitHub Codespaces、惡意NPM套件爆資安漏洞，AI助攻也要懂防禦！
-- 台灣大AI節能，2025年省下1,800萬度電，ESG與AI並進。
-- Anthropic控中國AI實驗室大規模「蒸餾」取巧，美中技術戰火再升溫。
-
-#AI代理 #人機協作 #開發工具 #產業趨勢 #資安警示 #AI職涯 #ESG永續</description>
+      <description>AWS、OpenAI、微軟齊推AI代理新標準，產業整合與資安挑戰並存 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -180,14 +182,6 @@ AI開發正從「全自動」轉向「人機協作」與「工程規模」，初
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-05.html</guid>
       <pubDate>Thu, 05 Feb 2026 08:30:00 +0800</pubDate>
       <description>蘋果Xcode邁入代理人開發，AI深入生活與創作 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-02-04 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-04.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-04.html</guid>
-      <pubDate>Wed, 04 Feb 2026 08:30:00 +0800</pubDate>
-      <description>n8n 新聞內容 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
