@@ -61,8 +61,8 @@ def retry_on_failure(max_retries: int = 2, delay: int = 3):
 # ============================================
 
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
-# 依序嘗試;新模型常因尖峰回 503,就退到下一個
-GEMINI_MODELS = [m.strip() for m in os.getenv("GEMINI_MODELS", "gemini-2.5-flash,gemini-flash-latest").split(",") if m.strip()]
+# 依序嘗試;免費額度每個模型每天 20 次、分開算,當天用完或尖峰 503 就換下一個
+GEMINI_MODELS = [m.strip() for m in os.getenv("GEMINI_MODELS", "gemini-2.5-flash,gemini-3.5-flash,gemini-3.6-flash,gemini-3.5-flash-lite").split(",") if m.strip()]
 
 _gemini_client = None
 
@@ -112,6 +112,9 @@ def call_gemini(system_instruction: str, user_prompt: str, temperature: float = 
                 last_err = e
                 msg = str(e)
                 logger.warning(f"⚠️  Gemini {model} 第 {attempt + 1} 次失敗: {msg[:1500]}")
+                if "429" in msg and "per day" in msg:
+                    logger.warning(f"⏭️  {model} 今天的免費額度用完，換下一個模型")
+                    break
                 # 免費額度每分鐘上限:照錯誤裡建議的秒數等(最多 65 秒)
                 m = re.search(r"retry in ([0-9.]+)s|'retryDelay': '([0-9]+)s'", msg)
                 wait = float(m.group(1) or m.group(2)) + 2 if m else (35 if "429" in msg else 5 * (attempt + 1))
