@@ -5,31 +5,38 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Sun, 01 Nov 2026 12:52:35 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 09:17:42 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-11-02 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-02.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-02.html</guid>
+      <pubDate>Mon, 02 Nov 2026 08:30:00 +0800</pubDate>
+      <description>🚨【AI 快訊】軟體狂飆轉向實體大戰！今日 3 大重磅亮點（2026-11-02）
+
+🤖 1. Meta 攜手新創 3 個月打造人形機器人「Max」
+AI 不再只是線上對話！Meta 跨足「具身智能」打造 48kg 輕量機器人原型，預示 AI 大模型正式全面殺入物理世界。
+
+🔥 2. AI 晶片發熱成痛點！台灣「一詮」殺入輝達供應鏈
+算力飆升讓「散熱」成最新瓶頸。台灣傳統廠憑藉先進散熱工藝逆襲，證明硬體基礎設施與演算法同等重要！
+
+🛡️ 3. 專治 AI 幻覺與洩密！「防護系工具」掀起新熱潮
+• CiteProof：不用 AI 抓 AI，用傳統檢索精準揪出法律假判例。
+• Infisical：獲融資 4,000 萬美元，推「假金鑰」防止 AI Agent 洩漏企業機密。
+
+💡 總編一針見血：
+AI 正從「純軟體演算法」轉向「軟硬體整合與安全落地」。初學者除了學寫 Code 與模型，更要關注資安防護、RAG 驗證機制與硬體限制，才能建立帶不走的跨域競爭力！
+
+#AI科技日報 #具身智能 #Meta #AI資安 #資料科學 #科技趨勢</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-11-01 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-01.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-01.html</guid>
       <pubDate>Sun, 01 Nov 2026 08:30:00 +0800</pubDate>
-      <description>🚨 2026-11-01 今日AI圈焦點快訊
-
-今天帶您快速掌握 3 大關鍵趨勢：
-
-🛰️ 1. 太空AI新突破
-Google 的「Project Suncatcher」成功在太空中運行 TPU 與 Gemma 4 模型，傳回第一首 AI 詩句，開啟邊緣運算新境界！
-
-🔒 2. 資安警訊：惡意 ChatGPT 連結
-研究指出點擊特定分享連結可能遭執行攻擊者代碼。提醒大家切勿隨意點擊不明對話連結，保護機敏資料。
-
-📉 3. 資本市場轉趨理性
-OpenAI 大幅下調募資目標至 1.25 兆美元，反映投資人對商業化變現與高昂基礎設施投入的務實考量。
-
-💡 為什麼重要？
-AI 的發展正從盲目追捧轉向成本效益、資安防護與實際商業價值的嚴格檢視。
-
-#AI科技日報 #人工智慧 #資料科學 #資安防護 #邊緣運算</description>
+      <description>Google衛星AI模型成功，輝達投資Naver，ChatGPT資安漏洞 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -174,14 +181,6 @@ AI 的發展正從盲目追捧轉向成本效益、資安防護與實際商業�
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-06.html</guid>
       <pubDate>Fri, 06 Feb 2026 08:30:00 +0800</pubDate>
       <description>AI代理人時代來臨，GitHub、OpenAI、Anthropic競逐新戰場 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-02-05 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-05.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-05.html</guid>
-      <pubDate>Thu, 05 Feb 2026 08:30:00 +0800</pubDate>
-      <description>蘋果Xcode邁入代理人開發，AI深入生活與創作 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
