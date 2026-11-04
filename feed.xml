@@ -5,37 +5,37 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Tue, 03 Nov 2026 11:21:13 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 09:55:02 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-11-04 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html</guid>
+      <pubDate>Wed, 04 Nov 2026 08:30:00 +0800</pubDate>
+      <description>🚨 AI大神嫌 YouTube 太爛，2小時自己打造全新平台！
+
+前 Tesla AI 總監 Andrej Karpathy 不爽資訊流被商業演算法綁架，直接利用 Anthropic 的 Claude，在短短 2 小時內開發出高質感影片篩選平台「HackerTube」！
+
+🔥 它是怎麼做到的？
+✅ AI 自動讀完 20 年 Hacker News 社群海量留言
+✅ 精準提煉出 6,454 支專家狂推的高質量影片
+✅ 擺脫演算法綁架，不用登入就能看
+
+💡 初學者關鍵啟示（So What?）
+過去需要開發數週的自然語言處理（NLP）數據篩選，現在靠 LLM 語意理解幾小時就能搞定！這證明了未來解決問題的核心不再是「寫出多少程式碼」，而是「如何定義問題」並「用 AI 助手進行數據提煉」。
+
+不妨找個身邊的小痛點，今天就用 AI 試著打造你的第一個原型吧！💪
+
+#AI趨勢 #Claude #Karpathy #資料科學 #數據提煉 #極速原型</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-11-03 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-03.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-03.html</guid>
       <pubDate>Tue, 03 Nov 2026 08:30:00 +0800</pubDate>
-      <description>🚨 2026-11-03 AI 科技快訊 ⚡
-
-今天 AI 圈迎來大爆發！從「全天候超級代理」到「太空 AI 運算」，再到「AI 自我建構」的警告，資訊量極大！
-
-📌 今日 3 大必看亮點：
-
-🤖 1. DeepSeek 推出「超級代理」架構
-打破單一對話限制，具備雙層與事件驅動機制，實現 24 小時自主跨平台執行複雜任務，AI 正式邁向高效率多工經理人！
-
-🚀 2. Google Gemma 4 成功升空運作
-人類首次在低軌道衛星上透過 TPU 運行大模型並產出回應！擺脫頻寬限制，開啟「太空資料中心」與邊緣運算全新想像。
-
-⚠️ 3. Anthropic 警告 AI 逼近「自我建構」
-AI 系統極度接近遞歸自我改進（RSI）臨界點，未來可能自主優化底層程式碼，引發全球對 AI 失控風險與安全對齊的極度重視。
-
-🛡️ 資安特別預警：
-• 熱門 AI 工作流工具 Langflow 爆致命漏洞，未授權即可控制伺服器，請速更新！
-• 新型惡意軟體 VOLTA 竟呼叫 Claude/Gemini 來評估受害者財力進行精準打擊！
-
-💡 初學者「So What」：
-AI 產業已從單純「工具試用」轉向「注重架構設計、邊緣運算與資安防護」的成熟期。學習 Python 或資料科學時，除了調參跑分，更要開始具備「自動化流程」與「資安合規」的思維！
-
-#AI新聞 #DeepSeek #GoogleAI #Anthropic #資安趨勢 #資料科學初學者</description>
+      <description>DeepSeek超級代理架構登場、Google太空運行AI模型與Anthropic安全警告 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -180,14 +180,6 @@ AI 產業已從單純「工具試用」轉向「注重架構設計、邊緣運�
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-08.html</guid>
       <pubDate>Sun, 08 Feb 2026 08:30:00 +0800</pubDate>
       <description>當AI成為虛擬同事，白領職涯警訊與AI工具實用性革命 - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-02-07 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-07.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-07.html</guid>
-      <pubDate>Sat, 07 Feb 2026 08:30:00 +0800</pubDate>
-      <description>AI正式進軍企業主戰場，OpenAI Frontier與Claude Opus 4.6引領工作流革命</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>

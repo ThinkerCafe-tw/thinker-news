@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-11-04 AI 科技日報 | Thinker News</title>
+    <meta name="description" content="AI大神Karpathy怒用Claude，2小時打造「HackerTube」！YouTube演算法再也綁不住我 - 今日AI科技重點新聞精選">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .article-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-date {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .content-section h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .news-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .external-link::after {
+            content: " 🔗";
+            font-size: 0.8em;
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .article-header {
+                padding: 25px 20px;
+            }
+
+            .article-title {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Thinker News RSS" href="https://thinkercafe-tw.github.io/thinker-news/feed.xml">
+    <!-- SEO: Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026-11-04 AI 科技日報 | Thinker News">
+    <meta property="og:description" content="2026-11-04 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。">
+    <meta property="og:url" content="https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html">
+    <meta property="og:site_name" content="Thinker News">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="article:published_time" content="2026-11-04T08:30:00+08:00">
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="2026-11-04 AI 科技日報 | Thinker News">
+    <meta name="twitter:description" content="2026-11-04 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。">
+    <!-- SEO: Canonical -->
+    <link rel="canonical" href="https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html">
+    <!-- SEO: JSON-LD 結構化資料 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "2026-11-04 AI 科技日報精選",
+      "description": "2026-11-04 AI 科技日報精選 — 為資料科學初學者提供每日精選的 AI 科技新聞。",
+      "datePublished": "2026-11-04T08:30:00+08:00",
+      "dateModified": "2026-11-04T08:30:00+08:00",
+      "author": {"@type": "Organization", "name": "Thinker News", "url": "https://thinkercafe-tw.github.io/thinker-news/"},
+      "publisher": {"@type": "Organization", "name": "Thinker News"},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html"},
+      "inLanguage": "zh-TW"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首頁</a>
+
+        <header class="article-header">
+            <div class="article-date">📅 2026年11月4日</div>
+            <h1 class="article-title">🤖 AI 科技日報精選</h1>
+            <p class="article-subtitle">AI大神Karpathy怒用Claude，2小時打造「HackerTube」！YouTube演算法再也綁不住我</p>
+        </header>
+
+        <div class="content-section">
+            <h2>✨ 今日必讀 TOP 1</h2>
+
+            <h3>1. AI大神Karpathy怒用Claude，2小時打造「HackerTube」！YouTube演算法再也綁不住我</h3>
+            <p><strong>🔧 分類: AI工具與應用</strong></p>
+            <p>前 Tesla AI 總監、同時也是 AI 社群巨擘的 Andrej Karpathy 近日因對 YouTube 的推薦演算法感到失望，決定親自動手解決資訊流被演算法制約的問題。他選擇利用 Anthropic 的強大大型語言模型 Claude，在短短兩小時之內，成功打造出一個名為「HackerTube」的全新影片篩選平台。</p>
+            <p>這個平台的核心機制是從技術論壇 Hacker News（HN）過去 20 年累積的海量留言中，精準提取並篩選出被社群專家反覆推薦的高質量影片。最終，HackerTube 整理出了 6,454 支精選影片，並提供無需登入即可直接觀看的優質服務，徹底擺脫傳統商業演算法的洗腦與綁架。</p>
+            <p>在開發過程中，Karpathy 運用了 Claude Opus 5.5 出色的非結構化文字理解與摘要能力，處理了極為龐大的 Hacker News 歷史留言數據。這項專案不僅向大眾展示了大型語言模型在數據處理、資訊篩選與極速原型開發（Rapid Prototyping）上的恐怖效率，也深刻揭示了 AI 如何幫助個人重構資料選取體驗，挑戰現有巨頭平台的演算法壟斷。</p>
+            <div class="highlight-box">
+                <strong>💡 學習價值：</strong><br>
+                對於資料科學與 AI 初學者而言，這是一個極具啟發性的實務範例。它證明了處理龐大非結構化文本（如社群留言）時，我們不再需要從零撰寫複雜的自然語言處理（NLP）程式碼。透過 LLM 的語意理解能力，即使是初學者也能在極短時間內完成過去需要數週開發的「數據篩選與內容策展」應用，將點子迅速轉化為解決問題的實用工具。
+            </div>
+            <p><a href="https://www.inside.com.tw/article/42797-karpathy-hackertube-claude-opus-hacker-news-videos" class="news-link external-link" target="_blank">閱讀原文</a></p>
+
+            <h3>📬 日報後記</h3>
+            <p>今天 Karpathy 的實踐為所有資料科學初學者打開了一扇新大門：AI 工具的進化正在急劇降低「將想法轉化為產品」的技術門檻。當我們擁有基礎的 R 或 Python 數據概念，再搭配像 Claude 這類高階 LLM 助手時，解決問題的核心能力就不再是寫出多少行複雜程式碼，而是「如何定義問題」與「如何運用 AI 工具進行數據提煉」。鼓勵大家在學習語法之餘，也嘗試找一個身邊的小痛點，用 AI 助手打造屬於你自己的第一個原型專案！</p>
+        </div>
+
+        <div class="content-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <h2 style="color: white; border-bottom: 3px solid white;">📱 LINE 精華版</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>🤖 今日AI重點 (LINE版)</h3>
+                <p>🚨 <strong>AI大神嫌 YouTube 太爛，2小時自己打造全新平台！</strong></p>
+                <p>前 Tesla AI 總監 Andrej Karpathy 不爽資訊流被商業演算法綁架，直接利用 Anthropic 的 Claude，在短短 2 小時內開發出高質感影片篩選平台「HackerTube」！</p>
+                <p style="margin-top: 10px;"><strong>🔥 它是怎麼做到的？</strong><br>
+                ✅ AI 自動讀完 20 年 Hacker News 社群海量留言<br>
+                ✅ 精準提煉出 6,454 支專家狂推的高質量影片<br>
+                ✅ 擺脫演算法綁架，不用登入就能看</p>
+                <p style="margin-top: 10px;"><strong>💡 初學者關鍵啟示（So What?）</strong><br>
+                過去需要開發數週的自然語言處理（NLP）數據篩選，現在靠 LLM 語意理解幾小時就能搞定！這證明了未來解決問題的核心不再是「寫出多少程式碼」，而是「如何定義問題」並「用 AI 助手進行數據提煉」。</p>
+                <p style="margin-top: 10px;">不妨找個身邊的小痛點，今天就用 AI 試著打造你的第一個原型吧！💪</p>
+                <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.9;">#AI趨勢 #Claude #Karpathy #資料科學 #數據提煉 #極速原型</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 0.9em; opacity: 0.8;">
+                    💡 此精華版專為LINE推送設計 | 完整分析請閱讀上方詳細報告
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="./index.html" class="nav-button">🏠 返回首頁</a>
+            <a href="https://github.com/ThinkerCafe-tw/thinker-news" class="nav-button" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+<script src="./thinker_secret_entrance.js"></script>
+</body>
+</html>
