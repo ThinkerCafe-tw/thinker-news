@@ -5,29 +5,41 @@
     <link>https://thinkercafe-tw.github.io/thinker-news</link>
     <description>每日精選 AI 科技新聞，專為資料科學初學者設計。涵蓋 AI 工具、產業趨勢、資安快訊與職涯觀察。</description>
     <language>zh-TW</language>
-    <lastBuildDate>Wed, 04 Nov 2026 09:55:02 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 10:04:09 +0800</lastBuildDate>
     <generator>Thinker News RSS Generator</generator>
     <atom:link href="https://thinkercafe-tw.github.io/thinker-news/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-11-05 AI 科技日報</title>
+      <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-05.html</link>
+      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-05.html</guid>
+      <pubDate>Thu, 05 Nov 2026 08:30:00 +0800</pubDate>
+      <description>🚨 2026-11-05 AI 每日快訊
+
+今天 AI 圈發生了幾件全面重塑規則的大事：
+
+1️⃣ **AI 跨足實體工程與基礎設施**
+• OpenAI GPT-6 Astra 不到一週設計出實體硬體，導入 Mazda 實測！
+• AI 寫 Code 太快打爆傳統 Git！OpenAI 與 Anthropic 雙雙自研全新版本控制系統。
+
+2️⃣ **算力吃到飽終結 &amp; 資安新威脅**
+• 馬斯克坦承 Grok 成本高到不可持續，宣布限縮用量，吃到飽時代告終。
+• 新型駭客攻擊「LLMjacking」竄起，偷取企業 API 金鑰轉售算力造成天價帳單！
+
+3️⃣ **人才與教育的大轉向**
+• 美國傳統資工系人數連續兩年下滑，學生大舉轉向「AI」與「資安」！單純記憶語法寫 Code 已不夠用。
+
+💡 **初學者核心啟示（So What?）**
+AI 正在從「對話框」走向「系統底層與實體世界」。初學者不需焦慮於死記程式語法，應將學習重心轉向 **Prompt 邏輯優化、API 權限控管與 AI Agent 流程設計**！
+
+#AI科技 #OpenAI #GPT6 #AI趨勢 #資安防禦 #職涯發展 #AI學習</description>
+      <category>AI 科技新聞</category>
+    </item>
     <item>
       <title>2026-11-04 AI 科技日報</title>
       <link>https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html</link>
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/2026-11-04.html</guid>
       <pubDate>Wed, 04 Nov 2026 08:30:00 +0800</pubDate>
-      <description>🚨 AI大神嫌 YouTube 太爛，2小時自己打造全新平台！
-
-前 Tesla AI 總監 Andrej Karpathy 不爽資訊流被商業演算法綁架，直接利用 Anthropic 的 Claude，在短短 2 小時內開發出高質感影片篩選平台「HackerTube」！
-
-🔥 它是怎麼做到的？
-✅ AI 自動讀完 20 年 Hacker News 社群海量留言
-✅ 精準提煉出 6,454 支專家狂推的高質量影片
-✅ 擺脫演算法綁架，不用登入就能看
-
-💡 初學者關鍵啟示（So What?）
-過去需要開發數週的自然語言處理（NLP）數據篩選，現在靠 LLM 語意理解幾小時就能搞定！這證明了未來解決問題的核心不再是「寫出多少程式碼」，而是「如何定義問題」並「用 AI 助手進行數據提煉」。
-
-不妨找個身邊的小痛點，今天就用 AI 試著打造你的第一個原型吧！💪
-
-#AI趨勢 #Claude #Karpathy #資料科學 #數據提煉 #極速原型</description>
+      <description>AI大神Karpathy怒用Claude，2小時打造「HackerTube」！YouTube演算法再也綁不住我 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
     <item>
@@ -172,14 +184,6 @@
       <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-09.html</guid>
       <pubDate>Mon, 09 Feb 2026 08:30:00 +0800</pubDate>
       <description>NotebookLM手機版升級，蘋果巨資收購Q.ai - 今日AI科技重點新聞精選</description>
-      <category>AI 科技新聞</category>
-    </item>
-    <item>
-      <title>2026-02-08 AI 科技日報</title>
-      <link>https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-08.html</link>
-      <guid isPermaLink="true">https://thinkercafe-tw.github.io/thinker-news/archive/2026-02-08.html</guid>
-      <pubDate>Sun, 08 Feb 2026 08:30:00 +0800</pubDate>
-      <description>當AI成為虛擬同事，白領職涯警訊與AI工具實用性革命 - 今日AI科技重點新聞精選</description>
       <category>AI 科技新聞</category>
     </item>
   </channel>
